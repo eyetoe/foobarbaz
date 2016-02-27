@@ -96,22 +96,36 @@ func (c Character) StatusBar() {
 		fmt.Printf("%s", Spc(" E?:"))
 		fmt.Printf("%s", attrC("none"))
 	} else {
-		fmt.Printf("%s", Red("Dead :("))
+		fmt.Printf("%s", Red(" Dead :("))
 	}
 	fmt.Println()
 }
 
-func main() {
+func Usage() {
+	fmt.Println("Usage: fbb <int hit point adjustment>")
 
-	// create Character struct
+}
+
+func main() {
 	Player := Character{}
 	Player.Load("Izro")
 	Player.StatusBar()
 
+	// Take first arg as hit point adjust
+	//[1:] is the slice from 2nd argument (skipping prog name)
+	//[0] is the first element in the array that is returned
+	arg1, err := strconv.Atoi(os.Args[1:][0])
+	if err != nil {
+		Usage()
+		fmt.Printf("%q\n", err)
+	} else {
+		Player.adjhp(arg1)
+	}
+
+	// create Character struct
 	Player.Armor = "Tshirt"
 
-	Player.adjhp(-15)
-	Player.adjhp(5)
+	//Player.adjhp(5)
 
 	Player.Save("Izro")
 	Player.StatusBar()
