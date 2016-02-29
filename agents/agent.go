@@ -12,7 +12,8 @@ import (
 )
 
 type Agent struct {
-	Name string
+	Name        string
+	Description string
 	// 3 base attributes Str, Int, Dex Str int
 	Str int
 	Int int
@@ -50,6 +51,7 @@ func (c *Agent) AdjHp(a int) {
 	}
 }
 
+// Load Character from json file
 func (c *Agent) Load(f string) {
 	d, err := os.Open("save/" + f + ".json")
 	fmt.Println("save/" + f + ".json")
@@ -64,17 +66,18 @@ func (c *Agent) Load(f string) {
 	return
 }
 
+// Save Character to json file
 func (c *Agent) Save(f string) {
 	i, _ := json.Marshal(c)
 	//if err := ioutil.WriteFile("playersave.json", i, 0644); err != nil {
-	if err := ioutil.WriteFile("./save/"+f+".json", i, 0644); err != nil {
+	if err := ioutil.WriteFile("save/"+f+".json", i, 0644); err != nil {
 		fmt.Println("Can't write file:", err.Error())
 	}
 	return
 }
 
+// Render character status bar
 func (c Agent) StatusBar() {
-
 	// this may be useful it clears the screen
 	//fmt.Print("[H[J")
 	Fbb := color.New(color.BgRed, color.FgYellow).SprintFunc()

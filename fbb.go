@@ -15,6 +15,8 @@ func main() {
 	Char.Load("Izro")
 	Char.StatusBar()
 
+	Foe := agents.Minotaur
+
 	// Take first arg as hit point adjust
 	//[1:] is the slice from 2nd argument (skipping prog name)
 	//[0] is the first element in the array that is returned
@@ -36,6 +38,10 @@ func main() {
 
 	fmt.Println(affects.OnFire)
 	fmt.Println(inv.Staff)
+	fmt.Println("Foe is:\n", Foe)
+
+	Foe.StatusBar()
+	Foe.Save("Minotaur")
 
 	return
 }
