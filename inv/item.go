@@ -1,10 +1,12 @@
-package main
+package inv
+
+import "github.com/eyetoe/foobarbaz/affects"
 
 type Item struct {
 	Name        string
 	Description string
 	Slot        string
-	Affects     []Affect
+	Affects     []affects.Affect
 	// modify 'To Hit' chance
 	Attack int
 	// modify damage dealt if hit
@@ -13,12 +15,8 @@ type Item struct {
 	Defence int
 	// active defence. lighter armor, Dex = better Dodge
 	Dodge int
-
 	// dammage over time adjustment. Bleed, Poison, Fire, etc
 	DoT int
 	// modify critical chance.
 	Crit int
-}
-
-func main() {
 }

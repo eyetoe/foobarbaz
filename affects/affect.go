@@ -1,4 +1,4 @@
-package main
+package affects
 
 type Affect struct {
 	Name string
@@ -18,8 +18,4 @@ type Affect struct {
 	DoT int
 	// modify critical chance
 	Crit int
-}
-
-func main() {
-
 }
