@@ -14,6 +14,7 @@ func main() {
 	Char := agents.Agent{}
 	Char.Load("Izro")
 	Char.StatusBar()
+	Char.Describe()
 
 	Foe := agents.Minotaur
 
@@ -42,6 +43,9 @@ func main() {
 
 	Foe.StatusBar()
 	Foe.Save("Minotaur")
+	Foe.Describe()
+
+	fmt.Printf("You roll the dice: %s", Roll)
 
 	return
 }

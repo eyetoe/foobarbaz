@@ -1,1 +1,17 @@
-{"Name":"Minotaur","Description":"Half man half bull, the minotaur has hatred in it's eyes","Str":30,"Int":5,"Dex":5,"MxHp":40,"Hp":40,"Dead":false,"Weap":"Axe","Armor":"Hide","Trink":"Amulet","Abl1":"Roar","Abl2":"Stomp","Abl3":"Snort","Inv":[]}
+{
+    "Name": "Minotaur",
+    "Description": "Half man half bull, the minotaur has hatred in it's eyes",
+    "Str": 30,
+    "Int": 5,
+    "Dex": 5,
+    "MxHp": 40,
+    "Hp": 40,
+    "Dead": false,
+    "Weap": "Axe",
+    "Armor": "Hide",
+    "Trink": "Amulet",
+    "Abl1": "Roar",
+    "Abl2": "Stomp",
+    "Abl3": "Snort",
+    "Inv": []
+}

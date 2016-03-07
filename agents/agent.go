@@ -34,6 +34,12 @@ type Agent struct {
 	Inv []inv.Item
 }
 
+func (c *Agent) Describe() {
+	fmt.Printf("You consider the %s. ", c.Name)
+	fmt.Printf("%s\n", c.Description)
+
+}
+
 // Adjust Hp "hit points"
 func (c *Agent) AdjHp(a int) {
 	c.Hp = c.Hp + a
@@ -68,8 +74,10 @@ func (c *Agent) Load(f string) {
 
 // Save Character to json file
 func (c *Agent) Save(f string) {
-	i, _ := json.Marshal(c)
-	//if err := ioutil.WriteFile("playersave.json", i, 0644); err != nil {
+	//i, _ := json.Marshal(c)
+	//Oh sweet MarshalIndent, you make my json look pretty
+	i, _ := json.MarshalIndent(c, "", "    ")
+
 	if err := ioutil.WriteFile("save/"+f+".json", i, 0644); err != nil {
 		fmt.Println("Can't write file:", err.Error())
 	}
