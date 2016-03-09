@@ -45,7 +45,24 @@ func main() {
 	Foe.Save("Minotaur")
 	Foe.Describe()
 
-	fmt.Printf("You roll the dice: %s", Roll)
+	fmt.Printf("You roll the dice: %d\n", Roll())
+	fmt.Printf("You roll the dice: %d\n", Roll())
+	fmt.Printf("You roll the dice: %d\n", Roll())
+	fmt.Printf("You roll the dice: %d\n", Roll())
+	fmt.Printf("You roll the dice: %d\n", Roll())
+	fmt.Printf("You roll the dice: %d\n", Roll())
+	fmt.Printf("You roll the dice: %d\n", Roll())
+	fmt.Printf("You roll the dice: %d\n", Roll())
+
+	// working on flow for a wrapper function to display combat dialog
+	atk := &Char
+	def := &Foe
+
+	fmt.Printf("%s attacks %s with %s.\n", atk.Name, def.Name, atk.Weap)
+	winner, loser := Attack(&Char, &Foe)
+	fmt.Printf("%s has prevailed!\n", winner.Name)
+	fmt.Printf("Alas %s has fallen short!\n", loser.Name)
+	//
 
 	return
 }
