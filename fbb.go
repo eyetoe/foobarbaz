@@ -5,18 +5,23 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/eyetoe/foobarbaz/affects"
-	"github.com/eyetoe/foobarbaz/agents"
-	"github.com/eyetoe/foobarbaz/inv"
+	. "github.com/eyetoe/foobarbaz/affects"
+	// dot preceding the import means, use this namespace for the import
+	// this means functions in the imported package don't need to have the
+	// directory prefixed, soo you can use Agent() rather than agents.Agent()
+	. "github.com/eyetoe/foobarbaz/agents"
+	. "github.com/eyetoe/foobarbaz/inv"
 )
 
 func main() {
-	Char := agents.Agent{}
+	Char := Agent{}
 	Char.Load("Izro")
 	Char.StatusBar()
+	fmt.Println("======================= Testing Character Description")
 	Char.Describe()
 
-	Foe := agents.Minotaur
+	//Foe := agents.Minotaur
+	Foe := Minotaur
 
 	// Take first arg as hit point adjust
 	//[1:] is the slice from 2nd argument (skipping prog name)
@@ -32,48 +37,65 @@ func main() {
 	// create Agent struct
 	Char.Armor = "Tshirt"
 
-	//Char.adjhp(5)
-
 	Char.Save("Izro")
 	Char.StatusBar()
 
-	fmt.Println(affects.OnFire)
-	fmt.Println(inv.Staff)
-	fmt.Println("Foe is:\n", Foe)
+	fmt.Println("======================= Testing Affect Struct")
+	fmt.Println(OnFire)
+	fmt.Println("======================= Testing Item Struct")
+	fmt.Println(Staff)
 
 	Foe.StatusBar()
 	Foe.Save("Minotaur")
+	fmt.Println("======================= Testing Foe Description")
 	Foe.Describe()
 
-	fmt.Printf("You roll the dice: %d\n", Roll())
-	fmt.Printf("You roll the dice: %d\n", Roll())
-	fmt.Printf("You roll the dice: %d\n", Roll())
-	fmt.Printf("You roll the dice: %d\n", Roll())
-	fmt.Printf("You roll the dice: %d\n", Roll())
-	fmt.Printf("You roll the dice: %d\n", Roll())
-	fmt.Printf("You roll the dice: %d\n", Roll())
-	fmt.Printf("You roll the dice: %d\n", Roll())
+	// combat
+	combat := func() {
+		// working on flow for a wrapper function to display combat dialog
+		fmt.Println("======================= Testing combat dialog")
+		atk := &Char
+		def := &Foe
 
-	// working on flow for a wrapper function to display combat dialog
-	atk := &Char
-	def := &Foe
+		fmt.Printf("%s attacks %s with %s.\n", atk.Name, def.Name, atk.Weap)
+		winner, loser := Attack(&Char, &Foe)
+		fmt.Printf("%s has prevailed!\n", winner.Name)
+		fmt.Printf("Alas, %s has fallen short!\n", loser.Name)
 
-	fmt.Printf("%s attacks %s with %s.\n", atk.Name, def.Name, atk.Weap)
-	winner, loser := Attack(&Char, &Foe)
-	fmt.Printf("%s has prevailed!\n", winner.Name)
-	fmt.Printf("Alas, %s has fallen short!\n", loser.Name)
-	//
+		return
+	}
+	combat()
 
-	// working on flow for a wrapper function to display combat dialog
-	fmt.Printf("%s attacks %s with %s.\n", atk.Name, def.Name, atk.Weap)
-	cwinner, closer := Contest(&Char, Char.Str, &Foe, Foe.Str)
-	fmt.Printf("%s has prevailed!\n", cwinner.Name)
-	fmt.Printf("Alas, %s has fallen short!\n", closer.Name)
-	//
+	// working on flow for a wrapper function to display comba
+	contest := func() {
+		fmt.Println("======================= Testing contest dialog")
+		atk := &Char
+		def := &Foe
+		cwinner, closer := Contest(&Char, Char.Str, &Foe, Foe.Str)
+		fmt.Printf("%s vs. %s in a battle of skill.\n", atk.Name, def.Name)
+		fmt.Printf("%s has prevailed!\n", cwinner.Name)
+		fmt.Printf("Alas, %s has fallen short!\n", closer.Name)
+		return
+	}
+	contest()
+
+	// roll some dice!
+	test_dice(20)
 
 	return
 }
 
+// usage message for cli
 func Usage() {
 	fmt.Println("Usage: fbb (int hp adjust)")
+}
+
+// test die rolls
+func test_dice(n int) {
+	fmt.Printf("======================= Testing %d d100 die rolls.\n", n)
+
+	// roll some dice n times
+	for i := 0; i < n; i++ {
+		fmt.Printf("You roll the dice: %d\n", Roll())
+	}
 }

@@ -5,7 +5,7 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/eyetoe/foobarbaz/agents"
+	. "github.com/eyetoe/foobarbaz/agents"
 )
 
 //func main() {
@@ -27,11 +27,19 @@ func Roll() int {
 // Second input struct is the 'defender'
 // First output struct is the 'winner'
 // Second output struct is the 'loser'
-func Attack(a *agents.Agent, d *agents.Agent) (*agents.Agent, *agents.Agent) {
-	ar := Roll() + a.Str
-	dr := Roll() + d.Dex
-	fmt.Println("Attack Roll  + Bonus =", ar)
-	fmt.Println("Defence Roll + Bonus =", dr)
+func Attack(a *Agent, d *Agent) (*Agent, *Agent) {
+	// roll for attacker and defender
+	ar := Roll()
+	dr := Roll()
+	// bonuses
+	arB := a.Str
+	drB := d.Str
+	// totals
+	aT := ar + arB
+	dT := dr + drB
+
+	fmt.Printf("Attack roll: %d plus Bonus: %d for Total: %d\n", ar, arB, aT)
+	fmt.Printf("Defence roll: %d plus Bonus: %d for Total: %d\n", dr, drB, dT)
 	// Attack wins if greater than Defence
 	// But a tie goes to the Defence
 	if ar > dr {
@@ -45,7 +53,7 @@ func Attack(a *agents.Agent, d *agents.Agent) (*agents.Agent, *agents.Agent) {
 // Contest takes two sets of structs and stats, and returns two structs
 // First input struct and stat represent the first contestant
 // Second input struct and stat are the second contestant
-func Contest(a *agents.Agent, as int, d *agents.Agent, ds int) (*agents.Agent, *agents.Agent) {
+func Contest(a *Agent, as int, d *Agent, ds int) (*Agent, *Agent) {
 	ar := Roll() + as
 	dr := Roll() + ds
 	fmt.Println(a.Name, "Roll  + Bonus =", ar)

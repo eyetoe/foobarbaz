@@ -60,7 +60,7 @@ func (c *Agent) AdjHp(a int) {
 // Load Character from json file
 func (c *Agent) Load(f string) {
 	d, err := os.Open("save/" + f + ".json")
-	fmt.Println("save/" + f + ".json")
+	fmt.Println("./save/"+f+".json", "loaded.")
 
 	if err != nil {
 		fmt.Println("Can't open file:", err.Error())
@@ -74,7 +74,7 @@ func (c *Agent) Load(f string) {
 
 // Save Character to json file
 func (c *Agent) Save(f string) {
-	//i, _ := json.Marshal(c)
+	fmt.Println("./save/"+f+".json", "saved.")
 	//Oh sweet MarshalIndent, you make my json look pretty
 	i, _ := json.MarshalIndent(c, "", "    ")
 
