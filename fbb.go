@@ -64,6 +64,13 @@ func main() {
 	fmt.Printf("Alas, %s has fallen short!\n", loser.Name)
 	//
 
+	// working on flow for a wrapper function to display combat dialog
+	fmt.Printf("%s attacks %s with %s.\n", atk.Name, def.Name, atk.Weap)
+	cwinner, closer := Contest(&Char, Char.Str, &Foe, Foe.Str)
+	fmt.Printf("%s has prevailed!\n", cwinner.Name)
+	fmt.Printf("Alas, %s has fallen short!\n", closer.Name)
+	//
+
 	return
 }
 
