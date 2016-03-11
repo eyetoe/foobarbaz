@@ -77,10 +77,13 @@ func main() {
 		fmt.Printf("Alas, %s has fallen short!\n", closer.Name)
 		return
 	}
-	contest()
+
+	for i := 0; i < 5000; i++ {
+		contest()
+	}
 
 	// roll some dice!
-	test_dice(20)
+	//	test_dice(20)
 
 	return
 }
