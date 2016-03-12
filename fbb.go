@@ -112,7 +112,8 @@ func main() {
 				}
 			}
 		default:
-			fmt.Printf("Run specific tests by passing one of the following arguments:\n dice, skill, combat, contest, item, affect, foe, adjust <int>")
+			fmt.Printf("Run specific tests by passing one of the following arguments:\n dice\n skill\n combat\n contest\n item\n affect\n foe\n adjust <int>\n")
+			fmt.Printf("e.g. :\n go run *.go dice\n\n")
 		} // switch
 	} // if len(os.Args) >= 2
 	return
