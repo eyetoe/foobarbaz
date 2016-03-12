@@ -22,6 +22,25 @@ func Roll() int {
 
 }
 
+func Skill(a Agent, s int, d int) bool {
+	fmt.Println("Skill Check!")
+	// need = difficulty - skill
+	n := d - s
+	r := Roll()
+	fmt.Printf("%s attempts to use a skill.\n", a.Name)
+	fmt.Printf("Difficulty(%d) minus Skill(%d) := Roll %d or higher to succeed.\n", d, s, n)
+	fmt.Printf("Roll...... %d !\n", r)
+
+	if r >= n {
+		fmt.Printf("%s Succeeds!\n", a.Name)
+		return true
+	} else {
+		fmt.Printf("%s Fails!\n", a.Name)
+		return false
+	}
+
+}
+
 // Attack takes two structs and returns two structs.
 // First input struct is the 'attacker'
 // Second input struct is the 'defender'

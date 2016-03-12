@@ -11,6 +11,11 @@ import (
 	"github.com/fatih/color"
 )
 
+type Stat struct {
+	Name string
+	Val  int
+}
+
 type Agent struct {
 	Name        string
 	Description string

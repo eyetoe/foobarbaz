@@ -26,12 +26,19 @@ func main() {
 	// Take first arg as hit point adjust
 	//[1:] is the slice from 2nd argument (skipping prog name)
 	//[0] is the first element in the array that is returned
-	arg1, err := strconv.Atoi(os.Args[1:][0])
-	if err != nil {
-		Usage()
-		fmt.Printf("%q\n", err)
+	if len(os.Args) < 2 {
+		fmt.Println("arg length is less than 2")
+		arg1 := 0
+		fmt.Printf("arg1 is: %d", arg1)
 	} else {
-		Char.AdjHp(arg1)
+		fmt.Println("arg length is at least 2")
+		arg1, err := strconv.Atoi(os.Args[1:][0])
+		if err != nil {
+			Usage()
+			fmt.Printf("%q\n", err)
+		} else {
+			Char.AdjHp(arg1)
+		}
 	}
 
 	// create Agent struct
@@ -78,10 +85,18 @@ func main() {
 		return
 	}
 
-	for i := 0; i < 5000; i++ {
+	for i := 0; i < 1; i++ {
 		contest()
 	}
 
+	for i := 0; i < 5; i++ {
+		fmt.Println("======================= Testing skill check dialog")
+		if Skill(Char, Char.Dex, Roll()) {
+			fmt.Println("Skill is true")
+		}
+	}
+
+	//Char.Color(*Char)
 	// roll some dice!
 	//	test_dice(20)
 

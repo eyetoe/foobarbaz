@@ -9,6 +9,7 @@ var Minotaur = Agent{
 	Description: "Half man half bull, the minotaur has hatred in it's eyes",
 	// Stats
 	Str: 30,
+	//Str: Stat{"Strength", 30},
 	Int: 5,
 	Dex: 5,
 	// Health and Wellness
