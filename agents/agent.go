@@ -19,13 +19,13 @@ type Stat struct {
 type Agent struct {
 	Name        string
 	Description string
-	// 3 base attributes Str, Int, Dex Str int
-	Str int
-	Int int
-	Dex int
+	// 3 base attributes Str, Int, Dex
+	Str Stat
+	Int Stat
+	Dex Stat
 	// Max Health and Health
-	MxHp int
-	Hp   int
+	MxHp Stat
+	Hp   Stat
 	Dead bool
 	// 3 item slots: Weapon, Armor, Trinket
 	Weap  string
@@ -47,16 +47,16 @@ func (c *Agent) Describe() {
 
 // Adjust Hp "hit points"
 func (c *Agent) AdjHp(a int) {
-	c.Hp = c.Hp + a
+	c.Hp.Val = c.Hp.Val + a
 	if a > 0 {
 		fmt.Println(c.Name, "heals", a, "hit points")
 	} else {
 		fmt.Println(c.Name, "takes", a, "damage!")
 	}
-	if c.Hp > c.MxHp {
-		c.Hp = c.MxHp
+	if c.Hp.Val > c.MxHp.Val {
+		c.Hp.Val = c.MxHp.Val
 	}
-	if c.Hp < 0 {
+	if c.Hp.Val < 0 {
 		fmt.Println(c.Name, "has died :( ")
 		c.Dead = true
 	}
@@ -106,15 +106,15 @@ func (c Agent) StatusBar() {
 	fmt.Printf("%s", Spc(" "))
 	fmt.Printf("%s", BlueU(c.Name))
 	fmt.Printf("%s", Spc(" S:"))
-	fmt.Printf("%s", Green(strconv.Itoa(c.Str)))
+	fmt.Printf("%s", Green(strconv.Itoa(c.Str.Val)))
 	fmt.Printf("%s", Spc(" I:"))
-	fmt.Printf("%s", Green(strconv.Itoa(c.Int)))
+	fmt.Printf("%s", Green(strconv.Itoa(c.Int.Val)))
 	fmt.Printf("%s", Spc(" D:"))
-	fmt.Printf("%s", Green(strconv.Itoa(c.Dex)))
+	fmt.Printf("%s", Green(strconv.Itoa(c.Dex.Val)))
 	fmt.Printf("%s", Spc(" HP:"))
-	fmt.Printf("%s", Green(strconv.Itoa(c.MxHp)))
+	fmt.Printf("%s", Green(strconv.Itoa(c.MxHp.Val)))
 	fmt.Printf("%s", Spc("|"))
-	fmt.Printf("%s", Red(strconv.Itoa(c.Hp)))
+	fmt.Printf("%s", Red(strconv.Itoa(c.Hp.Val)))
 	fmt.Printf("%s", Spc(" W:"))
 	fmt.Printf("%s", ItemC(c.Weap))
 	fmt.Printf("%s", Spc(" A:"))

@@ -22,13 +22,13 @@ func Roll() int {
 
 }
 
-func Skill(a Agent, s int, d int) bool {
+func Skill(a Agent, s Stat, d Stat) bool {
 	fmt.Println("Skill Check!")
 	// need = difficulty - skill
-	n := d - s
+	n := d.Val - s.Val
 	r := Roll()
-	fmt.Printf("%s attempts to use a skill.\n", a.Name)
-	fmt.Printf("Difficulty(%d) minus Skill(%d) := Roll %d or higher to succeed.\n", d, s, n)
+	fmt.Printf("%s attempts to use %s skill.\n", a.Name, s.Name)
+	fmt.Printf("Difficulty(%d) minus Skill(%d) := Roll %d or higher to succeed.\n", d.Val, s.Val, n)
 	fmt.Printf("Roll...... %d !\n", r)
 
 	if r >= n {
@@ -51,8 +51,8 @@ func Attack(a *Agent, d *Agent) (*Agent, *Agent) {
 	ar := Roll()
 	dr := Roll()
 	// bonuses
-	arB := a.Str
-	drB := d.Str
+	arB := a.Str.Val
+	drB := d.Str.Val
 	// totals
 	aT := ar + arB
 	dT := dr + drB
@@ -72,13 +72,13 @@ func Attack(a *Agent, d *Agent) (*Agent, *Agent) {
 // Contest takes two sets of structs and stats, and returns two structs
 // First input struct and stat represent the first contestant
 // Second input struct and stat are the second contestant
-func Contest(a *Agent, as int, d *Agent, ds int) (*Agent, *Agent) {
+func Contest(a *Agent, as Stat, d *Agent, ds Stat) (*Agent, *Agent) {
 	// roll for a and d in contest
 	ar := Roll()
 	dr := Roll()
 	// bonuses
-	arB := as
-	drB := ds
+	arB := as.Val
+	drB := ds.Val
 	// totals
 	aT := ar + arB
 	dT := dr + drB

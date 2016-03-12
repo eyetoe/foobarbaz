@@ -1,11 +1,26 @@
 {
     "Name": "Izro",
     "Description": "A person with great potential.",
-    "Str": 10,
-    "Int": 10,
-    "Dex": 10,
-    "MxHp": 30,
-    "Hp": 30,
+    "Str": {
+        "Name": "Strength",
+        "Val": 10
+    },
+    "Int": {
+        "Name": "Intelligence",
+        "Val": 10
+    },
+    "Dex": {
+        "Name": "Dexterity",
+        "Val": 10
+    },
+    "MxHp": {
+        "Name": "Max Health",
+        "Val": 30
+    },
+    "Hp": {
+        "Name": "Current Health",
+        "Val": 30
+    },
     "Dead": false,
     "Weap": "Staff",
     "Armor": "Tshirt",
