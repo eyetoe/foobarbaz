@@ -1,11 +1,26 @@
 {
     "Name": "Minotaur",
     "Description": "Half man half bull, the minotaur has hatred in it's eyes",
-    "Str": 30,
-    "Int": 5,
-    "Dex": 5,
-    "MxHp": 40,
-    "Hp": 40,
+    "Str": {
+        "Name": "Strength",
+        "Val": 30
+    },
+    "Int": {
+        "Name": "Intelligence",
+        "Val": 5
+    },
+    "Dex": {
+        "Name": "Dexterity",
+        "Val": 5
+    },
+    "MxHp": {
+        "Name": "Max Health",
+        "Val": 40
+    },
+    "Hp": {
+        "Name": "Current Health",
+        "Val": 40
+    },
     "Dead": false,
     "Weap": "Axe",
     "Armor": "Hide",

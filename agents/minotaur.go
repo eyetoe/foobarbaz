@@ -8,13 +8,12 @@ var Minotaur = Agent{
 	Name:        "Minotaur",
 	Description: "Half man half bull, the minotaur has hatred in it's eyes",
 	// Stats
-	Str: 30,
-	//Str: Stat{"Strength", 30},
-	Int: 5,
-	Dex: 5,
+	Str: Stat{"Strength", 30},
+	Int: Stat{"Intelligence", 5},
+	Dex: Stat{"Dexterity", 5},
 	// Health and Wellness
-	MxHp: 40,
-	Hp:   40,
+	MxHp: Stat{"Max Health", 40},
+	Hp:   Stat{"Current Health", 40},
 	Dead: false,
 	// Equiped items
 	Weap:  "Axe",

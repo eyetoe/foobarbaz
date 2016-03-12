@@ -23,85 +23,100 @@ func main() {
 	//Foe := agents.Minotaur
 	Foe := Minotaur
 
-	// Take first arg as hit point adjust
-	//[1:] is the slice from 2nd argument (skipping prog name)
-	//[0] is the first element in the array that is returned
-	if len(os.Args) < 2 {
-		fmt.Println("arg length is less than 2")
-		arg1 := 0
-		fmt.Printf("arg1 is: %d", arg1)
-	} else {
-		fmt.Println("arg length is at least 2")
-		arg1, err := strconv.Atoi(os.Args[1:][0])
-		if err != nil {
-			Usage()
-			fmt.Printf("%q\n", err)
-		} else {
-			Char.AdjHp(arg1)
-		}
-	}
+	if len(os.Args) >= 2 {
 
-	// create Agent struct
-	Char.Armor = "Tshirt"
+		//arg2, err := os.Args[2:][0]
+		arg1 := os.Args[1:][0]
+		fmt.Println("Running test:", arg1)
 
-	Char.Save("Izro")
-	Char.StatusBar()
+		// create Agent struct
+		Char.Armor = "Tshirt"
 
-	fmt.Println("======================= Testing Affect Struct")
-	fmt.Println(OnFire)
-	fmt.Println("======================= Testing Item Struct")
-	fmt.Println(Staff)
+		Char.Save("Izro")
+		Char.StatusBar()
 
-	Foe.StatusBar()
-	Foe.Save("Minotaur")
-	fmt.Println("======================= Testing Foe Description")
-	Foe.Describe()
+		// pass second argument to see example routines
+		switch arg1 {
+		// display affect
+		case "affect":
+			fmt.Println("======================= Testing Affect Struct")
+			fmt.Printf("%s has %s%% chance to cause affect.\nDescription: %s is %s\n", OnFire.Name, strconv.Itoa(OnFire.Proc), OnFire.Name, OnFire.Description)
+		// display item
+		case "item":
+			fmt.Println("======================= Testing Item Struct")
+			fmt.Printf("%s is equipped in the %s slot.\nIt grants + %s to attack rolls, and + %s to damage rolls\nDescription: %s is %s\n", Staff.Name, Staff.Slot, strconv.Itoa(Staff.Attack), strconv.Itoa(Staff.Damage), Staff.Name, Staff.Description)
+		// display foe
+		case "foe":
+			fmt.Println("======================= Testing Foe Description")
+			Foe.StatusBar()
+			Foe.Save("Minotaur")
+			Foe.Describe()
+		// display combat
+		case "combat":
+			combat := func() {
+				// working on flow for a wrapper function to display combat dialog
+				fmt.Println("======================= Testing combat dialog")
+				atk := &Char
+				def := &Foe
 
-	// combat
-	combat := func() {
-		// working on flow for a wrapper function to display combat dialog
-		fmt.Println("======================= Testing combat dialog")
-		atk := &Char
-		def := &Foe
+				fmt.Printf("%s attacks %s with %s.\n", atk.Name, def.Name, atk.Weap)
+				winner, loser := Attack(&Char, &Foe)
+				fmt.Printf("%s has prevailed!\n", winner.Name)
+				fmt.Printf("Alas, %s has fallen short!\n", loser.Name)
 
-		fmt.Printf("%s attacks %s with %s.\n", atk.Name, def.Name, atk.Weap)
-		winner, loser := Attack(&Char, &Foe)
-		fmt.Printf("%s has prevailed!\n", winner.Name)
-		fmt.Printf("Alas, %s has fallen short!\n", loser.Name)
+				return
+			}
+			combat()
+		// display contest
+		case "contest":
+			// working on flow for a wrapper function to display comba
+			contest := func() {
+				fmt.Println("======================= Testing contest dialog")
+				atk := &Char
+				def := &Foe
+				cwinner, closer := Contest(&Char, Char.Str, &Foe, Foe.Str)
+				fmt.Printf("%s vs. %s in a battle of skill.\n", atk.Name, def.Name)
+				fmt.Printf("%s has prevailed!\n", cwinner.Name)
+				fmt.Printf("Alas, %s has fallen short!\n", closer.Name)
+				return
+			}
 
-		return
-	}
-	combat()
-
-	// working on flow for a wrapper function to display comba
-	contest := func() {
-		fmt.Println("======================= Testing contest dialog")
-		atk := &Char
-		def := &Foe
-		cwinner, closer := Contest(&Char, Char.Str, &Foe, Foe.Str)
-		fmt.Printf("%s vs. %s in a battle of skill.\n", atk.Name, def.Name)
-		fmt.Printf("%s has prevailed!\n", cwinner.Name)
-		fmt.Printf("Alas, %s has fallen short!\n", closer.Name)
-		return
-	}
-
-	for i := 0; i < 1; i++ {
-		contest()
-	}
-
-	for i := 0; i < 5; i++ {
-		fmt.Println("======================= Testing skill check dialog")
-		if Skill(Char, Char.Dex, Roll()) {
-			fmt.Println("Skill is true")
-		}
-	}
-
-	//Char.Color(*Char)
-	// roll some dice!
-	//	test_dice(20)
-
+			for i := 0; i < 5; i++ {
+				contest()
+			}
+		// display contest
+		case "skill":
+			for i := 0; i < 5; i++ {
+				fmt.Println("======================= Testing skill check dialog")
+				if Skill(Char, Char.Dex, Stat{"Roll", Roll()}) {
+					fmt.Println("Skill is true")
+				}
+			}
+		// display dice rolls
+		case "dice":
+			test_dice(20)
+		// adjust hp
+		case "adjust":
+			if len(os.Args) < 2 {
+				fmt.Println("arg length is less than 2")
+				arg2 := 0
+				fmt.Printf("arg2 is: %d\n", arg2)
+			} else {
+				fmt.Println("arg length is at least 2")
+				arg2, err := strconv.Atoi(os.Args[2:][0])
+				if err != nil {
+					Usage()
+					fmt.Printf("%q\n", err)
+				} else {
+					Char.AdjHp(arg2)
+				}
+			}
+		default:
+			fmt.Printf("Run specific tests by passing one of the following arguments:\n dice, skill, combat, contest, item, affect, foe, adjust <int>")
+		} // switch
+	} // if len(os.Args) >= 2
 	return
-}
+} // main
 
 // usage message for cli
 func Usage() {
