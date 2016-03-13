@@ -116,7 +116,7 @@ func Testies() {
 					Char.StatusBar()
 				}
 			}
-		case "color":
+		case "color", "colors":
 			fmt.Println("Say what?", Fbb("I said Bam!"))
 			fmt.Println(Fbb("Fbb"), Red("Red"), Green("Green"), BlueU("BlueU"), ItemC("ItemC"), AttrC("attrC"), Spc("Spc"))
 
