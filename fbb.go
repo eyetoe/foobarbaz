@@ -10,17 +10,21 @@ import (
 	// this means functions in the imported package don't need to have the
 	// directory prefixed, soo you can use Agent() rather than agents.Agent()
 	. "github.com/eyetoe/foobarbaz/agents"
-	. "github.com/eyetoe/foobarbaz/inv"
+	. "github.com/eyetoe/foobarbaz/colors"
+	. "github.com/eyetoe/foobarbaz/items"
 )
 
 func main() {
+	Prompt()
+	Testies()
+	return
+}
+
+func Testies() {
 	Char := Agent{}
 	Char.Load("Izro")
 	Char.StatusBar()
-	fmt.Println("======================= Testing Character Description")
-	Char.Describe()
 
-	//Foe := agents.Minotaur
 	Foe := Minotaur
 
 	if len(os.Args) >= 2 {
@@ -29,15 +33,14 @@ func main() {
 		arg1 := os.Args[1:][0]
 		fmt.Println("Running test:", arg1)
 
-		// create Agent struct
-		Char.Armor = "Tshirt"
+		//Char.Armor = "Tshirt"
+		//Char.Save("Izro")
 
-		Char.Save("Izro")
-		Char.StatusBar()
-
-		// pass second argument to see example routines
 		switch arg1 {
 		// display affect
+		case "describe":
+			fmt.Println("======================= Testing Character Description")
+			Char.Describe()
 		case "affect":
 			fmt.Println("======================= Testing Affect Struct")
 			fmt.Printf("%s has %s%% chance to cause affect.\nDescription: %s is %s\n", OnFire.Name, strconv.Itoa(OnFire.Proc), OnFire.Name, OnFire.Description)
@@ -109,17 +112,20 @@ func main() {
 					fmt.Printf("%q\n", err)
 				} else {
 					Char.AdjHp(arg2)
+					Char.Save("Izro")
+					Char.StatusBar()
 				}
 			}
+		case "color":
+			fmt.Println("Say what?", Fbb("I said Bam!"))
+			fmt.Println(Fbb("Fbb"), Red("Red"), Green("Green"), BlueU("BlueU"), ItemC("ItemC"), AttrC("attrC"), Spc("Spc"))
+
 		default:
-			fmt.Printf("Run specific tests by passing one of the following arguments:\n dice\n skill\n combat\n contest\n item\n affect\n foe\n adjust <int>\n")
+			fmt.Printf("Run specific tests by passing one of the following arguments:\n dice\n skill\n combat\n contest\n item\n affect\n foe\n color\n adjust <int>\n")
 			fmt.Printf("e.g. :\n go run *.go dice\n\n")
 		} // switch
 	} // if len(os.Args) >= 2
 
-	fmt.Println("Say what?", Fbb("I said Bam!"))
-
-	fmt.Println(Fbb("color"), Red("color"), Green("color"), BlueU("color"), ItemC("color"), attrC("color"), Spc("color"))
 	return
 } // main
 

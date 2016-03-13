@@ -7,8 +7,8 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/eyetoe/foobarbaz/inv"
-	"github.com/fatih/color"
+	. "github.com/eyetoe/foobarbaz/colors"
+	. "github.com/eyetoe/foobarbaz/items"
 )
 
 type Stat struct {
@@ -36,7 +36,7 @@ type Agent struct {
 	Abl2 string
 	Abl3 string
 	//
-	Inv []inv.Item
+	Inv []Item
 }
 
 func (c *Agent) Describe() {
@@ -93,13 +93,13 @@ func (c *Agent) Save(f string) {
 func (c Agent) StatusBar() {
 	// this may be useful it clears the screen
 	//fmt.Print("[H[J")
-	Fbb := color.New(color.BgRed, color.FgYellow).SprintFunc()
-	Red := color.New(color.BgBlack, color.FgRed).SprintFunc()
-	Green := color.New(color.BgBlack, color.FgGreen).SprintFunc()
-	BlueU := color.New(color.BgBlack, color.FgHiBlue, color.Bold, color.Underline).SprintFunc()
-	ItemC := color.New(color.BgBlack, color.FgHiWhite, color.Bold).SprintFunc()
-	attrC := color.New(color.BgBlack, color.FgMagenta, color.Underline).SprintFunc()
-	Spc := color.New(color.BgBlack, color.FgYellow).SprintFunc()
+	//	Fbb := color.New(color.BgRed, color.FgYellow).SprintFunc()
+	//	Red := color.New(color.BgBlack, color.FgRed).SprintFunc()
+	//	Green := color.New(color.BgBlack, color.FgGreen).SprintFunc()
+	//	BlueU := color.New(color.BgBlack, color.FgHiBlue, color.Bold, color.Underline).SprintFunc()
+	//	ItemC := color.New(color.BgBlack, color.FgHiWhite, color.Bold).SprintFunc()
+	//	attrC := color.New(color.BgBlack, color.FgMagenta, color.Underline).SprintFunc()
+	//	Spc := color.New(color.BgBlack, color.FgYellow).SprintFunc()
 
 	// For sanity layout the StatusBar vertically while printing horizonal
 	fmt.Printf("%s", Fbb("FooBarBaz:"))
@@ -123,7 +123,7 @@ func (c Agent) StatusBar() {
 	fmt.Printf("%s", ItemC(c.Trink))
 	if c.Dead == false {
 		fmt.Printf("%s", Spc(" E?:"))
-		fmt.Printf("%s", attrC("none"))
+		fmt.Printf("%s", AttrC("none"))
 	} else {
 		fmt.Printf("%s", Red(" Dead :("))
 	}

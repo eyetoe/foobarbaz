@@ -1,6 +1,8 @@
 package agents
 
-import "github.com/eyetoe/foobarbaz/inv"
+import (
+	. "github.com/eyetoe/foobarbaz/items"
+)
 
 // A mighty minotaur
 var Minotaur = Agent{
@@ -24,5 +26,5 @@ var Minotaur = Agent{
 	Abl2: "Stomp",
 	Abl3: "Snort",
 	// Inventory
-	Inv: []inv.Item{},
+	Inv: []Item{},
 }

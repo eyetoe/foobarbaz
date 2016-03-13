@@ -1,4 +1,4 @@
-package inv
+package items
 
 import "github.com/eyetoe/foobarbaz/affects"
 

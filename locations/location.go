@@ -1,4 +1,4 @@
-package gps
+package Locations
 
 type Location struct {
 	Path  string
