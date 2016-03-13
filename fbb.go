@@ -116,6 +116,10 @@ func main() {
 			fmt.Printf("e.g. :\n go run *.go dice\n\n")
 		} // switch
 	} // if len(os.Args) >= 2
+
+	fmt.Println("Say what?", Fbb("I said Bam!"))
+
+	fmt.Println(Fbb("color"), Red("color"), Green("color"), BlueU("color"), ItemC("color"), attrC("color"), Spc("color"))
 	return
 } // main
 
