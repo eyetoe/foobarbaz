@@ -12,6 +12,7 @@ import (
 	. "github.com/eyetoe/foobarbaz/agents"
 	. "github.com/eyetoe/foobarbaz/colors"
 	. "github.com/eyetoe/foobarbaz/items"
+	. "github.com/eyetoe/foobarbaz/skills"
 )
 
 func main() {
@@ -21,8 +22,8 @@ func main() {
 }
 
 func Testies() {
-	Char := Agent{}
-	Char.Load("Izro")
+	Char := Agent{File: "Izro"}
+	Char.Load()
 	Char.StatusBar()
 
 	Foe := Minotaur
@@ -32,9 +33,6 @@ func Testies() {
 		//arg2, err := os.Args[2:][0]
 		arg1 := os.Args[1:][0]
 		fmt.Println("Running test:", arg1)
-
-		//Char.Armor = "Tshirt"
-		//Char.Save("Izro")
 
 		switch arg1 {
 		// display affect
@@ -47,12 +45,14 @@ func Testies() {
 		// display item
 		case "item":
 			fmt.Println("======================= Testing Item Struct")
-			fmt.Printf("%s is equipped in the %s slot.\nIt grants + %s to attack rolls, and + %s to damage rolls\nDescription: %s is %s\n", Staff.Name, Staff.Slot, strconv.Itoa(Staff.Attack), strconv.Itoa(Staff.Damage), Staff.Name, Staff.Description)
+			//fmt.Printf("%s is equipped in the %s slot.\nIt grants + %s to attack rolls, and + %s to damage rolls\nDescription: %s is %s\n", Staff.Name, Staff.Slot, strconv.Itoa(Staff.Attack), strconv.Itoa(Staff.Damage), Staff.Name, Staff.Description)
+			Char.Weap = Staff
+			Char.Save()
 		// display foe
 		case "foe":
 			fmt.Println("======================= Testing Foe Description")
 			Foe.StatusBar()
-			Foe.Save("Minotaur")
+			Foe.Save()
 			Foe.Describe()
 		// display combat
 		case "combat":
@@ -62,7 +62,7 @@ func Testies() {
 				atk := &Char
 				def := &Foe
 
-				fmt.Printf("%s attacks %s with %s.\n", atk.Name, def.Name, atk.Weap)
+				fmt.Printf("%s attacks %s with %s.\n", atk.Name, def.Name, atk.Weap.Name)
 				winner, loser := Attack(&Char, &Foe)
 				fmt.Printf("%s has prevailed!\n", winner.Name)
 				fmt.Printf("Alas, %s has fallen short!\n", loser.Name)
@@ -91,7 +91,8 @@ func Testies() {
 		case "skill":
 			for i := 0; i < 5; i++ {
 				fmt.Println("======================= Testing skill check dialog")
-				if Skill(Char, Char.Dex, Stat{"Roll", Roll()}) {
+				//if Skill(Char, Char.Dex, Stat{"Roll", Roll()}) {
+				if SkillCheck(Char, Char.Str, Door) {
 					fmt.Println("Skill is true")
 				}
 			}
@@ -101,18 +102,22 @@ func Testies() {
 		// adjust hp
 		case "adjust":
 			if len(os.Args) < 2 {
-				fmt.Println("arg length is less than 2")
 				arg2 := 0
 				fmt.Printf("arg2 is: %d\n", arg2)
 			} else {
-				fmt.Println("arg length is at least 2")
 				arg2, err := strconv.Atoi(os.Args[2:][0])
 				if err != nil {
-					Usage()
+					usage()
 					fmt.Printf("%q\n", err)
 				} else {
 					Char.AdjHp(arg2)
-					Char.Save("Izro")
+					if arg2 > 0 {
+						fmt.Printf(Green("%s heals %d!\n"), Char.Name, arg2)
+					} else {
+						fmt.Printf(Red("%s takes %d damage!\n"), Char.Name, arg2)
+					}
+
+					Char.Save()
 					Char.StatusBar()
 				}
 			}
@@ -130,7 +135,7 @@ func Testies() {
 } // main
 
 // usage message for cli
-func Usage() {
+func usage() {
 	fmt.Println("Usage: fbb (int hp adjust)")
 }
 
@@ -140,6 +145,6 @@ func test_dice(n int) {
 
 	// roll some dice n times
 	for i := 0; i < n; i++ {
-		fmt.Printf("You roll the dice: %d\n", Roll())
+		fmt.Printf("You roll the dice: %d\n", Roll(100))
 	}
 }

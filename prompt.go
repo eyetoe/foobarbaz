@@ -11,12 +11,12 @@ import (
 
 func Prompt() {
 	for {
-		Char := Agent{}
-		Char.Load("Izro")
+		Char := Agent{File: "Izro"}
+		Char.Load()
 		Foe := Minotaur
 		Char.StatusBar()
 
-		fmt.Printf(":> A %s does not see you. Engage? %s?\n<: ", Foe.Name, GrnU("y/n"))
+		fmt.Printf(":> A %s does not see you. Engage? %s?\n<: ", Foe.Name, GreenU("y/n"))
 		reader := bufio.NewReader(os.Stdin)
 		input, _ := reader.ReadString('\n')
 		choice := string([]byte(input)[0])
@@ -40,18 +40,31 @@ func Prompt() {
 
 func Fight(c *Agent, f *Agent) {
 	for {
-		fmt.Printf(":> %sight, %svade, %sescribe, %sun\n<: ", GrnU("F"), GrnU("E"), GrnU("D"), GrnU("R"))
+		c.StatusBar()
+		fmt.Printf(":> %sight, %svade, %sescribe, %sun\n<: ", GreenU("F"), GreenU("E"), GreenU("D"), GreenU("R"))
 		reader := bufio.NewReader(os.Stdin)
 		input, _ := reader.ReadString('\n')
 		choice := string([]byte(input)[0])
 
 		switch choice {
 		case "f", "F":
-			fmt.Println("Fight!\n You enter the fray!")
-			fmt.Printf("%s attacks %s with %s.\n", c.Name, f.Name, c.Weap)
+			fmt.Printf("\n%s attacks %s with %s.\n", c.Name, f.Name, c.Weap.Name)
 			winner, loser := Attack(c, f)
-			fmt.Printf("%s has prevailed!\n", winner.Name)
-			fmt.Printf("Alas, %s has fallen short!\n", loser.Name)
+			if c.Name == winner.Name {
+				Damage(*winner, loser)
+				if loser.Dead == true {
+					break
+				}
+			}
+			fmt.Printf("\n%s attacks %s with %s.\n", f.Name, c.Name, f.Weap.Name)
+			winner, loser = Attack(f, c)
+			if f.Name == winner.Name {
+				Damage(*winner, loser)
+				if loser.Dead == true {
+					break
+				}
+			}
+
 			continue
 		case "e", "E":
 			fmt.Println("Evade!\n You stall for time, looking for an opening!")

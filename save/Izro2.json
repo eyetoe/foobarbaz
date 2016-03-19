@@ -19,9 +19,9 @@
     },
     "Hp": {
         "Name": "Current Health",
-        "Val": -9
+        "Val": 30
     },
-    "Dead": true,
+    "Dead": false,
     "Weap": {
         "Name": "Oaken Staff",
         "Description": "is weathered beyond belief, and seems to be laquered in blood and sweat.  On close inspection it is engraved with ancient runes, and passages.",
@@ -51,6 +51,5 @@
     "Abl1": "",
     "Abl2": "",
     "Abl3": "",
-    "Inv": null,
-    "File": "Izro"
+    "Inv": null
 }
