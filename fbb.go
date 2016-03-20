@@ -16,9 +16,18 @@ import (
 )
 
 func main() {
+	Banner()
 	Prompt()
 	Testies()
 	return
+}
+
+// Start the game.
+func Play() {
+	Char := Agent{File: "Izro"}
+	Char.Load()
+	Char.StatusBar()
+
 }
 
 func Testies() {

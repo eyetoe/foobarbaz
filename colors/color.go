@@ -4,6 +4,8 @@
 package color
 
 import (
+	"fmt"
+
 	"github.com/fatih/color"
 )
 
@@ -48,5 +50,12 @@ var WhiteBU = color.New(color.BgBlack, color.FgWhite, color.Underline).SprintFun
 var AttrC = color.New(color.BgBlack, color.FgMagenta, color.Underline).SprintFunc()
 var Fbb = color.New(color.BgRed, color.FgYellow).SprintFunc()
 var Spc = color.New(color.BgBlack, color.FgYellow).SprintFunc()
+var FbbBanner = color.New(color.FgRed).SprintFunc()
 
-var ItemC = color.New(color.BgBlack, color.FgHiWhite, color.Bold).SprintFunc()
+//var ItemC = color.New(color.BgBlack, color.FgHiWhite, color.Bold).SprintFunc()
+var ItemC = color.New(color.FgHiWhite, color.Bold).SprintFunc()
+
+func Clear() {
+
+	fmt.Print("[H[J")
+}

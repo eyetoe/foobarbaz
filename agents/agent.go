@@ -9,6 +9,7 @@ import (
 
 	. "github.com/eyetoe/foobarbaz/colors"
 	. "github.com/eyetoe/foobarbaz/items"
+	. "github.com/eyetoe/foobarbaz/locations"
 )
 
 type Stat struct {
@@ -36,7 +37,9 @@ type Agent struct {
 	Abl2 string
 	Abl3 string
 	//
+	Exp  int
 	Inv  []Item
+	Loc  Loc
 	File string
 }
 
@@ -99,33 +102,37 @@ func (c *Agent) Save() {
 func (c Agent) StatusBar() {
 	// For sanity layout the StatusBar vertically while printing horizonal
 	fmt.Printf("%s", Fbb("FooBarBaz:"))
-	fmt.Printf("%s", Spc(" "))
-	fmt.Printf("%s", BlueBU(c.Name))
-	fmt.Printf("%s", Spc(" S:"))
-	fmt.Printf("%s", GreenB(strconv.Itoa(c.Str.Val)))
-	fmt.Printf("%s", Spc(" I:"))
-	fmt.Printf("%s", GreenB(strconv.Itoa(c.Int.Val)))
-	fmt.Printf("%s", Spc(" D:"))
-	fmt.Printf("%s", GreenB(strconv.Itoa(c.Dex.Val)))
-	fmt.Printf("%s", Spc(" HP:"))
-	fmt.Printf("%s", GreenB(strconv.Itoa(c.MxHp.Val)))
-	fmt.Printf("%s", Spc("|"))
-	fmt.Printf("%s", RedB(strconv.Itoa(c.Hp.Val)))
-	fmt.Printf("%s", Spc(" W:"))
+	fmt.Printf("%s", Yellow(" "))
+	fmt.Printf("%s", BlueU(c.Name))
+	fmt.Printf("%s", Yellow(" S:"))
+	fmt.Printf("%s", Green(strconv.Itoa(c.Str.Val)))
+	fmt.Printf("%s", Yellow(" I:"))
+	fmt.Printf("%s", Green(strconv.Itoa(c.Int.Val)))
+	fmt.Printf("%s", Yellow(" D:"))
+	fmt.Printf("%s", Green(strconv.Itoa(c.Dex.Val)))
+	fmt.Printf("%s", Yellow(" HP:"))
+	fmt.Printf("%s", Green(strconv.Itoa(c.MxHp.Val)))
+	fmt.Printf("%s", Yellow("|"))
+	fmt.Printf("%s", Red(strconv.Itoa(c.Hp.Val)))
+
+	fmt.Printf("%s", Yellow(" XP:"))
+	fmt.Printf("%s", Green(strconv.Itoa(c.Exp)))
+
+	fmt.Printf("%s", Yellow(" W:"))
 	fmt.Printf("%s", ItemC(c.Weap.Name))
-	fmt.Printf("%s", Spc(" A:"))
+	fmt.Printf("%s", Yellow(" A:"))
 	fmt.Printf("%s", ItemC(c.Armor))
-	fmt.Printf("%s", Spc(" T:"))
+	fmt.Printf("%s", Yellow(" T:"))
 	fmt.Printf("%s", ItemC(c.Trink))
 	if c.Dead == false {
-		fmt.Printf("%s", Spc(" E?:"))
-		fmt.Printf("%s", MagentaBU("none"))
+		fmt.Printf("%s", Yellow(" E?:"))
+		fmt.Printf("%s", MagentaU("none"))
 	} else {
 		fmt.Printf("%s", Red(" Dead :("))
 	}
 	fmt.Println()
 	if c.Dead == true {
-		fmt.Printf(Red("%s collapses in a sobbing frightned lump and expires.\n\n\n"), c.Name)
+		fmt.Printf(Red("%s collapsed in a sobbing frightned lump and expired.\n\n\n"), c.Name)
 		os.Exit(0)
 	}
 }

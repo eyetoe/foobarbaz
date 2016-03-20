@@ -50,21 +50,7 @@ func Prompt() {
 			continue
 		case "h", "H":
 			fmt.Println(Blue("All you help are belong to us."))
+			//Monster(&Minotaur
 		}
 	}
-}
-func Look(c Agent) {
-	fmt.Printf(Blue("You are here: %s"), c.Loc)
-}
-func CharacterSheet(c *Agent) {
-	fmt.Printf("%s\n", c.Name)
-}
-func Monster(f *Agent) {
-	fmt.Printf("%s\n", f.Name)
-}
-
-func Banner() {
-	fmt.Println("[H[J")
-	fmt.Printf(White("Welcome to ...\n"))
-	fmt.Printf(Red("FooBarBaz\n\n"))
 }
