@@ -23,8 +23,8 @@ func Roll(n int) int {
 func Damage(a *Agent, d *Agent) {
 	hp := Roll(a.Weap.Damage)
 	d.AdjHp(0 - hp)
-	fmt.Printf("%s takes %s damage. ", d.Name, Red(strconv.Itoa(hp)))
-	fmt.Printf("%s's health is %s.\n", d.Name, Red(strconv.Itoa(d.Hp.Val)))
+	fmt.Printf("for %s damage. ", Red(strconv.Itoa(hp)))
+	fmt.Printf("%s's health = %s.\n", d.Name, Red(strconv.Itoa(d.Hp.Val)))
 	// Monster agents don't have a save file set
 	if d.File == "" && d.Dead == true {
 		a.Exp = a.Exp + d.MxHp.Val
@@ -80,7 +80,7 @@ func Attack(a *Agent, d *Agent) (*Agent, *Agent) {
 	// Attack wins if greater than Defence
 	// But a tie goes to the Defence
 	if aT > dT {
-		fmt.Printf(Green("%s hits!\n"), a.Name)
+		fmt.Printf(Green("%s hits! "), a.Name)
 		return a, d
 	} else {
 		fmt.Printf(Red("%s misses!\n"), a.Name)
@@ -117,5 +117,19 @@ func Contest(a *Agent, as Stat, d *Agent, ds Stat) (*Agent, *Agent) {
 		return Contest(a, as, d, ds)
 
 	}
+
+}
+
+func Spawn() Agent {
+	rand.Seed(time.Now().UTC().UnixNano())
+	monsters := []Agent{
+		// Add monsters here to be included in random spawn
+		Minotaur,
+		Coyote,
+		Phantom,
+	}
+	return monsters[rand.Intn(len(monsters))]
+	//monster := monsters[rand.Intn(len(monsters))]
+	//fmt.Println(monster.Name, monster.Description)
 
 }

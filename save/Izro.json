@@ -19,7 +19,7 @@
     },
     "Hp": {
         "Name": "Current Health",
-        "Val": 13
+        "Val": 20
     },
     "Dead": false,
     "Weap": {
@@ -51,7 +51,7 @@
     "Abl1": "",
     "Abl2": "",
     "Abl3": "",
-    "Exp": 102,
+    "Exp": 143,
     "Inv": null,
     "Loc": {
         "Name": "Start",

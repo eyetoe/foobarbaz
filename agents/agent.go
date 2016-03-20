@@ -59,7 +59,7 @@ func (c *Agent) AdjHp(a int) {
 	if c.Hp.Val > c.MxHp.Val {
 		c.Hp.Val = c.MxHp.Val
 	}
-	if c.Hp.Val < 0 {
+	if c.Hp.Val <= 0 {
 		fmt.Println(c.Name, "has died :( ")
 		c.Dead = true
 	}
@@ -101,6 +101,7 @@ func (c *Agent) Save() {
 // Render character status bar
 func (c Agent) StatusBar() {
 	// For sanity layout the StatusBar vertically while printing horizonal
+	fmt.Println()
 	fmt.Printf("%s", Fbb("FooBarBaz:"))
 	fmt.Printf("%s", Yellow(" "))
 	fmt.Printf("%s", BlueU(c.Name))

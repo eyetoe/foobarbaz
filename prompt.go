@@ -63,17 +63,17 @@ func Monster(f *Agent) {
 	fmt.Printf("%s\n", f.Name)
 }
 
-func Banner() {
-	fmt.Println("[H[J")
-	fmt.Printf(White("Welcome to ...\n"))
-	fmt.Printf(Red("FooBarBaz\n\n"))
-}
+//func Banner() {
+//	fmt.Println("[H[J")
+//	fmt.Printf(White("Welcome to ...\n"))
+//	fmt.Printf(Red("FooBarBaz\n\n"))
+//}
 
 // Fight loop where c is character and f is foe
 func Fight(c *Agent, f *Agent) {
 	for {
 		c.StatusBar()
-		fmt.Printf("You have encountered a %s\n, A %s is before you.\n", WhiteU("Monster!"), Red(f.Name))
+		fmt.Printf("You have encountered a %s.\nA %s is before you.\n", WhiteU("Monster!"), Red(f.Name))
 		fmt.Printf(":> %sight, %svade, %sescribe, %sun\n<: ", GreenU("F"), GreenU("E"), GreenU("D"), GreenU("R"))
 		reader := bufio.NewReader(os.Stdin)
 		input, _ := reader.ReadString('\n')
@@ -115,5 +115,18 @@ func Fight(c *Agent, f *Agent) {
 		}
 		return
 	}
+}
 
+func Banner() {
+
+	fmt.Println("[H[J")
+	fmt.Printf(White("Welcome to ...\n"))
+	fmt.Println(Red(
+		`   ______         ______           ______              ` + "\n" +
+			`   |  ___|        | ___ \          | ___ \             ` + "\n" +
+			`   | |_ ___   ___ | |_/ / __ _ _ __| |_/ / __ _ ____   ` + "\n" +
+			`   |  _/ _ \ / _ \| ___ \/ _' | '__| ___ \/ _' |_  /   ` + "\n" +
+			`   | || (_) | (_) | |_/ / (_| | |  | |_/ / (_| |/ /    ` + "\n" +
+			`   \_| \___/ \___/\____/ \__,_|_|  \____/ \__,_/___|   ` + "\n" +
+			`                                                       `))
 }
