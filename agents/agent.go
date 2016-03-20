@@ -43,6 +43,11 @@ type Agent struct {
 	File string
 }
 
+func (c Agent) ExpDrop() int {
+	t := c.Str.Val + c.Int.Val + c.Dex.Val + c.MxHp.Val
+	return t / 4
+}
+
 func (c *Agent) Describe() {
 	fmt.Printf("You consider the %s. ", c.Name)
 	fmt.Printf("%s\n", c.Description)

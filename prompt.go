@@ -52,8 +52,8 @@ func Prompt() {
 }
 func Character(c *Agent) {
 	for {
+		ClearScreen()
 		c.StatusBar()
-		//		fmt.Printf("\n%s \n:> %sest, %sp, %sbility, %snventory, %sack <:", BlueU("Character"), Green("R"), Green("X"), Green("A"), Green("I"), Green("B"))
 
 		fmt.Printf("\n%s \n:> ", BlueU("Character"))
 		fmt.Printf("%sest, ", Green("R"))
@@ -72,7 +72,9 @@ func Character(c *Agent) {
 			if c.Hp.Val < c.MxHp.Val/2 {
 				c.Hp.Val = c.MxHp.Val / 2
 				fmt.Printf(Green("You heal.\n"))
+				c.Save()
 			}
+			Continue()
 			continue
 		case "x", "X":
 			ExpMgr(c)
@@ -127,13 +129,14 @@ func ExpMgr(c *Agent) {
 	for {
 		ClearScreen()
 		c.StatusBar()
+		cost := StatCost(c)
 		fmt.Printf("\n%s \n", YellowU("Experience Point Store!\n"))
 		fmt.Printf(Blue("You have %s %s\n"), Green(strconv.Itoa(c.Exp)), Blue("experience.\n"))
 		fmt.Printf(Blue("Choose a Stat to increase 1 point\n"))
-		fmt.Printf(":>	%strength	 (10xp),\n", Green("S"))
-		fmt.Printf("	%sntelligence	 (10xp),\n", Green("I"))
-		fmt.Printf("	%sexterity	 (10xp),\n", Green("D"))
-		fmt.Printf("	%sP		 (10xp),\n", Green("H"))
+		fmt.Printf(":>	%strength	 (%s xp),\n", Green("S"), Yellow(strconv.Itoa(cost)))
+		fmt.Printf("	%sntelligence	 (%s xp),\n", Green("I"), Yellow(strconv.Itoa(cost)))
+		fmt.Printf("	%sexterity	 (%s xp),\n", Green("D"), Yellow(strconv.Itoa(cost)))
+		fmt.Printf("	%sP		 (%s xp),\n", Green("H"), Yellow(strconv.Itoa(cost)))
 		fmt.Printf("	%sack\n", Green("B"))
 		fmt.Printf("<:")
 
@@ -149,8 +152,8 @@ func ExpMgr(c *Agent) {
 
 		switch choice {
 		case "s", "S":
-			if c.Exp >= 10 {
-				c.Exp = c.Exp - 10
+			if c.Exp >= cost {
+				c.Exp = c.Exp - cost
 				c.Str.Val = c.Str.Val + 1
 				fmt.Println(Blue("\nYour muscles quiver and flex."))
 				fmt.Printf(Yellow("\n Strength is now %s.\n"), Green(strconv.Itoa(c.Str.Val)))
@@ -162,8 +165,8 @@ func ExpMgr(c *Agent) {
 
 			continue
 		case "i", "I":
-			if c.Exp >= 10 {
-				c.Exp = c.Exp - 10
+			if c.Exp >= cost {
+				c.Exp = c.Exp - cost
 				c.Int.Val = c.Int.Val + 1
 				fmt.Println(Blue("\nYou have an epiphany of significant import."))
 				fmt.Printf(Yellow("\n Intelligence is now %s.\n"), Green(strconv.Itoa(c.Int.Val)))
@@ -175,8 +178,8 @@ func ExpMgr(c *Agent) {
 
 			continue
 		case "d", "D":
-			if c.Exp >= 10 {
-				c.Exp = c.Exp - 10
+			if c.Exp >= cost {
+				c.Exp = c.Exp - cost
 				c.Dex.Val = c.Dex.Val + 1
 				fmt.Println(Blue("\nYour nerves tingle and radiate with anticipation."))
 				fmt.Printf(Yellow("\n Dexterity is now %s.\n"), Green(strconv.Itoa(c.Dex.Val)))
@@ -188,8 +191,8 @@ func ExpMgr(c *Agent) {
 
 			continue
 		case "h", "H":
-			if c.Exp >= 10 {
-				c.Exp = c.Exp - 10
+			if c.Exp >= cost {
+				c.Exp = c.Exp - cost
 				c.MxHp.Val = c.MxHp.Val + 1
 				fmt.Println(Blue("\nAttention to physical health improves your metabolism."))
 				fmt.Printf(Yellow("\n Max Hp is now %s.\n"), Green(strconv.Itoa(c.MxHp.Val)))

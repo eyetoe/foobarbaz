@@ -29,8 +29,8 @@ func Damage(a *Agent, d *Agent) {
 	}
 	// Monster agents don't have a save file set
 	if d.File == "" && d.Dead == true {
-		a.Exp = a.Exp + d.MxHp.Val
-		fmt.Printf(Green("You gain %d experience.\n"), d.MxHp.Val)
+		a.Exp = a.Exp + d.ExpDrop()
+		fmt.Printf(Green("You gain %d experience.\n"), d.ExpDrop())
 		a.Save()
 	}
 	d.Save()
