@@ -23,8 +23,10 @@ func Roll(n int) int {
 func Damage(a *Agent, d *Agent) {
 	hp := Roll(a.Weap.Damage)
 	d.AdjHp(0 - hp)
-	fmt.Printf("for %s damage. ", Red(strconv.Itoa(hp)))
-	fmt.Printf("%s's health = %s.\n", d.Name, Red(strconv.Itoa(d.Hp.Val)))
+	if d.Dead == false {
+		fmt.Printf("for %s damage. ", Red(strconv.Itoa(hp)))
+		fmt.Printf("%s's health = %s.\n", d.Name, Red(strconv.Itoa(d.Hp.Val)))
+	}
 	// Monster agents don't have a save file set
 	if d.File == "" && d.Dead == true {
 		a.Exp = a.Exp + d.MxHp.Val

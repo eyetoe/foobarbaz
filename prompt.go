@@ -56,8 +56,8 @@ func Prompt() {
 func Character(c *Agent) {
 	for {
 		c.StatusBar()
-		fmt.Printf(Blue("You examine your character sheet.\n"))
-		fmt.Printf(":> %sest, %sp, %sbility, %snventory, %sack <:", Green("R"), Green("X"), Green("A"), Green("I"), Green("B"))
+		//fmt.Printf(Blue("You examine your character sheet.\n"))
+		fmt.Printf("%s:> %sest, %sp, %sbility, %snventory, %sack <:", Blue("Character"), Green("R"), Green("X"), Green("A"), Green("I"), Green("B"))
 		reader := bufio.NewReader(os.Stdin)
 		input, _ := reader.ReadString('\n')
 		choice := string([]byte(input)[0])
@@ -99,15 +99,16 @@ func Go() {
 	}
 }
 func Look(c Agent) {
-	fmt.Printf(Blue("You are here: %s"), c.Loc)
+	fmt.Printf(Blue("You are here: %s\n"), c.Loc.Name)
+	fmt.Printf(Blue("%s\n"), c.Loc.Description)
 }
 
 // Fight loop where c is character and f is foe
 func Fight(c *Agent, f *Agent) {
 	for {
 		c.StatusBar()
-		fmt.Printf("You have encountered a %s.\nA %s is before you.\n", WhiteU("Monster!"), Red(f.Name))
-		fmt.Printf(":> %sight, %svade, %sescribe, %sun\n<: ", GreenU("F"), GreenU("E"), GreenU("D"), GreenU("R"))
+		fmt.Printf("You have encountered a %s.\n", WhiteU("Monster!"))
+		fmt.Printf("%s:> %sight, %svade, %sescribe, %sun\n<: ", Red(f.Name), GreenU("F"), GreenU("E"), GreenU("D"), GreenU("R"))
 		reader := bufio.NewReader(os.Stdin)
 		input, _ := reader.ReadString('\n')
 		choice := string([]byte(input)[0])
