@@ -42,11 +42,11 @@ func Prompt() {
 			CharacterSheet(&Char)
 			continue
 		case "e", "E":
-			fmt.Printf(Blue("If there is an event, let's do it!\n"))
 			var Foe Agent
 			//Foe = Phantom
 			Foe = Spawn()
-			Monster(&Foe)
+			//Monster(&Foe)
+			Fight(&Char, &Foe)
 			continue
 		case "h", "H":
 			fmt.Println(Blue("All you help are belong to us."))
@@ -67,4 +67,53 @@ func Banner() {
 	fmt.Println("[H[J")
 	fmt.Printf(White("Welcome to ...\n"))
 	fmt.Printf(Red("FooBarBaz\n\n"))
+}
+
+// Fight loop where c is character and f is foe
+func Fight(c *Agent, f *Agent) {
+	for {
+		c.StatusBar()
+		fmt.Printf("You have encountered a %s\n, A %s is before you.\n", WhiteU("Monster!"), Red(f.Name))
+		fmt.Printf(":> %sight, %svade, %sescribe, %sun\n<: ", GreenU("F"), GreenU("E"), GreenU("D"), GreenU("R"))
+		reader := bufio.NewReader(os.Stdin)
+		input, _ := reader.ReadString('\n')
+		choice := string([]byte(input)[0])
+
+		switch choice {
+		case "f", "F":
+			fmt.Printf("\n%s attacks %s with %s.\n", c.Name, f.Name, c.Weap.Name)
+			winner, loser := Attack(c, f)
+			if c.Name == winner.Name {
+				Damage(c, f)
+				if loser.Dead == true {
+					break
+				}
+			}
+			fmt.Printf("\n%s attacks %s with %s.\n", f.Name, c.Name, f.Weap.Name)
+			winner, loser = Attack(f, c)
+			if f.Name == winner.Name {
+				Damage(f, c)
+				if loser.Dead == true {
+					break
+				}
+			}
+			continue
+		case "e", "E":
+			fmt.Println("Evade!\n You stall for time, looking for an opening!")
+			continue
+		case "d", "D":
+			fmt.Printf(Blue("\nYou consider the %s. %s\n"), f.Name, f.Description)
+			f.FoeBar()
+			fmt.Println()
+			continue
+		case "r", "R":
+			fmt.Println("Run!\n You have lost this battle, but may yet win the war!")
+			break
+		default:
+			Fight(c, f)
+			break
+		}
+		return
+	}
+
 }

@@ -19,7 +19,7 @@
     },
     "Hp": {
         "Name": "Current Health",
-        "Val": 15
+        "Val": 13
     },
     "Dead": false,
     "Weap": {
