@@ -27,7 +27,15 @@ func Play() {
 	Char := Agent{File: "Izro"}
 	Char.Load()
 	Char.StatusBar()
+}
 
+func Resurrect(c *Agent) {
+	if c.Dead == true {
+		fmt.Printf(Blue("\n A mystical light shines down on %s's lifeless corpse.\n\n A sulfurous effluvium expands from the body.\n\n %s takes a gasping breath, and lives!\n\n"), c.Name, c.Name)
+		c.Hp.Val = c.MxHp.Val
+		c.Dead = false
+		c.Save()
+	}
 }
 
 func Testies() {

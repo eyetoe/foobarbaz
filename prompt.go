@@ -4,10 +4,10 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strconv"
 
 	. "github.com/eyetoe/foobarbaz/agents"
 	. "github.com/eyetoe/foobarbaz/colors"
-	"github.com/eyetoe/foobarbaz/locations"
 )
 
 func Prompt() {
@@ -16,8 +16,9 @@ func Prompt() {
 		// the save file without prompting.
 		Char := Agent{File: "Izro"}
 		Char.Load()
+		Resurrect(&Char)
 		Char.StatusBar()
-		Char.Loc = locations.Start
+		//Char.Loc = locations.Start
 		Char.Save()
 		fmt.Printf("You are here: "+BlueU("%s\n"), Char.Loc.Name)
 
@@ -35,11 +36,10 @@ func Prompt() {
 			Look(Char)
 			continue
 		case "g", "G":
-			fmt.Printf(Blue("Where are we going?.\n"))
+			Go()
 			break
 		case "c", "C":
-			fmt.Printf(Blue("You examine your character sheet.\n"))
-			CharacterSheet(&Char)
+			Character(&Char)
 			continue
 		case "e", "E":
 			var Foe Agent
@@ -53,21 +53,54 @@ func Prompt() {
 		}
 	}
 }
+func Character(c *Agent) {
+	for {
+		c.StatusBar()
+		fmt.Printf(Blue("You examine your character sheet.\n"))
+		fmt.Printf(":> %sest, %sp, %sbility, %snventory, %sack <:", Green("R"), Green("X"), Green("A"), Green("I"), Green("B"))
+		reader := bufio.NewReader(os.Stdin)
+		input, _ := reader.ReadString('\n')
+		choice := string([]byte(input)[0])
+		switch choice {
+		case "r", "R":
+			fmt.Printf(Blue("You rest and recuperate.\n"))
+			if c.Hp.Val < c.MxHp.Val/2 {
+				c.Hp.Val = c.MxHp.Val / 2
+				fmt.Printf(Green("You heal.\n"))
+			}
+			continue
+		case "x", "X":
+			fmt.Printf(Blue("\nYou have %s %s"), Green(strconv.Itoa(c.Exp)), Blue("experience.\n"))
+			continue
+		case "a", "A":
+			fmt.Printf(Blue("\nAbility 1: %s.\n"), c.Abl1)
+			fmt.Printf(Blue("Ability 2: %s.\n"), c.Abl2)
+			fmt.Printf(Blue("Ability 3: %s.\n"), c.Abl3)
+			continue
+		case "i", "I":
+			fmt.Printf(Blue(c.Inv))
+			continue
+		case "b", "B":
+			return
+		}
+	}
+}
+
+func Go() {
+	fmt.Printf(":> %sxit, %sack <:", Green("E"), Green("B"))
+	reader := bufio.NewReader(os.Stdin)
+	input, _ := reader.ReadString('\n')
+	choice := string([]byte(input)[0])
+	switch choice {
+	case "e", "E":
+		os.Exit(0)
+	case "b", "B":
+		return
+	}
+}
 func Look(c Agent) {
 	fmt.Printf(Blue("You are here: %s"), c.Loc)
 }
-func CharacterSheet(c *Agent) {
-	fmt.Printf("%s\n", c.Name)
-}
-func Monster(f *Agent) {
-	fmt.Printf("%s\n", f.Name)
-}
-
-//func Banner() {
-//	fmt.Println("[H[J")
-//	fmt.Printf(White("Welcome to ...\n"))
-//	fmt.Printf(Red("FooBarBaz\n\n"))
-//}
 
 // Fight loop where c is character and f is foe
 func Fight(c *Agent, f *Agent) {
