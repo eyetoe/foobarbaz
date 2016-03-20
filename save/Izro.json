@@ -3,23 +3,23 @@
     "Description": "A person with great potential.",
     "Str": {
         "Name": "Strength",
-        "Val": 10
+        "Val": 14
     },
     "Int": {
         "Name": "Intelligence",
-        "Val": 10
+        "Val": 12
     },
     "Dex": {
         "Name": "Dexterity",
-        "Val": 10
+        "Val": 14
     },
     "MxHp": {
         "Name": "Max Health",
-        "Val": 30
+        "Val": 38
     },
     "Hp": {
         "Name": "Current Health",
-        "Val": 30
+        "Val": 19
     },
     "Dead": false,
     "Weap": {
@@ -51,7 +51,7 @@
     "Abl1": "",
     "Abl2": "",
     "Abl3": "",
-    "Exp": 265,
+    "Exp": 20,
     "Inv": null,
     "Loc": {
         "Name": "Start",

@@ -12,18 +12,16 @@ import (
 
 func Prompt() {
 	for {
-		// setting File var in Agent struct, this allowss Char.Load to pick up
+		// setting File var in Agent struct, this allows Char.Load to pick up
 		// the save file without prompting.
 		Char := Agent{File: "Izro"}
 		Char.Load()
-		Resurrect(&Char)
+		ClearScreen()
 		Char.StatusBar()
-		//Char.Loc = locations.Start
 		Char.Save()
-		fmt.Printf("You are here: "+BlueU("%s\n"), Char.Loc.Name)
+		fmt.Printf("\n%s <- You are here.\n", BlueU(Char.Loc.Name))
 
-		// ask the firt question
-		//fmt.Printf("Load, Save, New, Help\n")
+		// ask the first question
 		fmt.Printf(":> %sook, %so, %sharacter, %svent, %selp <: ", GreenU("L"), GreenU("G"), GreenU("C"), GreenU("E"), GreenU("H"))
 
 		reader := bufio.NewReader(os.Stdin)
@@ -45,7 +43,6 @@ func Prompt() {
 			var Foe Agent
 			//Foe = Phantom
 			Foe = Spawn()
-			//Monster(&Foe)
 			Fight(&Char, &Foe)
 			continue
 		case "h", "H":
@@ -56,21 +53,29 @@ func Prompt() {
 func Character(c *Agent) {
 	for {
 		c.StatusBar()
-		//fmt.Printf(Blue("You examine your character sheet.\n"))
-		fmt.Printf("%s:> %sest, %sp, %sbility, %snventory, %sack <:", Blue("Character"), Green("R"), Green("X"), Green("A"), Green("I"), Green("B"))
+		//		fmt.Printf("\n%s \n:> %sest, %sp, %sbility, %snventory, %sack <:", BlueU("Character"), Green("R"), Green("X"), Green("A"), Green("I"), Green("B"))
+
+		fmt.Printf("\n%s \n:> ", BlueU("Character"))
+		fmt.Printf("%sest, ", Green("R"))
+		fmt.Printf("%sp, ", Green("X"))
+		fmt.Printf("%sbility, ", Green("A"))
+		fmt.Printf("%snventory, ", Green("I"))
+		fmt.Printf("%saves, ", Green("S"))
+		fmt.Printf("%sack <:", Green("B"))
+
 		reader := bufio.NewReader(os.Stdin)
 		input, _ := reader.ReadString('\n')
 		choice := string([]byte(input)[0])
 		switch choice {
 		case "r", "R":
-			fmt.Printf(Blue("You rest and recuperate.\n"))
+			fmt.Printf(Blue("\nYou rest and recuperate.\n"))
 			if c.Hp.Val < c.MxHp.Val/2 {
 				c.Hp.Val = c.MxHp.Val / 2
 				fmt.Printf(Green("You heal.\n"))
 			}
 			continue
 		case "x", "X":
-			fmt.Printf(Blue("\nYou have %s %s"), Green(strconv.Itoa(c.Exp)), Blue("experience.\n"))
+			ExpMgr(c)
 			continue
 		case "a", "A":
 			fmt.Printf(Blue("\nAbility 1: %s.\n"), c.Abl1)
@@ -80,10 +85,126 @@ func Character(c *Agent) {
 		case "i", "I":
 			fmt.Printf(Blue(c.Inv))
 			continue
+		case "s", "S":
+			SaveMgr(c)
+			continue
 		case "b", "B":
 			return
 		}
 	}
+}
+
+func SaveMgr(c *Agent) {
+	for {
+		fmt.Printf("\n%s \n:> ", BlueU("Save File Management"))
+		fmt.Printf("%sew, ", Green("N"))
+		fmt.Printf("%save, ", Green("S"))
+		fmt.Printf("%soad, ", Green("L"))
+		fmt.Printf("%sack <:", Green("B"))
+
+		reader := bufio.NewReader(os.Stdin)
+		input, _ := reader.ReadString('\n')
+		choice := string([]byte(input)[0])
+
+		switch choice {
+		case "n", "N":
+			fmt.Printf("\ncomming soon, New Character\n")
+			continue
+		case "s", "S":
+			c.Save()
+			continue
+		case "l", "L":
+			c.Load()
+			continue
+		case "b", "B":
+			return
+		}
+	}
+
+}
+
+func ExpMgr(c *Agent) {
+	for {
+		ClearScreen()
+		c.StatusBar()
+		fmt.Printf("\n%s \n", YellowU("Experience Point Store!\n"))
+		fmt.Printf(Blue("You have %s %s\n"), Green(strconv.Itoa(c.Exp)), Blue("experience.\n"))
+		fmt.Printf(Blue("Choose a Stat to increase 1 point\n"))
+		fmt.Printf(":>	%strength	 (10xp),\n", Green("S"))
+		fmt.Printf("	%sntelligence	 (10xp),\n", Green("I"))
+		fmt.Printf("	%sexterity	 (10xp),\n", Green("D"))
+		fmt.Printf("	%sP		 (10xp),\n", Green("H"))
+		fmt.Printf("	%sack\n", Green("B"))
+		fmt.Printf("<:")
+
+		consolation := func() {
+			fmt.Printf(Yellow("\nAlas you have not the required experience.\n"))
+			fmt.Printf(Red("Without risk there can be no reward.\n"))
+			Continue()
+		}
+
+		reader := bufio.NewReader(os.Stdin)
+		input, _ := reader.ReadString('\n')
+		choice := string([]byte(input)[0])
+
+		switch choice {
+		case "s", "S":
+			if c.Exp >= 10 {
+				c.Exp = c.Exp - 10
+				c.Str.Val = c.Str.Val + 1
+				fmt.Println(Blue("\nYour muscles quiver and flex."))
+				fmt.Printf(Yellow("\n Strength is now %s.\n"), Green(strconv.Itoa(c.Str.Val)))
+				c.Save()
+				Continue()
+			} else {
+				consolation()
+			}
+
+			continue
+		case "i", "I":
+			if c.Exp >= 10 {
+				c.Exp = c.Exp - 10
+				c.Int.Val = c.Int.Val + 1
+				fmt.Println(Blue("\nYou have an epiphany of significant import."))
+				fmt.Printf(Yellow("\n Intelligence is now %s.\n"), Green(strconv.Itoa(c.Int.Val)))
+				c.Save()
+				Continue()
+			} else {
+				consolation()
+			}
+
+			continue
+		case "d", "D":
+			if c.Exp >= 10 {
+				c.Exp = c.Exp - 10
+				c.Dex.Val = c.Dex.Val + 1
+				fmt.Println(Blue("\nYour nerves tingle and radiate with anticipation."))
+				fmt.Printf(Yellow("\n Dexterity is now %s.\n"), Green(strconv.Itoa(c.Dex.Val)))
+				c.Save()
+				Continue()
+			} else {
+				consolation()
+			}
+
+			continue
+		case "h", "H":
+			if c.Exp >= 10 {
+				c.Exp = c.Exp - 10
+				c.MxHp.Val = c.MxHp.Val + 1
+				fmt.Println(Blue("\nAttention to physical health improves your metabolism."))
+				fmt.Printf(Yellow("\n Max Hp is now %s.\n"), Green(strconv.Itoa(c.MxHp.Val)))
+				c.Save()
+				Continue()
+			} else {
+				consolation()
+			}
+
+			continue
+		case "b", "B":
+			return
+		}
+	}
+
 }
 
 func Go() {
@@ -105,10 +226,13 @@ func Look(c Agent) {
 
 // Fight loop where c is character and f is foe
 func Fight(c *Agent, f *Agent) {
+	ClearScreen()
+	fmt.Printf("\nYou have encountered a %s!\n", YellowU("Monster"))
+	Continue()
+	ClearScreen()
 	for {
 		c.StatusBar()
-		fmt.Printf("You have encountered a %s.\n", WhiteU("Monster!"))
-		fmt.Printf("%s:> %sight, %svade, %sescribe, %sun\n<: ", Red(f.Name), GreenU("F"), GreenU("E"), GreenU("D"), GreenU("R"))
+		fmt.Printf("\n%s\n:> %sight, %svade, %sescribe, %sun\n<: ", RedU(f.Name), GreenU("F"), GreenU("E"), GreenU("D"), GreenU("R"))
 		reader := bufio.NewReader(os.Stdin)
 		input, _ := reader.ReadString('\n')
 		choice := string([]byte(input)[0])
@@ -120,6 +244,7 @@ func Fight(c *Agent, f *Agent) {
 			if c.Name == winner.Name {
 				Damage(c, f)
 				if loser.Dead == true {
+					Continue()
 					break
 				}
 			}
@@ -128,6 +253,7 @@ func Fight(c *Agent, f *Agent) {
 			if f.Name == winner.Name {
 				Damage(f, c)
 				if loser.Dead == true {
+					Continue()
 					break
 				}
 			}
@@ -151,10 +277,26 @@ func Fight(c *Agent, f *Agent) {
 	}
 }
 
+func Continue() {
+	fmt.Printf(BlueU("\nEnter"))
+	fmt.Printf(Blue(" to continue...\n"))
+	reader := bufio.NewReader(os.Stdin)
+	input, _ := reader.ReadString('\n')
+	choice := string([]byte(input)[0])
+	switch choice {
+	default:
+		return
+	}
+}
+
+func ClearScreen() {
+	fmt.Printf("[H[J")
+}
+
 func Banner() {
 
-	fmt.Println("[H[J")
-	fmt.Printf(White("Welcome to ...\n"))
+	ClearScreen()
+	fmt.Printf(White("\nWelcome to ...\n"))
 	fmt.Println(Red(
 		`   ______         ______           ______              ` + "\n" +
 			`   |  ___|        | ___ \          | ___ \             ` + "\n" +

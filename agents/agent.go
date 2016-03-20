@@ -60,8 +60,11 @@ func (c *Agent) AdjHp(a int) {
 		c.Hp.Val = c.MxHp.Val
 	}
 	if c.Hp.Val <= 0 {
-		fmt.Println(c.Name, "has died :( ")
+		//fmt.Println(c.Name, "has died :( ")
+		fmt.Printf("%s", BlueU(c.Name))
+		fmt.Printf(Red(" has died:( \n"))
 		c.Dead = true
+		c.Exp = 0
 	}
 }
 
@@ -133,7 +136,7 @@ func (c Agent) StatusBar() {
 	}
 	fmt.Println()
 	if c.Dead == true {
-		fmt.Printf(Red("%s collapsed in a sobbing frightned lump and expired.\n\n\n"), c.Name)
+		fmt.Printf(Red("\n%s collapsed in a sobbing frightned lump and expired.\n\n"), c.Name)
 		os.Exit(0)
 	}
 }

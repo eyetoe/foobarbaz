@@ -17,6 +17,12 @@ import (
 
 func main() {
 	Banner()
+	// for testing, Resurrect if character is dead
+	Char := Agent{File: "Izro"}
+	Char.Load()
+	Resurrect(&Char)
+
+	Continue()
 	Prompt()
 	Testies()
 	return
@@ -35,6 +41,8 @@ func Resurrect(c *Agent) {
 		c.Hp.Val = c.MxHp.Val
 		c.Dead = false
 		c.Save()
+	} else {
+		return
 	}
 }
 
