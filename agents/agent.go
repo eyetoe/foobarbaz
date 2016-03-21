@@ -133,12 +133,12 @@ func (c Agent) StatusBar() {
 	fmt.Printf("%s", ItemC(c.Armor))
 	fmt.Printf("%s", Yellow(" T:"))
 	fmt.Printf("%s", ItemC(c.Trink))
-	if c.Dead == false {
-		fmt.Printf("%s", Yellow(" E?:"))
-		fmt.Printf("%s", MagentaU("none"))
-	} else {
-		fmt.Printf("%s", Red(" Dead :("))
-	}
+	//	if c.Dead == false {
+	//		fmt.Printf("%s", Yellow(" E?:"))
+	//		fmt.Printf("%s", MagentaU("none"))
+	//	} else {
+	//		fmt.Printf("%s", Red(" Dead :("))
+	//	}
 	fmt.Println()
 	if c.Dead == true {
 		fmt.Printf(Red("\n%s collapsed in a sobbing frightned lump and expired.\n\n"), c.Name)

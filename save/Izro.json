@@ -3,7 +3,7 @@
     "Description": "A person with great potential.",
     "Str": {
         "Name": "Strength",
-        "Val": 14
+        "Val": 44
     },
     "Int": {
         "Name": "Intelligence",
@@ -19,7 +19,7 @@
     },
     "Hp": {
         "Name": "Current Health",
-        "Val": 5
+        "Val": 38
     },
     "Dead": false,
     "Weap": {
@@ -51,7 +51,7 @@
     "Abl1": "",
     "Abl2": "",
     "Abl3": "",
-    "Exp": 23,
+    "Exp": 0,
     "Inv": null,
     "Loc": {
         "Name": "Start",

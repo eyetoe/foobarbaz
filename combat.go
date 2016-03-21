@@ -11,17 +11,25 @@ import (
 	. "github.com/eyetoe/foobarbaz/skills"
 )
 
-func Roll(n int) int {
-	r := rand.New(rand.NewSource(time.Now().UnixNano()))
-	num := r.Intn(n)
-	//fmt.Println(num)
-	return num + 1
+//func Roll(n int) int {
+//	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+//	num := r.Intn(n)
+//	return num + 1
+//}
 
+func Roll(n int, d int) int {
+	num := 0
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	for i := 0; i < n; i++ {
+		num = num + r.Intn(d)
+	}
+	num = num / n
+	return num + 1
 }
 
 // Calculate and apply damage to Agent
 func Damage(a *Agent, d *Agent) {
-	hp := Roll(a.Weap.Damage)
+	hp := Roll(1, a.Weap.Damage)
 	d.AdjHp(0 - hp)
 	if d.Dead == false {
 		fmt.Printf("for %s damage. ", Red(strconv.Itoa(hp)))
@@ -46,7 +54,7 @@ func SkillCheck(a Agent, s Stat, d Skill) bool {
 	fmt.Println("Skill Check!")
 	// need = difficulty - skill
 	n := d.Prob - s.Val
-	r := Roll(100)
+	r := Roll(1, 100)
 	fmt.Printf("%s.\n %s attempts to use %s skill.\n", d.Description, a.Name, s.Name)
 	fmt.Printf("Difficulty(%d) minus Skill(%d) := Roll %d or higher to succeed.\n", d.Prob, s.Val, n)
 	fmt.Printf("Roll...... %d !\n", r)
@@ -68,8 +76,8 @@ func SkillCheck(a Agent, s Stat, d Skill) bool {
 // Second output struct is the 'loser'
 func Attack(a *Agent, d *Agent) (*Agent, *Agent) {
 	// roll for attacker and defender
-	ar := Roll(100)
-	dr := Roll(100)
+	ar := Roll(1, 100)
+	dr := Roll(1, 100)
 	// bonuses
 	arB := a.Str.Val + a.Weap.Attack
 	drB := d.Str.Val
@@ -96,8 +104,8 @@ func Attack(a *Agent, d *Agent) (*Agent, *Agent) {
 // Second input struct and stat are the second contestant
 func Contest(a *Agent, as Stat, d *Agent, ds Stat) (*Agent, *Agent) {
 	// roll for a and d in contest
-	ar := Roll(100)
-	dr := Roll(100)
+	ar := Roll(1, 100)
+	dr := Roll(1, 100)
 	// bonuses
 	arB := as.Val
 	drB := ds.Val

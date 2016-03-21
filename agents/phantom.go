@@ -9,7 +9,7 @@ var Phantom = Agent{
 	// Name and Description
 	Name: "Phantom",
 	//Description: "Thin and desperate, the coyote shows it's teeth.",
-	Description: "the whithered unatural horror loiters.",
+	Description: "the withered unatural horror loiters.",
 	// Stats
 	Str: Stat{"Strength", 2},
 	Int: Stat{"Intelligence", 15},

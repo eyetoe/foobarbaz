@@ -22,7 +22,13 @@ func Prompt() {
 		fmt.Printf("\n%s <- You are here.\n", BlueU(Char.Loc.Name))
 
 		// ask the first question
-		fmt.Printf(":> %sook, %so, %sharacter, %svent, %selp <: ", GreenU("L"), GreenU("G"), GreenU("C"), GreenU("E"), GreenU("H"))
+		//fmt.Printf(":> %sook, %so, %sharacter, %svent, %selp <: ", GreenU("L"), GreenU("G"), GreenU("C"), GreenU("E"), GreenU("H"))
+		fmt.Printf(":> %sook, ", GreenU("L"))
+		fmt.Printf("%so, ", GreenU("G"))
+		fmt.Printf("%sharacter, ", GreenU("C"))
+		fmt.Printf("%svent, ", GreenU("E"))
+		fmt.Printf("%sreferences, ", GreenU("P"))
+		fmt.Printf("%selp <: ", GreenU("H"))
 
 		reader := bufio.NewReader(os.Stdin)
 		input, _ := reader.ReadString('\n')
@@ -45,11 +51,15 @@ func Prompt() {
 			Foe = Spawn()
 			Fight(&Char, &Foe)
 			continue
+		case "p", "P":
+			Preferences(&Char)
+			continue
 		case "h", "H":
 			fmt.Println(Blue("All you help are belong to us."))
 		}
 	}
 }
+
 func Character(c *Agent) {
 	for {
 		ClearScreen()
@@ -225,6 +235,7 @@ func Go() {
 func Look(c Agent) {
 	fmt.Printf(Blue("You are here: %s\n"), c.Loc.Name)
 	fmt.Printf(Blue("%s\n"), c.Loc.Description)
+	Continue()
 }
 
 // Fight loop where c is character and f is foe
@@ -278,6 +289,11 @@ func Fight(c *Agent, f *Agent) {
 		}
 		return
 	}
+}
+
+func Preferences(c *Agent) {
+	fmt.Println(Yellow("\nArrr, here be ye preferences..."), BlueU(c.Name), "\n")
+	Continue()
 }
 
 func Continue() {

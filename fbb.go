@@ -21,6 +21,9 @@ func main() {
 	Char := Agent{File: "Izro"}
 	Char.Load()
 	Resurrect(&Char)
+	//for i := 0; i < 20; i++ {
+	//	fmt.Println(Roll(2, 100))
+	//}
 
 	Continue()
 	Prompt()
@@ -116,7 +119,6 @@ func Testies() {
 		case "skill":
 			for i := 0; i < 5; i++ {
 				fmt.Println("======================= Testing skill check dialog")
-				//if Skill(Char, Char.Dex, Stat{"Roll", Roll()}) {
 				if SkillCheck(Char, Char.Str, Door) {
 					fmt.Println("Skill is true")
 				}
@@ -170,6 +172,6 @@ func test_dice(n int) {
 
 	// roll some dice n times
 	for i := 0; i < n; i++ {
-		fmt.Printf("You roll the dice: %d\n", Roll(100))
+		fmt.Printf("You roll the dice: %d\n", Roll(1, 100))
 	}
 }
