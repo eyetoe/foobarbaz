@@ -1,5 +1,5 @@
 {
-    "Name": "Izro",
+    "Name": "Bacon",
     "Description": "A person with great potential.",
     "Str": {
         "Name": "Strength",
@@ -19,7 +19,7 @@
     },
     "Hp": {
         "Name": "Current Health",
-        "Val": 19
+        "Val": 11
     },
     "Dead": false,
     "Weap": {
@@ -63,5 +63,5 @@
             "Start"
         ]
     },
-    "File": "Izro"
+    "File": "Bacon"
 }

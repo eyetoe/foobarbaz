@@ -15,17 +15,21 @@ import (
 	. "github.com/eyetoe/foobarbaz/skills"
 )
 
+var SaveFile string
+
 func main() {
 	Banner()
-	// for testing, Resurrect if character is dead
-	Char := Agent{File: "Izro"}
+	//Char := Agent{File: "Izro"}
+	Char := Agent{File: SaveFile}
 	Char.Load()
+
+	// for testing, Resurrect if character is dead
 	Resurrect(&Char)
 	//for i := 0; i < 20; i++ {
 	//	fmt.Println(Roll(2, 100))
 	//}
 
-	Continue()
+	//Continue()
 	Prompt()
 	Testies()
 	return
@@ -33,7 +37,7 @@ func main() {
 
 // Start the game.
 func Play() {
-	Char := Agent{File: "Izro"}
+	Char := Agent{File: SaveFile}
 	Char.Load()
 	Char.StatusBar()
 }
@@ -44,13 +48,14 @@ func Resurrect(c *Agent) {
 		c.Hp.Val = c.MxHp.Val
 		c.Dead = false
 		c.Save()
+		Continue()
 	} else {
 		return
 	}
 }
 
 func Testies() {
-	Char := Agent{File: "Izro"}
+	Char := Agent{File: SaveFile}
 	Char.Load()
 	Char.StatusBar()
 

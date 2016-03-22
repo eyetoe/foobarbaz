@@ -1,55 +1,52 @@
 {
-    "Name": "Minotaur",
-    "Description": "Half man half bull, the minotaur has hatred in it's eyes.",
+    "Name": "",
+    "Description": "",
     "Str": {
-        "Name": "Strength",
-        "Val": 30
+        "Name": "",
+        "Val": 0
     },
     "Int": {
-        "Name": "Intelligence",
-        "Val": 5
+        "Name": "",
+        "Val": 0
     },
     "Dex": {
-        "Name": "Dexterity",
-        "Val": 5
+        "Name": "",
+        "Val": 0
     },
     "MxHp": {
-        "Name": "Max Health",
-        "Val": 40
+        "Name": "",
+        "Val": 0
     },
     "Hp": {
-        "Name": "Current Health",
-        "Val": 40
+        "Name": "",
+        "Val": 0
     },
     "Dead": false,
     "Weap": {
-        "Name": "Battle Axe",
-        "Description": "is caked in blood and shows signs of recent use.",
-        "Slot": "Weapon",
-        "Affects": [
-            {
-                "Name": "Charged",
-                "Description": "shimmers with electric charge.  As you get closer your hairs stand on end.",
-                "Proc": 25,
-                "Message": "your foe is shocked!",
-                "Attack": 0,
-                "Damage": 5,
-                "Dodge": 0,
-                "DoT": 0,
-                "Crit": 5
-            }
-        ],
-        "Attack": 1,
-        "Damage": 12,
+        "Name": "",
+        "Description": "",
+        "Slot": "",
+        "Affects": null,
+        "Attack": 0,
+        "Damage": 0,
         "Defence": 0,
         "Dodge": 0,
         "DoT": 0,
-        "Crit": 10
+        "Crit": 0
     },
-    "Armor": "Hide",
-    "Trink": "Amulet",
-    "Abl1": "Roar",
-    "Abl2": "Stomp",
-    "Abl3": "Snort",
-    "Inv": []
+    "Armor": "",
+    "Trink": "",
+    "Abl1": "",
+    "Abl2": "",
+    "Abl3": "",
+    "Exp": 0,
+    "Inv": null,
+    "Loc": {
+        "Name": "",
+        "Path": "",
+        "Event": "",
+        "Description": "",
+        "Exits": null
+    },
+    "File": "Minotaur"
 }

@@ -46,8 +46,8 @@ func Damage(a *Agent, d *Agent) {
 
 // Skill determines the winner in a contest of skill
 // pass in an Agent, a Stat to base the skill check on, and a Difficulty
-// e.g. a player Izro would like to try to open a heavy door by force. Success
-// should be based on Izro's strength but also on a general level of difficulty
+// e.g. a player would like to try to open a heavy door by force. Success
+// should be based on players's strength but also on a general level of difficulty
 // representing how well built the door is.
 //  Skill(Char, Char.Str, 50)
 func SkillCheck(a Agent, s Stat, d Skill) bool {

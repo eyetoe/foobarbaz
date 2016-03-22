@@ -3,8 +3,10 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"io/ioutil"
 	"os"
 	"strconv"
+	"strings"
 
 	. "github.com/eyetoe/foobarbaz/agents"
 	. "github.com/eyetoe/foobarbaz/colors"
@@ -14,7 +16,7 @@ func Prompt() {
 	for {
 		// setting File var in Agent struct, this allows Char.Load to pick up
 		// the save file without prompting.
-		Char := Agent{File: "Izro"}
+		Char := Agent{File: SaveFile}
 		Char.Load()
 		ClearScreen()
 		Char.StatusBar()
@@ -25,9 +27,10 @@ func Prompt() {
 		//fmt.Printf(":> %sook, %so, %sharacter, %svent, %selp <: ", GreenU("L"), GreenU("G"), GreenU("C"), GreenU("E"), GreenU("H"))
 		fmt.Printf(":> %sook, ", GreenU("L"))
 		fmt.Printf("%so, ", GreenU("G"))
-		fmt.Printf("%sharacter, ", GreenU("C"))
 		fmt.Printf("%svent, ", GreenU("E"))
-		fmt.Printf("%sreferences, ", GreenU("P"))
+		fmt.Printf("%sharacter, ", GreenU("C"))
+		fmt.Printf("%srefs, ", GreenU("P"))
+		fmt.Printf("%sile, ", GreenU("F"))
 		fmt.Printf("%selp <: ", GreenU("H"))
 
 		reader := bufio.NewReader(os.Stdin)
@@ -42,20 +45,24 @@ func Prompt() {
 		case "g", "G":
 			Go()
 			break
-		case "c", "C":
-			Character(&Char)
-			continue
 		case "e", "E":
 			var Foe Agent
 			//Foe = Phantom
 			Foe = Spawn()
 			Fight(&Char, &Foe)
 			continue
+		case "c", "C":
+			Character(&Char)
+			continue
 		case "p", "P":
 			Preferences(&Char)
 			continue
+		case "f", "F":
+			WhichFile()
+			continue
 		case "h", "H":
-			fmt.Println(Blue("All you help are belong to us."))
+			fmt.Println(Blue("\nAll you help are belong to us."))
+			Continue()
 		}
 	}
 }
@@ -106,6 +113,71 @@ func Character(c *Agent) {
 	}
 }
 
+// PickChar is the initial character load/create prompt
+func PickChar() {
+	//files, _ := filepath.Glob("./save/*.json")
+	//fmt.Println("glob: ", files)
+	for {
+		fmt.Printf("\n%s \n:> ", BlueU(""))
+		fmt.Printf("%sew, ", Green("N"))
+		fmt.Printf("%soad, ", Green("L"))
+
+		reader := bufio.NewReader(os.Stdin)
+		input, _ := reader.ReadString('\n')
+		choice := string([]byte(input)[0])
+
+		switch choice {
+		case "n", "N":
+			continue
+		case "l", "L":
+			ClearScreen()
+			WhichFile()
+			//c.Load()
+			continue
+		default:
+			return
+		}
+	}
+}
+
+func WhichFile() {
+	files, _ := ioutil.ReadDir("./save/")
+	for {
+		num := 1
+		fmt.Printf(BlueU("\nChoose a character:\n\n"))
+		for _, f := range files {
+			fmt.Printf("  %s  %s\n", GreenU(strconv.Itoa(num)), Blue(strings.Replace(f.Name(), ".json", "", -1)))
+			num++
+		}
+		//fmt.Printf("%sew	:\n", GreenU("N"))
+		fmt.Printf("\n  %sew\n", GreenU("N"))
+		fmt.Printf("\n<: ")
+
+		reader := bufio.NewReader(os.Stdin)
+		input, _ := reader.ReadString('\n')
+		choice := string([]byte(input)[0])
+
+		cnum := 1
+		for _, f := range files {
+			//fmt.Println("f is: ", f)
+			if choice == strconv.Itoa(cnum) {
+				fmt.Printf("Loading --> %s\n", Blue(f.Name()))
+				//Continue()
+				SaveFile = strings.Replace(f.Name(), ".json", "", -1)
+				return
+			} else {
+				cnum++
+			}
+		}
+		switch choice {
+		case "n", "N":
+			return
+		case "b", "B":
+			return
+		}
+	}
+}
+
 func SaveMgr(c *Agent) {
 	for {
 		fmt.Printf("\n%s \n:> ", BlueU("Save File Management"))
@@ -126,13 +198,12 @@ func SaveMgr(c *Agent) {
 			c.Save()
 			continue
 		case "l", "L":
-			c.Load()
+			WhichFile()
 			continue
 		case "b", "B":
 			return
 		}
 	}
-
 }
 
 func ExpMgr(c *Agent) {
@@ -324,4 +395,5 @@ func Banner() {
 			`   | || (_) | (_) | |_/ / (_| | |  | |_/ / (_| |/ /    ` + "\n" +
 			`   \_| \___/ \___/\____/ \__,_|_|  \____/ \__,_/___|   ` + "\n" +
 			`                                                       `))
+	WhichFile()
 }
