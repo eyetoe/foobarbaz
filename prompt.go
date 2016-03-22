@@ -159,7 +159,6 @@ func WhichFile() {
 
 		cnum := 1
 		for _, f := range files {
-			//fmt.Println("f is: ", f)
 			if choice == strconv.Itoa(cnum) {
 				fmt.Printf("Loading --> %s\n", Blue(f.Name()))
 				SaveFile = strings.Replace(f.Name(), ".json", "", -1)
@@ -180,15 +179,27 @@ func WhichFile() {
 }
 
 func NewCharacter() {
-	//newName := PromptConfirm("What shall your name be? ")
 	SaveFile = PromptConfirm("What shall your name be? ")
+
+	//make sure we don't use a name already taken
+	files, _ := ioutil.ReadDir("./save/")
+	for _, f := range files {
+		chkFile := strings.Replace(f.Name(), ".json", "", -1)
+		if SaveFile == chkFile || SaveFile == "New" {
+			fmt.Printf("\nThe name %s is already taken\n\n", Red(SaveFile))
+			Continue()
+			NewCharacter()
+			return
+		}
+	}
+
 	Char := Agent{File: "New"}
 	Char.Load()
 	Char.Name = SaveFile
 	Char.File = SaveFile
 	Char.Save()
 
-	fmt.Println("Then we shall call you,", SaveFile)
+	fmt.Printf("\nThen we shall call you, %s\n\n", BlueU(SaveFile))
 }
 
 func SaveMgr(c *Agent) {
@@ -223,7 +234,7 @@ func ExpMgr(c *Agent) {
 	for {
 		ClearScreen()
 		c.StatusBar()
-		cost := StatCost(c)
+		cost := StatCost(*c)
 		fmt.Printf("\n%s \n", YellowU("Experience Point Store!\n"))
 		fmt.Printf(Blue("You have %s %s\n"), Green(strconv.Itoa(c.Exp)), Blue("experience.\n"))
 		fmt.Printf(Blue("Choose a Stat to increase 1 point\n"))
@@ -420,7 +431,7 @@ func PromptConfirm(question string) string {
 	var response string
 Ask:
 	for {
-		fmt.Printf("%s", question)
+		fmt.Printf("%s", Yellow(question))
 
 		scanner := bufio.NewScanner(os.Stdin)
 		scanner.Scan()
@@ -435,7 +446,7 @@ Ask:
 
 	Confirm:
 		for {
-			fmt.Printf("You choose: %s. confirm y/n? > ", response)
+			fmt.Printf("You choose: %s. confirm y/n? > ", BlueU(response))
 
 			reader := bufio.NewReader(os.Stdin)
 			input, _ := reader.ReadString('\n')

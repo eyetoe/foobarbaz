@@ -1,25 +1,25 @@
 {
-    "Name": "Bacon",
+    "Name": "Hoobastank",
     "Description": "A person with great potential.",
     "Str": {
         "Name": "Strength",
-        "Val": 44
+        "Val": 12
     },
     "Int": {
         "Name": "Intelligence",
-        "Val": 12
+        "Val": 8
     },
     "Dex": {
         "Name": "Dexterity",
-        "Val": 14
+        "Val": 8
     },
     "MxHp": {
         "Name": "Max Health",
-        "Val": 38
+        "Val": 10
     },
     "Hp": {
         "Name": "Current Health",
-        "Val": 11
+        "Val": 10
     },
     "Dead": false,
     "Weap": {
@@ -63,5 +63,5 @@
             "Start"
         ]
     },
-    "File": "Bacon"
+    "File": "Hoobastank"
 }

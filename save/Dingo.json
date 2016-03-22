@@ -1,25 +1,25 @@
 {
-    "Name": "Izro",
+    "Name": "Dingo",
     "Description": "A person with great potential.",
     "Str": {
         "Name": "Strength",
-        "Val": 44
+        "Val": 12
     },
     "Int": {
         "Name": "Intelligence",
-        "Val": 12
+        "Val": 8
     },
     "Dex": {
         "Name": "Dexterity",
-        "Val": 15
+        "Val": 8
     },
     "MxHp": {
         "Name": "Max Health",
-        "Val": 38
+        "Val": 10
     },
     "Hp": {
         "Name": "Current Health",
-        "Val": 19
+        "Val": 10
     },
     "Dead": false,
     "Weap": {
@@ -51,7 +51,7 @@
     "Abl1": "",
     "Abl2": "",
     "Abl3": "",
-    "Exp": 29,
+    "Exp": 20,
     "Inv": null,
     "Loc": {
         "Name": "Start",
@@ -63,5 +63,5 @@
             "Start"
         ]
     },
-    "File": "Izro"
+    "File": "Dingo"
 }
