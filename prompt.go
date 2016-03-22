@@ -144,13 +144,13 @@ func WhichFile() {
 	files, _ := ioutil.ReadDir("./save/")
 	for {
 		num := 1
-		fmt.Printf(BlueU("\nChoose a character:\n\n"))
+		fmt.Printf(YellowU("\nChoose a character:\n\n"))
+		fmt.Printf(Blue("  %s  %s\n"), GreenU("0"), Blue("New"))
 		for _, f := range files {
 			fmt.Printf("  %s  %s\n", GreenU(strconv.Itoa(num)), Blue(strings.Replace(f.Name(), ".json", "", -1)))
 			num++
 		}
-		//fmt.Printf("%sew	:\n", GreenU("N"))
-		fmt.Printf("\n  %sew\n", GreenU("N"))
+		//fmt.Printf("\n  %sew\n", GreenU("N"))
 		fmt.Printf("\n<: ")
 
 		reader := bufio.NewReader(os.Stdin)
@@ -162,7 +162,6 @@ func WhichFile() {
 			//fmt.Println("f is: ", f)
 			if choice == strconv.Itoa(cnum) {
 				fmt.Printf("Loading --> %s\n", Blue(f.Name()))
-				//Continue()
 				SaveFile = strings.Replace(f.Name(), ".json", "", -1)
 				return
 			} else {
@@ -170,7 +169,7 @@ func WhichFile() {
 			}
 		}
 		switch choice {
-		case "n", "N":
+		case "0", "o", "O":
 			NewCharacter()
 			Continue()
 			return
@@ -181,10 +180,15 @@ func WhichFile() {
 }
 
 func NewCharacter() {
-	newName := PromptConfirm("What shall your name be? ")
+	//newName := PromptConfirm("What shall your name be? ")
+	SaveFile = PromptConfirm("What shall your name be? ")
+	Char := Agent{File: "New"}
+	Char.Load()
+	Char.Name = SaveFile
+	Char.File = SaveFile
+	Char.Save()
 
-	fmt.Println("Then we shall call you,", newName)
-
+	fmt.Println("Then we shall call you,", SaveFile)
 }
 
 func SaveMgr(c *Agent) {
