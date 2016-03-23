@@ -18,7 +18,7 @@ import (
 var SaveFile string
 
 func main() {
-	Banner()
+	PickChar()
 	//Char := Agent{File: "Izro"}
 	Char := Agent{File: SaveFile}
 	Char.Load()

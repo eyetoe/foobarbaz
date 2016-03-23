@@ -58,7 +58,8 @@ func Prompt() {
 			Preferences(&Char)
 			continue
 		case "f", "F":
-			WhichFile()
+			Banner()
+			PickChar()
 			continue
 		case "h", "H":
 			fmt.Println(Blue("\nAll you help are belong to us."))
@@ -77,7 +78,6 @@ func Character(c *Agent) {
 		fmt.Printf("%sp, ", Green("X"))
 		fmt.Printf("%sbility, ", Green("A"))
 		fmt.Printf("%snventory, ", Green("I"))
-		fmt.Printf("%saves, ", Green("S"))
 		fmt.Printf("%sack <:", Green("B"))
 
 		reader := bufio.NewReader(os.Stdin)
@@ -104,9 +104,6 @@ func Character(c *Agent) {
 		case "i", "I":
 			fmt.Printf(Blue(c.Inv))
 			continue
-		case "s", "S":
-			SaveMgr(c)
-			continue
 		case "b", "B":
 			return
 		}
@@ -115,37 +112,14 @@ func Character(c *Agent) {
 
 // PickChar is the initial character load/create prompt
 func PickChar() {
-	//files, _ := filepath.Glob("./save/*.json")
-	//fmt.Println("glob: ", files)
+	var files []os.FileInfo
 	for {
-		fmt.Printf("\n%s \n:> ", BlueU(""))
-		fmt.Printf("%sew, ", Green("N"))
-		fmt.Printf("%soad, ", Green("L"))
-
-		reader := bufio.NewReader(os.Stdin)
-		input, _ := reader.ReadString('\n')
-		choice := string([]byte(input)[0])
-
-		switch choice {
-		case "n", "N":
-			continue
-		case "l", "L":
-			ClearScreen()
-			WhichFile()
-			//c.Load()
-			continue
-		default:
-			return
-		}
-	}
-}
-
-func WhichFile() {
-	files, _ := ioutil.ReadDir("./save/")
-	for {
+		Banner()
 		num := 1
-		fmt.Printf(YellowU("\nChoose a character:\n\n"))
-		fmt.Printf(Blue("  %s  %s\n"), GreenU("0"), Blue("New"))
+		fmt.Printf(YellowU("\nChoose a character:\n"))
+		fmt.Printf(":> %selete <:\n\n", GreenU("D"))
+		fmt.Printf(Blue("  %s  %s\n"), GreenU("0"), GreenU("New"))
+		files, _ = ioutil.ReadDir("./save/")
 		for _, f := range files {
 			fmt.Printf("  %s  %s\n", GreenU(strconv.Itoa(num)), Blue(strings.Replace(f.Name(), ".json", "", -1)))
 			num++
@@ -169,9 +143,64 @@ func WhichFile() {
 		}
 		switch choice {
 		case "0", "o", "O":
+			if cnum >= 10 {
+				fmt.Println(Red("\nYou already have the maximum number of characters.\nDelete one first.\n"))
+				Continue()
+				continue
+			}
 			NewCharacter()
-			Continue()
 			return
+		//case "b", "B":
+		//return
+		case "d", "D":
+			DeleteCharacter()
+			break
+		}
+	}
+}
+
+func DeleteCharacter() {
+	var files []os.FileInfo
+	for {
+		Banner()
+		num := 1
+		fmt.Printf(RedU("\nDelete which character?\n"))
+		fmt.Printf(":> %sack <:\n\n", GreenU("B"))
+		//fmt.Printf(Blue("  %s  %s\n"), GreenU("0"), Blue("New"))
+		// List Characters for selection
+		files, _ = ioutil.ReadDir("./save/")
+		for _, f := range files {
+			fmt.Printf("  %s  %s\n", GreenU(strconv.Itoa(num)), Red(strings.Replace(f.Name(), ".json", "", -1)))
+			num++
+		}
+		fmt.Printf("\n<: ")
+
+		reader := bufio.NewReader(os.Stdin)
+		input, _ := reader.ReadString('\n')
+		choice := string([]byte(input)[0])
+
+		cnum := 1
+		// Delete the choice
+		for _, f := range files {
+			if choice == strconv.Itoa(cnum) {
+				fmt.Printf("Deleting --> %s\n", Red(f.Name()))
+
+				if Confirm("Are you sure you want to delete " + f.Name()) {
+					err := os.Remove("save/" + f.Name())
+					if err != nil {
+						fmt.Println(Red(err))
+					}
+					Continue()
+					continue
+				} else {
+					continue
+				}
+
+			} else {
+				cnum++
+			}
+		}
+		switch choice {
 		case "b", "B":
 			return
 		}
@@ -200,34 +229,8 @@ func NewCharacter() {
 	Char.Save()
 
 	fmt.Printf("\nThen we shall call you, %s\n\n", BlueU(SaveFile))
-}
-
-func SaveMgr(c *Agent) {
-	for {
-		fmt.Printf("\n%s \n:> ", BlueU("Save File Management"))
-		fmt.Printf("%sew, ", Green("N"))
-		fmt.Printf("%save, ", Green("S"))
-		fmt.Printf("%soad, ", Green("L"))
-		fmt.Printf("%sack <:", Green("B"))
-
-		reader := bufio.NewReader(os.Stdin)
-		input, _ := reader.ReadString('\n')
-		choice := string([]byte(input)[0])
-
-		switch choice {
-		case "n", "N":
-			fmt.Printf("\ncomming soon, New Character\n")
-			continue
-		case "s", "S":
-			c.Save()
-			continue
-		case "l", "L":
-			WhichFile()
-			continue
-		case "b", "B":
-			return
-		}
-	}
+	Continue()
+	return
 }
 
 func ExpMgr(c *Agent) {
@@ -419,7 +422,6 @@ func Banner() {
 			`   | || (_) | (_) | |_/ / (_| | |  | |_/ / (_| |/ /    ` + "\n" +
 			`   \_| \___/ \___/\____/ \__,_|_|  \____/ \__,_/___|   ` + "\n" +
 			`                                                       `))
-	WhichFile()
 }
 
 //PromptConfirm returns a user entered string with confirmation from
@@ -461,6 +463,24 @@ Ask:
 		}
 	}
 	return response
+}
+
+func Confirm(response string) bool {
+	for {
+		fmt.Printf("%s. confirm y/n? > ", Yellow(response))
+
+		reader := bufio.NewReader(os.Stdin)
+		input, _ := reader.ReadString('\n')
+		choice := string([]byte(input)[0])
+
+		switch choice {
+		case "y", "Y":
+			return true
+		case "n", "N":
+			return false
+		}
+	}
+
 }
 
 func stripchars(str, chr string) string {
