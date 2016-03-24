@@ -11,7 +11,7 @@
     },
     "Dex": {
         "Name": "Dexterity",
-        "Val": 15
+        "Val": 16
     },
     "MxHp": {
         "Name": "Max Health",
@@ -51,7 +51,7 @@
     "Abl1": "",
     "Abl2": "",
     "Abl3": "",
-    "Exp": 29,
+    "Exp": 128,
     "Inv": null,
     "Loc": {
         "Name": "Start",

@@ -1,5 +1,5 @@
 {
-    "Name": "Dingo",
+    "Name": "FooBarBaz",
     "Description": "A person with great potential.",
     "Str": {
         "Name": "Strength",
@@ -19,7 +19,7 @@
     },
     "Hp": {
         "Name": "Current Health",
-        "Val": 10
+        "Val": 5
     },
     "Dead": false,
     "Weap": {
@@ -51,7 +51,7 @@
     "Abl1": "",
     "Abl2": "",
     "Abl3": "",
-    "Exp": 0,
+    "Exp": 56,
     "Inv": null,
     "Loc": {
         "Name": "Start",
@@ -63,5 +63,5 @@
             "Start"
         ]
     },
-    "File": "Dingo"
+    "File": "FooBarBaz"
 }

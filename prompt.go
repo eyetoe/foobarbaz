@@ -124,7 +124,6 @@ func PickChar() {
 			fmt.Printf("  %s  %s\n", GreenU(strconv.Itoa(num)), Blue(strings.Replace(f.Name(), ".json", "", -1)))
 			num++
 		}
-		//fmt.Printf("\n  %sew\n", GreenU("N"))
 		fmt.Printf("\n<: ")
 
 		reader := bufio.NewReader(os.Stdin)
@@ -344,13 +343,16 @@ func Fight(c *Agent, f *Agent) {
 	ClearScreen()
 	for {
 		c.StatusBar()
-		fmt.Printf("\n%s\n:> %sight, %svade, %sescribe, %sun\n<: ", RedU(f.Name), GreenU("F"), GreenU("E"), GreenU("D"), GreenU("R"))
+		fmt.Println()
+		f.FoeBar()
+		fmt.Printf(":> %sight, %svade, %sescribe, %sun\n<: ", GreenU("F"), GreenU("E"), GreenU("D"), GreenU("R"))
 		reader := bufio.NewReader(os.Stdin)
 		input, _ := reader.ReadString('\n')
 		choice := string([]byte(input)[0])
 
 		switch choice {
 		case "f", "F":
+			ClearScreen()
 			fmt.Printf("\n%s attacks %s with %s.\n", c.Name, f.Name, c.Weap.Name)
 			winner, loser := Attack(c, f)
 			if c.Name == winner.Name {

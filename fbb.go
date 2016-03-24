@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"os"
 	"strconv"
 
@@ -15,22 +16,23 @@ import (
 	. "github.com/eyetoe/foobarbaz/skills"
 )
 
+// HOME is the game working dir
+// SAVE is the game save file under HOME
+var HOME, SAVES = FbbDirs()
 var SaveFile string
 
 func main() {
+
+	EnvSetup()
 	PickChar()
-	//Char := Agent{File: "Izro"}
 	Char := Agent{File: SaveFile}
 	Char.Load()
 
 	// for testing, Resurrect if character is dead
 	Resurrect(&Char)
-	//for i := 0; i < 20; i++ {
-	//	fmt.Println(Roll(2, 100))
-	//}
 
-	//Continue()
 	Prompt()
+	// tests will run after Prompt exits
 	Testies()
 	return
 }
@@ -44,6 +46,7 @@ func Play() {
 
 func Resurrect(c *Agent) {
 	if c.Dead == true {
+		Banner()
 		fmt.Printf(Blue("\n A mystical light shines down on %s's lifeless corpse.\n\n A sulfurous effluvium expands from the body.\n\n %s takes a gasping breath, and lives!\n\n"), c.Name, c.Name)
 		c.Hp.Val = c.MxHp.Val
 		c.Dead = false
@@ -179,4 +182,51 @@ func test_dice(n int) {
 	for i := 0; i < n; i++ {
 		fmt.Printf("You roll the dice: %d\n", Roll(1, 100))
 	}
+}
+
+// FbbDirs returns the HOME and SAVE vars values
+func FbbDirs() (string, string) {
+	// Is the ENV var $HOME set?
+	home, ok := os.LookupEnv("HOME")
+	if ok != true {
+		fmt.Println("Please set your $HOME environment variable.")
+		os.Exit(1)
+	}
+	return home + "/.foobarbaz", home + "/.foobarbaz/saves"
+}
+
+// EnvSetup prepares the game HOME directory
+func EnvSetup() {
+	// Is the client dir already there?
+	if _, err := os.Stat(HOME); err != nil {
+		if os.IsNotExist(err) {
+			// Make the dir
+			if err := os.Mkdir(HOME, 0744); err != nil {
+				fmt.Println(err)
+				os.Exit(1)
+			}
+		}
+	}
+
+	// Is the saves dir already there?
+	if _, err := os.Stat(SAVES); err != nil {
+		if os.IsNotExist(err) {
+			// Make the dir
+			if err := os.Mkdir(SAVES, 0744); err != nil {
+				fmt.Println(err)
+				os.Exit(1)
+			}
+		}
+	}
+	// set working dir to $HOME/.foobarbaz
+	if err := os.Chdir(HOME); err != nil {
+		fmt.Println("Can't move to working directory", err)
+	}
+
+	// TESTING: list files in working dir
+	files, _ := ioutil.ReadDir("./")
+	for _, f := range files {
+		fmt.Println("list files:", f.Name())
+	}
+	return
 }
