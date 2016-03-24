@@ -119,7 +119,8 @@ func PickChar() {
 		fmt.Printf(YellowU("\nChoose a character:\n"))
 		fmt.Printf(":> %selete <:\n\n", GreenU("D"))
 		fmt.Printf(Blue("  %s  %s\n"), GreenU("0"), GreenU("New"))
-		files, _ = ioutil.ReadDir("./save/")
+		//files, _ = ioutil.ReadDir("./save/")
+		files, _ = ioutil.ReadDir(SAVES)
 		for _, f := range files {
 			fmt.Printf("  %s  %s\n", GreenU(strconv.Itoa(num)), Blue(strings.Replace(f.Name(), ".json", "", -1)))
 			num++
@@ -167,7 +168,7 @@ func DeleteCharacter() {
 		fmt.Printf(":> %sack <:\n\n", GreenU("B"))
 		//fmt.Printf(Blue("  %s  %s\n"), GreenU("0"), Blue("New"))
 		// List Characters for selection
-		files, _ = ioutil.ReadDir("./save/")
+		files, _ = ioutil.ReadDir(SAVES)
 		for _, f := range files {
 			fmt.Printf("  %s  %s\n", GreenU(strconv.Itoa(num)), Red(strings.Replace(f.Name(), ".json", "", -1)))
 			num++
@@ -185,7 +186,7 @@ func DeleteCharacter() {
 				fmt.Printf("Deleting --> %s\n", Red(f.Name()))
 
 				if Confirm("Are you sure you want to delete " + f.Name()) {
-					err := os.Remove("save/" + f.Name())
+					err := os.Remove(SAVES + f.Name())
 					if err != nil {
 						fmt.Println(Red(err))
 					}
@@ -210,7 +211,7 @@ func NewCharacter() {
 	SaveFile = PromptConfirm("What shall your name be? ")
 
 	//make sure we don't use a name already taken
-	files, _ := ioutil.ReadDir("./save/")
+	files, _ := ioutil.ReadDir(SAVES)
 	for _, f := range files {
 		chkFile := strings.Replace(f.Name(), ".json", "", -1)
 		if SaveFile == chkFile || SaveFile == "New" {
@@ -221,8 +222,9 @@ func NewCharacter() {
 		}
 	}
 
-	Char := Agent{File: "New"}
-	Char.Load()
+	//Char := Agent{File: "New"}
+	//Char.Load()
+	Char := New
 	Char.Name = SaveFile
 	Char.File = SaveFile
 	Char.Save()

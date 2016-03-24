@@ -12,6 +12,10 @@ import (
 	. "github.com/eyetoe/foobarbaz/locations"
 )
 
+// HOME is the game working dir
+// SAVE is the game save file under HOME
+var HOME, SAVES = FbbDirs()
+
 type Stat struct {
 	Name string
 	Val  int
@@ -76,17 +80,16 @@ func (c *Agent) AdjHp(a int) {
 // Load Character from json file
 func (c *Agent) Load() {
 
-	var path string
+	//var path string
 
-	if c.File == "New" {
-		path = ""
-	} else {
-		path = "save/"
-	}
+	//	if c.File == "New" {
+	//		path = ""
+	//	} else {
+	//		path = "save/"
+	//	}
 
 	if c.File != "" {
-		//d, err := os.Open("save/" + c.File + ".json")
-		d, err := os.Open(path + c.File + ".json")
+		d, err := os.Open(SAVES + c.File + ".json")
 
 		if err != nil {
 			fmt.Println("Can't open file:", err.Error())
@@ -95,7 +98,7 @@ func (c *Agent) Load() {
 		if err = jp.Decode(&c); err != nil {
 			fmt.Println("Can't parse json:", err.Error())
 		} else {
-			fmt.Println(Black("./save/" + c.File + ".json loaded."))
+			fmt.Println(Black(SAVES + c.File + ".json loaded."))
 		}
 	}
 	return
@@ -107,10 +110,11 @@ func (c *Agent) Save() {
 		//Oh sweet MarshalIndent, you make my json look pretty
 		i, _ := json.MarshalIndent(c, "", "    ")
 
-		if err := ioutil.WriteFile("save/"+c.File+".json", i, 0644); err != nil {
+		//if err := ioutil.WriteFile("save/"+c.File+".json", i, 0644); err != nil {
+		if err := ioutil.WriteFile(SAVES+c.File+".json", i, 0644); err != nil {
 			fmt.Println("Can't write file:", err.Error())
 		} else {
-			fmt.Println(Black("./save/" + c.File + ".json saved."))
+			fmt.Println(Black(SAVES + c.File + ".json saved."))
 		}
 	}
 	return
@@ -226,4 +230,51 @@ func StatCost(c Agent) int {
 	default:
 		return 200 * m
 	}
+}
+
+// FbbDirs returns the HOME and SAVE vars values
+func FbbDirs() (string, string) {
+	// Is the ENV var $HOME set?
+	home, ok := os.LookupEnv("HOME")
+	if ok != true {
+		fmt.Println("Please set your $HOME environment variable.")
+		os.Exit(1)
+	}
+	return home + "/.foobarbaz/", home + "/.foobarbaz/saves/"
+}
+
+// EnvSetup prepares the game HOME directory
+func EnvSetup() {
+	// Is the client dir already there?
+	if _, err := os.Stat(HOME); err != nil {
+		if os.IsNotExist(err) {
+			// Make the dir
+			if err := os.Mkdir(HOME, 0744); err != nil {
+				fmt.Println(err)
+				os.Exit(1)
+			}
+		}
+	}
+
+	// Is the saves dir already there?
+	if _, err := os.Stat(SAVES); err != nil {
+		if os.IsNotExist(err) {
+			// Make the dir
+			if err := os.Mkdir(SAVES, 0744); err != nil {
+				fmt.Println(err)
+				os.Exit(1)
+			}
+		}
+	}
+	// set working dir to $HOME/.foobarbaz
+	if err := os.Chdir(HOME); err != nil {
+		fmt.Println("Can't move to working directory", err)
+	}
+
+	// TESTING: list files in working dir
+	files, _ := ioutil.ReadDir("./")
+	for _, f := range files {
+		fmt.Println("list files:", f.Name())
+	}
+	return
 }
