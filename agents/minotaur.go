@@ -26,5 +26,6 @@ var Minotaur = Agent{
 	Abl2: "Stomp",
 	Abl3: "Snort",
 	// Inventory
-	Inv: []Item{},
+	DropChance: 20,
+	Inv:        []Item{},
 }

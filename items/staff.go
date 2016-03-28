@@ -9,8 +9,8 @@ var Staff = Item{
 	Description: "is weathered beyond belief, and seems to be laquered in blood and sweat.  On close inspection it is engraved with ancient runes, and passages.",
 	Slot:        "Weapon",
 	Affects:     []Affect{OnFire},
-	Attack:      2,
-	Damage:      8,
+	Attack:      8,
+	Damage:      6,
 	//Damage
 	//Dodge
 	//DoT

@@ -10,6 +10,6 @@ var Battleaxe = Item{
 	Slot:        "Weapon",
 	Affects:     []Affect{Charged},
 	Attack:      1,
-	Damage:      12,
+	Damage:      8,
 	Crit:        10,
 }

@@ -4,12 +4,12 @@ import (
 	. "github.com/eyetoe/foobarbaz/affects"
 )
 
-var Bite = Item{
-	Name:        "Rabid Bite",
-	Description: "Foamy and wet this mouth craves blood!",
+var Tack = Item{
+	Name:        "Tack",
+	Description: "provides a well placed poke!",
 	Slot:        "Weapon",
 	Affects:     []Affect{Charged},
 	Attack:      10,
-	Damage:      4,
+	Damage:      3,
 	Crit:        10,
 }

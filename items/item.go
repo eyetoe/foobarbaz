@@ -1,6 +1,12 @@
 package items
 
-import "github.com/eyetoe/foobarbaz/affects"
+import (
+	"fmt"
+	"strconv"
+
+	"github.com/eyetoe/foobarbaz/affects"
+	. "github.com/eyetoe/foobarbaz/colors"
+)
 
 type Item struct {
 	Name        string
@@ -19,4 +25,10 @@ type Item struct {
 	DoT int
 	// modify critical chance.
 	Crit int
+}
+
+func (i *Item) Display() {
+	fmt.Printf("%s: %s. - ", Blue(i.Name), Yellow(i.Description))
+	fmt.Printf("Slot: %s, Attack: %s, Damage: %s\n", Yellow(i.Slot), Red(strconv.Itoa(i.Attack)), Red(strconv.Itoa(i.Damage)))
+
 }

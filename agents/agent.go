@@ -41,10 +41,11 @@ type Agent struct {
 	Abl2 string
 	Abl3 string
 	//
-	Exp  int
-	Inv  []Item
-	Loc  Loc
-	File string
+	Exp        int
+	DropChance int
+	Inv        []Item
+	Loc        Loc
+	File       string
 }
 
 func (c Agent) ExpDrop() int {
@@ -200,7 +201,7 @@ func (c Agent) FoeBar() {
 // The average stat is compared with the position in the fibonacci sequence
 // then the product of the postion and the multiplier var = Stat Cost
 func StatCost(c Agent) int {
-	m := 5 // multiplier
+	m := 1 // multiplier
 	tStat := c.Str.Val + c.Int.Val + c.Dex.Val + c.Hp.Val
 	avStat := tStat / 4
 

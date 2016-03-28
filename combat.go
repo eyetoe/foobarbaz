@@ -11,12 +11,6 @@ import (
 	. "github.com/eyetoe/foobarbaz/skills"
 )
 
-//func Roll(n int) int {
-//	r := rand.New(rand.NewSource(time.Now().UnixNano()))
-//	num := r.Intn(n)
-//	return num + 1
-//}
-
 func Roll(n int, d int) int {
 	num := 0
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
@@ -80,7 +74,7 @@ func Attack(a *Agent, d *Agent) (*Agent, *Agent) {
 	dr := Roll(1, 100)
 	// bonuses
 	arB := a.Str.Val + a.Weap.Attack
-	drB := d.Str.Val
+	drB := d.Dex.Val
 	// totals
 	aT := ar + arB
 	dT := dr + drB
@@ -134,9 +128,13 @@ func Spawn() Agent {
 	rand.Seed(time.Now().UTC().UnixNano())
 	monsters := []Agent{
 		// Add monsters here to be included in random spawn
-		Minotaur,
-		Coyote,
+		Spider,
 		Phantom,
+		Pixie,
+		Kobold,
+		Oldman,
+		Coyote,
+		Minotaur,
 	}
 	return monsters[rand.Intn(len(monsters))]
 	//monster := monsters[rand.Intn(len(monsters))]

@@ -6,7 +6,7 @@ import (
 
 var Fist = Item{
 	Name:        "Fist",
-	Description: "A trusty knuckle sandwich!",
+	Description: "yep trusty knuckle sandwich!",
 	Slot:        "Weapon",
 	Affects:     []Affect{},
 	Attack:      2,

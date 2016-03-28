@@ -4,7 +4,6 @@ import (
 	. "github.com/eyetoe/foobarbaz/items"
 )
 
-// A mighty minotaur
 var Phantom = Agent{
 	// Name and Description
 	Name: "Phantom",

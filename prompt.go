@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	. "github.com/eyetoe/foobarbaz/agents"
+	. "github.com/eyetoe/foobarbaz/art"
 	. "github.com/eyetoe/foobarbaz/colors"
 )
 
@@ -360,6 +361,9 @@ func Fight(c *Agent, f *Agent) {
 			if c.Name == winner.Name {
 				Damage(c, f)
 				if loser.Dead == true {
+					if f.Weap.Name != c.Weap.Name && loser.DropChance >= Roll(1, 100) {
+						OfferItem(c, f)
+					}
 					Continue()
 					break
 				}
@@ -391,6 +395,21 @@ func Fight(c *Agent, f *Agent) {
 		}
 		return
 	}
+}
+func OfferItem(c *Agent, f *Agent) {
+	ClearScreen()
+	fmt.Println(Yellow(Sword1()))
+	fmt.Println(Blue("!! ITEM DROP !!"))
+	fmt.Printf("%s has dropped it's %s.\n", Yellow(f.Name), Yellow(f.Weap.Name))
+	fmt.Printf("Replace?\n	")
+	c.Weap.Display()
+	fmt.Printf("with..\n	")
+	f.Weap.Display()
+	if Confirm("\nWould you like to make this swap?") == true {
+		c.Weap = f.Weap
+		c.Save()
+	}
+
 }
 
 func Preferences(c *Agent) {
