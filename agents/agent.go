@@ -61,11 +61,6 @@ func (c *Agent) Describe() {
 // Adjust Hp "hit points"
 func (c *Agent) AdjHp(a int) {
 	c.Hp.Val = c.Hp.Val + a
-	//	if a > 0 {
-	//		fmt.Println(c.Name, "heals", a, "hit points")
-	//} else {
-	//fmt.Println(c.Name, "takes", a, "damage!")
-	//}
 	if c.Hp.Val > c.MxHp.Val {
 		c.Hp.Val = c.MxHp.Val
 	}
@@ -80,15 +75,6 @@ func (c *Agent) AdjHp(a int) {
 
 // Load Character from json file
 func (c *Agent) Load() {
-
-	//var path string
-
-	//	if c.File == "New" {
-	//		path = ""
-	//	} else {
-	//		path = "save/"
-	//	}
-
 	if c.File != "" {
 		d, err := os.Open(SAVES + c.File + ".json")
 
