@@ -4,12 +4,12 @@ import (
 	. "github.com/eyetoe/foobarbaz/affects"
 )
 
-var Bite = Item{
-	Name:        "Rabid Bite",
-	Description: "looms foamy and wet. The mouth craves blood!",
+var Maw = Item{
+	Name:        "Rabid Maw",
+	Description: "glistens foamy and wet. The mouth craves blood!",
 	Slot:        "Weapon",
 	Affects:     []Affect{Charged},
-	Attack:      10,
+	Attack:      1,
 	Damage:      4,
 	Crit:        10,
 }

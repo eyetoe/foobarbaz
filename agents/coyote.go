@@ -10,15 +10,15 @@ var Coyote = Agent{
 	Name:        "Coyote",
 	Description: "Thin and desperate, the coyote shows it's teeth.",
 	// Stats
-	Str: Stat{"Strength", 10},
-	Int: Stat{"Intelligence", 5},
+	Str: Stat{"Strength", 5},
+	Int: Stat{"Intelligence", 4},
 	Dex: Stat{"Dexterity", 20},
 	// Health and Wellness
-	MxHp: Stat{"Max Health", 20},
-	Hp:   Stat{"Current Health", 20},
+	MxHp: Stat{"Max Health", 15},
+	Hp:   Stat{"Current Health", 15},
 	Dead: false,
 	// Equiped items
-	Weap:  Bite,
+	Weap:  Maw,
 	Armor: "Hide",
 	Trink: "Amulet",
 	// Special Abilities

@@ -9,7 +9,7 @@ var Tack = Item{
 	Description: "provides a well placed poke!",
 	Slot:        "Weapon",
 	Affects:     []Affect{Charged},
-	Attack:      10,
-	Damage:      3,
+	Attack:      4,
+	Damage:      4,
 	Crit:        10,
 }

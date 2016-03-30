@@ -137,7 +137,5 @@ func Spawn() Agent {
 		Minotaur,
 	}
 	return monsters[rand.Intn(len(monsters))]
-	//monster := monsters[rand.Intn(len(monsters))]
-	//fmt.Println(monster.Name, monster.Description)
 
 }

@@ -6,7 +6,7 @@ import (
 
 var Knife = Item{
 	Name:        "Knife",
-	Description: "A greasy bloodstained shiv!",
+	Description: "a greasy bloodstained shiv!",
 	Slot:        "Weapon",
 	Affects:     []Affect{Charged},
 	Attack:      3,

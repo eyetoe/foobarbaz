@@ -6,10 +6,10 @@ import (
 
 var Fang = Item{
 	Name:        "Fang",
-	Description: "glistens with such a tiny drop of venom!",
+	Description: "conseals a tiny drop of venom!",
 	Slot:        "Weapon",
 	Affects:     []Affect{Charged},
-	Attack:      10,
-	Damage:      3,
+	Attack:      0,
+	Damage:      2,
 	Crit:        10,
 }

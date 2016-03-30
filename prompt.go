@@ -45,7 +45,6 @@ func Prompt() {
 			break
 		case "e", "E":
 			var Foe Agent
-			//Foe = Phantom
 			Foe = Spawn()
 			Fight(&Char, &Foe)
 			continue
@@ -87,6 +86,7 @@ func Look(c Agent) {
 // Fight loop where c is character and f is foe
 func Fight(c *Agent, f *Agent) {
 	ClearScreen()
+	//fmt.Println(Green(f.Art()))
 	fmt.Printf("\nYou have encountered a %s!\n", YellowU("Monster"))
 	Continue()
 	ClearScreen()
@@ -94,6 +94,8 @@ func Fight(c *Agent, f *Agent) {
 		c.StatusBar()
 		fmt.Println()
 		f.FoeBar()
+		fmt.Println(Green(SpiderImage()))
+		//Continue()
 		fmt.Printf(":> %sight, %svade, %sescribe, %sun\n<: ", GreenU("F"), GreenU("E"), GreenU("D"), GreenU("R"))
 		reader := bufio.NewReader(os.Stdin)
 		input, _ := reader.ReadString('\n')
@@ -146,7 +148,7 @@ func Fight(c *Agent, f *Agent) {
 
 func WinHeal(c *Agent) {
 	h := Roll(2, c.MxHp.Val)
-	if c.MxHp.Val > c.Hp.Val && c.MxHp.Val+50 >= Roll(1, 100) {
+	if c.MxHp.Val > c.Hp.Val && c.MxHp.Val+30 >= Roll(1, 100) {
 		c.AdjHp(h)
 		fmt.Printf(Green("\nIn victory heal %d hit points!\n\n"), h)
 		c.Save()

@@ -10,6 +10,7 @@ import (
 	. "github.com/eyetoe/foobarbaz/colors"
 	. "github.com/eyetoe/foobarbaz/items"
 	. "github.com/eyetoe/foobarbaz/locations"
+	. "github.com/eyetoe/foobarbaz/meters"
 )
 
 // HOME is the game working dir
@@ -154,6 +155,7 @@ func (c Agent) StatusBar() {
 		fmt.Printf(Red("\n%s collapsed in a sobbing frightned lump and expired.\n\n"), c.Name)
 		os.Exit(0)
 	}
+	Meter(c.Hp.Val, c.MxHp.Val, "Health", "=")
 }
 
 // Render character status bar
