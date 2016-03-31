@@ -22,20 +22,22 @@ func Roll(n int, d int) int {
 }
 
 // Calculate and apply damage to Agent
-func Damage(a *Agent, d *Agent) {
+func Damage(a *Agent, d *Agent) string {
 	hp := Roll(1, a.Weap.Damage)
 	d.AdjHp(0 - hp)
+	var textOut string
 	if d.Dead == false {
-		fmt.Printf("for %s damage. ", Red(strconv.Itoa(hp)))
-		fmt.Printf("%s's health = %s.\n", d.Name, Red(strconv.Itoa(d.Hp.Val)))
+		textOut = fmt.Sprintf("for %s damage. ", Red(strconv.Itoa(hp)))
+		textOut = textOut + fmt.Sprintf("%s's health = %s.\n", d.Name, Red(strconv.Itoa(d.Hp.Val)))
 	}
 	// Monster agents don't have a save file set
 	if d.File == "" && d.Dead == true {
 		a.Exp = a.Exp + d.ExpDrop()
-		fmt.Printf(Green("You gain %d experience.\n"), d.ExpDrop())
+		textOut = textOut + fmt.Sprintf(Green("You gain %d experience.\n"), d.ExpDrop())
 		a.Save()
 	}
 	d.Save()
+	return textOut
 }
 
 // Skill determines the winner in a contest of skill
@@ -68,7 +70,10 @@ func SkillCheck(a Agent, s Stat, d Skill) bool {
 // Second input struct is the 'defender'
 // First output struct is the 'winner'
 // Second output struct is the 'loser'
-func Attack(a *Agent, d *Agent) (*Agent, *Agent) {
+func Attack(a *Agent, d *Agent) (*Agent, *Agent, string) {
+
+	var outText string
+
 	// roll for attacker and defender
 	ar := Roll(1, 100)
 	dr := Roll(1, 100)
@@ -79,16 +84,17 @@ func Attack(a *Agent, d *Agent) (*Agent, *Agent) {
 	aT := ar + arB
 	dT := dr + drB
 
-	fmt.Printf(Black("Attack roll: %d plus Bonus: %d for Total: %d\n"), ar, arB, aT)
-	fmt.Printf(Black("Defence roll: %d plus Bonus: %d for Total: %d\n"), dr, drB, dT)
+	outText = fmt.Sprintf(Black("Attack roll: %d plus Bonus: %d for Total: %d\n"), ar, arB, aT)
+	outText = outText + fmt.Sprintf(Black("Defence roll: %d plus Bonus: %d for Total: %d\n"), dr, drB, dT)
+
 	// Attack wins if greater than Defence
 	// But a tie goes to the Defence
 	if aT > dT {
-		fmt.Printf(Green("%s hits! "), a.Name)
-		return a, d
+		outText = outText + fmt.Sprintf(Green("%s hits! "), a.Name)
+		return a, d, outText
 	} else {
-		fmt.Printf(Red("%s misses!\n"), a.Name)
-		return d, a
+		outText = outText + fmt.Sprintf(Red("%s misses!\n"), a.Name)
+		return d, a, outText
 	}
 
 }

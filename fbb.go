@@ -96,9 +96,10 @@ func Testies() {
 				def := &Foe
 
 				fmt.Printf("%s attacks %s with %s.\n", atk.Name, def.Name, atk.Weap.Name)
-				winner, loser := Attack(&Char, &Foe)
+				winner, loser, details := Attack(&Char, &Foe)
 				fmt.Printf("%s has prevailed!\n", winner.Name)
 				fmt.Printf("Alas, %s has fallen short!\n", loser.Name)
+				fmt.Println(details)
 
 				return
 			}

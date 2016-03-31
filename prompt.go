@@ -86,16 +86,21 @@ func Look(c Agent) {
 // Fight loop where c is character and f is foe
 func Fight(c *Agent, f *Agent) {
 	ClearScreen()
-	//fmt.Println(Green(f.Art()))
 	fmt.Printf("\nYou have encountered a %s!\n", YellowU("Monster"))
 	Continue()
 	ClearScreen()
-	for {
+
+	var cout, fout string
+
+	display := func() {
 		c.StatusBar()
 		fmt.Println()
 		f.FoeBar()
 		fmt.Println(Green(SpiderImage()))
-		//Continue()
+	}
+	display()
+
+	for {
 		fmt.Printf(":> %sight, %svade, %sescribe, %sun\n<: ", GreenU("F"), GreenU("E"), GreenU("D"), GreenU("R"))
 		reader := bufio.NewReader(os.Stdin)
 		input, _ := reader.ReadString('\n')
@@ -104,10 +109,11 @@ func Fight(c *Agent, f *Agent) {
 		switch choice {
 		case "f", "F":
 			ClearScreen()
+			display()
 			fmt.Printf("\n%s attacks %s with %s.\n", c.Name, f.Name, c.Weap.Name)
-			winner, loser := Attack(c, f)
+			winner, loser, charAttackDetails := Attack(c, f)
 			if c.Name == winner.Name {
-				Damage(c, f)
+				fout = Damage(c, f)
 				if loser.Dead == true {
 					if f.Weap.Name != c.Weap.Name && loser.DropChance >= Roll(1, 100) {
 						OfferItem(c, f)
@@ -118,14 +124,20 @@ func Fight(c *Agent, f *Agent) {
 				}
 			}
 			fmt.Printf("\n%s attacks %s with %s.\n", f.Name, c.Name, f.Weap.Name)
-			winner, loser = Attack(f, c)
+			winner, loser, foeAttackDetails := Attack(f, c)
 			if f.Name == winner.Name {
-				Damage(f, c)
+				cout = Damage(f, c)
 				if loser.Dead == true {
 					Continue()
 					break
 				}
 			}
+			ClearScreen()
+			display()
+			fmt.Println(charAttackDetails)
+			fmt.Println(fout)
+			fmt.Println(foeAttackDetails)
+			fmt.Println(cout)
 			continue
 		case "e", "E":
 			fmt.Println("Evade!\n You stall for time, looking for an opening!")
