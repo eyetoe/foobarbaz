@@ -63,7 +63,6 @@ func PickChar() {
 		fmt.Printf(YellowU("\nChoose a character:\n"))
 		fmt.Printf(":> %selete <:\n\n", GreenU("D"))
 		fmt.Printf(Blue("  %s  %s\n"), GreenU("0"), GreenU("New"))
-		//files, _ = ioutil.ReadDir("./save/")
 		files, _ = ioutil.ReadDir(SAVES)
 		for _, f := range files {
 			fmt.Printf("  %s  %s\n", GreenU(strconv.Itoa(num)), Blue(strings.Replace(f.Name(), ".json", "", -1)))
@@ -94,8 +93,6 @@ func PickChar() {
 			}
 			NewCharacter()
 			return
-		//case "b", "B":
-		//return
 		case "d", "D":
 			DeleteCharacter()
 			break
@@ -110,7 +107,7 @@ func DeleteCharacter() {
 		num := 1
 		fmt.Printf(RedU("\nDelete which character?\n"))
 		fmt.Printf(":> %sack <:\n\n", GreenU("B"))
-		//fmt.Printf(Blue("  %s  %s\n"), GreenU("0"), Blue("New"))
+
 		// List Characters for selection
 		files, _ = ioutil.ReadDir(SAVES)
 		for _, f := range files {
@@ -166,8 +163,6 @@ func NewCharacter() {
 		}
 	}
 
-	//Char := Agent{File: "New"}
-	//Char.Load()
 	Char := New
 	Char.Name = SaveFile
 	Char.File = SaveFile
@@ -199,9 +194,7 @@ func ExpMgr(c *Agent) {
 			Continue()
 		}
 
-		reader := bufio.NewReader(os.Stdin)
-		input, _ := reader.ReadString('\n')
-		choice := string([]byte(input)[0])
+		choice := GetReturn()
 
 		switch choice {
 		case "s", "S":

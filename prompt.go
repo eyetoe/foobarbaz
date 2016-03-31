@@ -9,6 +9,7 @@ import (
 	. "github.com/eyetoe/foobarbaz/agents"
 	. "github.com/eyetoe/foobarbaz/art"
 	. "github.com/eyetoe/foobarbaz/colors"
+	"github.com/pkg/term"
 )
 
 func Prompt() {
@@ -31,9 +32,7 @@ func Prompt() {
 		fmt.Printf("%sile, ", GreenU("F"))
 		fmt.Printf("%selp <: ", GreenU("H"))
 
-		reader := bufio.NewReader(os.Stdin)
-		input, _ := reader.ReadString('\n')
-		choice := string([]byte(input)[0])
+		choice, _, _ := GetChar()
 
 		// choices here
 		switch choice {
@@ -41,7 +40,7 @@ func Prompt() {
 			Look(Char)
 			continue
 		case "g", "G":
-			Go()
+			Go(&Char)
 			break
 		case "e", "E":
 			var Foe Agent
@@ -65,7 +64,10 @@ func Prompt() {
 	}
 }
 
-func Go() {
+func Go(c *Agent) {
+	ClearScreen()
+	c.StatusBar()
+	fmt.Println()
 	fmt.Printf(":> %sxit, %sack <:", Green("E"), Green("B"))
 	reader := bufio.NewReader(os.Stdin)
 	input, _ := reader.ReadString('\n')
@@ -102,9 +104,8 @@ func Fight(c *Agent, f *Agent) {
 
 	for {
 		fmt.Printf(":> %sight, %svade, %sescribe, %sun\n<: ", GreenU("F"), GreenU("E"), GreenU("D"), GreenU("R"))
-		reader := bufio.NewReader(os.Stdin)
-		input, _ := reader.ReadString('\n')
-		choice := string([]byte(input)[0])
+
+		choice, _, _ := GetChar()
 
 		switch choice {
 		case "f", "F":
@@ -283,4 +284,50 @@ func stripchars(str, chr string) string {
 		}
 		return -1
 	}, str)
+}
+
+// GetReturn returns a single string character after user enters newline
+func GetReturn() (ascii string) {
+	reader := bufio.NewReader(os.Stdin)
+	input, _ := reader.ReadString('\n')
+	return string([]byte(input)[0])
+}
+
+// GetChar returns a single string character, without waiting for newline
+func GetChar() (ascii string, keyCode int, err error) {
+	t, _ := term.Open("/dev/tty")
+	term.RawMode(t)
+	bytes := make([]byte, 3)
+
+	var numRead int
+	numRead, err = t.Read(bytes)
+	if err != nil {
+		return
+	}
+	if numRead == 3 && bytes[0] == 27 && bytes[1] == 91 {
+		// Three-character control sequence, beginning with "ESC-[".
+
+		// Since there are no ASCII codes for arrow keys, we use
+		// Javascript key codes.
+		if bytes[2] == 65 {
+			// Up
+			keyCode = 38
+		} else if bytes[2] == 66 {
+			// Down
+			keyCode = 40
+		} else if bytes[2] == 67 {
+			// Right
+			keyCode = 39
+		} else if bytes[2] == 68 {
+			// Left
+			keyCode = 37
+		}
+	} else if numRead == 1 {
+		ascii = fmt.Sprintf("%c", int(bytes[0]))
+	} else {
+		// Two characters read??
+	}
+	t.Restore()
+	t.Close()
+	return
 }
