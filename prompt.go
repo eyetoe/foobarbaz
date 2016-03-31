@@ -169,8 +169,8 @@ func WinHeal(c *Agent) {
 func OfferItem(c *Agent, f *Agent) {
 	ClearScreen()
 	fmt.Println(Yellow(Sword1()))
-	fmt.Println(Blue("!! ITEM DROP !!"))
-	fmt.Printf("%s has dropped it's %s.\n", Yellow(f.Name), Yellow(f.Weap.Name))
+	fmt.Println(Blue("!! ITEM DROP !!\n"))
+	fmt.Printf("%s has dropped it's %s.\n\n", Yellow(f.Name), Yellow(f.Weap.Name))
 	fmt.Printf("Replace?\n	")
 	c.Weap.Display()
 	fmt.Printf("with..\n	")

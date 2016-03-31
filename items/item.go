@@ -28,7 +28,8 @@ type Item struct {
 }
 
 func (i *Item) Display() {
-	fmt.Printf("%s: %s. - ", Blue(i.Name), Yellow(i.Description))
-	fmt.Printf("Slot: %s, Attack: %s, Damage: %s\n", Yellow(i.Slot), Red(strconv.Itoa(i.Attack)), Red(strconv.Itoa(i.Damage)))
+	fmt.Printf("%s\n", Blue(i.Name))
+	fmt.Printf("	Slot: %s, Attack: %s, Damage: %s\n", Yellow(i.Slot), Red(strconv.Itoa(i.Attack)), Red(strconv.Itoa(i.Damage)))
+	fmt.Printf("	%s\n", Yellow(i.Description))
 
 }
