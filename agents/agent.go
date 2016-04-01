@@ -47,6 +47,7 @@ type Agent struct {
 	Inv        []Item
 	Loc        Loc
 	File       string
+	Art        string
 }
 
 func (c Agent) ExpDrop() int {
@@ -60,18 +61,19 @@ func (c *Agent) Describe() {
 }
 
 // Adjust Hp "hit points"
-func (c *Agent) AdjHp(a int) {
+func (c *Agent) AdjHp(a int) string {
+	var textOut string
 	c.Hp.Val = c.Hp.Val + a
 	if c.Hp.Val > c.MxHp.Val {
 		c.Hp.Val = c.MxHp.Val
 	}
 	if c.Hp.Val <= 0 {
-		//fmt.Println(c.Name, "has died :( ")
-		fmt.Printf("%s", BlueU(c.Name))
-		fmt.Printf(Red(" has died:( \n"))
+		textOut = textOut + fmt.Sprintf("%s", BlueU(c.Name))
+		textOut = textOut + fmt.Sprintf(Red(" has died:( \n"))
 		c.Dead = true
 		c.Exp = 0
 	}
+	return textOut
 }
 
 // Load Character from json file

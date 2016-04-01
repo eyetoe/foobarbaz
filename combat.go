@@ -24,8 +24,8 @@ func Roll(n int, d int) int {
 // Calculate and apply damage to Agent
 func Damage(a *Agent, d *Agent) string {
 	hp := Roll(1, a.Weap.Damage)
-	d.AdjHp(0 - hp)
 	var textOut string
+	textOut = textOut + d.AdjHp(0-hp)
 	if d.Dead == false {
 		textOut = fmt.Sprintf("for %s damage. ", Red(strconv.Itoa(hp)))
 		textOut = textOut + fmt.Sprintf("%s's health = %s.\n", d.Name, Red(strconv.Itoa(d.Hp.Val)))
@@ -34,6 +34,8 @@ func Damage(a *Agent, d *Agent) string {
 	if d.File == "" && d.Dead == true {
 		a.Exp = a.Exp + d.ExpDrop()
 		textOut = textOut + fmt.Sprintf(Green("You gain %d experience.\n"), d.ExpDrop())
+		fmt.Println(textOut)
+		Continue()
 		a.Save()
 	}
 	d.Save()

@@ -92,13 +92,14 @@ func Fight(c *Agent, f *Agent) {
 	Continue()
 	ClearScreen()
 
-	var cout, fout string
+	var cout, fout, healmsg string
 
 	display := func() {
 		c.StatusBar()
 		fmt.Println()
 		f.FoeBar()
-		fmt.Println(Green(SpiderImage()))
+		//fmt.Println(Green(SpiderImage()))
+		fmt.Println(Green(f.Art))
 	}
 	display()
 
@@ -113,14 +114,17 @@ func Fight(c *Agent, f *Agent) {
 			display()
 			fmt.Printf("\n%s attacks %s with %s.\n", c.Name, f.Name, c.Weap.Name)
 			winner, loser, charAttackDetails := Attack(c, f)
+
 			if c.Name == winner.Name {
 				fout = Damage(c, f)
 				if loser.Dead == true {
 					if f.Weap.Name != c.Weap.Name && loser.DropChance >= Roll(1, 100) {
 						OfferItem(c, f)
 					}
-					WinHeal(c)
-					Continue()
+					healmsg = WinHeal(c)
+					//fmt.Println("pausing to see heal message")
+					//fmt.Println(fout)
+					//Continue()
 					break
 				}
 			}
@@ -129,7 +133,7 @@ func Fight(c *Agent, f *Agent) {
 			if f.Name == winner.Name {
 				cout = Damage(f, c)
 				if loser.Dead == true {
-					Continue()
+					//Continue()
 					break
 				}
 			}
@@ -137,11 +141,14 @@ func Fight(c *Agent, f *Agent) {
 			display()
 			fmt.Println(charAttackDetails)
 			fmt.Println(fout)
+			fmt.Println(healmsg)
 			fmt.Println(foeAttackDetails)
 			fmt.Println(cout)
+			Continue()
 			continue
 		case "e", "E":
 			fmt.Println("Evade!\n You stall for time, looking for an opening!")
+			fmt.Println("Note: should have a separate menu here where you can use items.  So you have to take a break from the fight, to be able to pull out an item or potion.  including switching weapons, drinking potions, using magic items.")
 			continue
 		case "d", "D":
 			fmt.Printf(Blue("\nYou consider the %s. %s\n"), f.Name, f.Description)
@@ -159,13 +166,15 @@ func Fight(c *Agent, f *Agent) {
 	}
 }
 
-func WinHeal(c *Agent) {
+func WinHeal(c *Agent) string {
+	var textOut string
 	h := Roll(2, c.MxHp.Val)
 	if c.MxHp.Val > c.Hp.Val && c.MxHp.Val+30 >= Roll(1, 100) {
-		c.AdjHp(h)
-		fmt.Printf(Green("\nIn victory heal %d hit points!\n\n"), h)
+		textOut = textOut + c.AdjHp(h)
+		textOut = textOut + fmt.Sprintf(Green("\nIn victory heal %d hit points!\n\n"), h)
 		c.Save()
 	}
+	return textOut
 }
 func OfferItem(c *Agent, f *Agent) {
 	ClearScreen()
@@ -189,11 +198,12 @@ func Preferences(c *Agent) {
 }
 
 func Continue() {
-	fmt.Printf(BlueU("\nEnter"))
-	fmt.Printf(Blue(" to continue...\n"))
-	reader := bufio.NewReader(os.Stdin)
-	input, _ := reader.ReadString('\n')
-	choice := string([]byte(input)[0])
+	fmt.Printf(BlueU("\nAny"))
+	fmt.Printf(Blue(" key to continue...\n"))
+	//reader := bufio.NewReader(os.Stdin)
+	//input, _ := reader.ReadString('\n')
+	//choice := string([]byte(input)[0])
+	choice, _, _ := GetChar()
 	switch choice {
 	default:
 		return
