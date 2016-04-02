@@ -21,27 +21,6 @@ func Roll(n int, d int) int {
 	return num + 1
 }
 
-// Calculate and apply damage to Agent
-func Damage(a *Agent, d *Agent) string {
-	hp := Roll(1, a.Weap.Damage)
-	var textOut string
-	textOut = textOut + d.AdjHp(0-hp)
-	if d.Dead == false {
-		textOut = fmt.Sprintf("for %s damage. ", Red(strconv.Itoa(hp)))
-		textOut = textOut + fmt.Sprintf("%s's health = %s.\n", d.Name, Red(strconv.Itoa(d.Hp.Val)))
-	}
-	// Monster agents don't have a save file set
-	if d.File == "" && d.Dead == true {
-		a.Exp = a.Exp + d.ExpDrop()
-		textOut = textOut + fmt.Sprintf(Green("You gain %d experience.\n"), d.ExpDrop())
-		fmt.Println(textOut)
-		Continue()
-		a.Save()
-	}
-	d.Save()
-	return textOut
-}
-
 // Skill determines the winner in a contest of skill
 // pass in an Agent, a Stat to base the skill check on, and a Difficulty
 // e.g. a player would like to try to open a heavy door by force. Success
@@ -65,6 +44,30 @@ func SkillCheck(a Agent, s Stat, d Skill) bool {
 		return false
 	}
 
+}
+
+// Calculate and apply damage to Agent
+func Damage(a *Agent, d *Agent) string {
+
+	var textOut string
+
+	hp := Roll(1, a.Weap.Damage)
+
+	textOut = d.AdjHp(0 - hp)
+
+	if d.Dead == false {
+		textOut = textOut + fmt.Sprintf("for %s damage. ", Red(strconv.Itoa(hp)))
+		textOut = textOut + fmt.Sprintf("%s's health = %s.\n", d.Name, Red(strconv.Itoa(d.Hp.Val)))
+	}
+
+	// Monster agents don't have a save file set
+	if d.File == "" && d.Dead == true {
+		a.Exp = a.Exp + d.ExpDrop()
+		textOut = textOut + fmt.Sprintf(Green("You gain %d experience.\n"), d.ExpDrop())
+		a.Save()
+	}
+	d.Save()
+	return textOut
 }
 
 // Attack takes two structs and returns two structs.
@@ -91,6 +94,7 @@ func Attack(a *Agent, d *Agent) (*Agent, *Agent, string) {
 
 	// Attack wins if greater than Defence
 	// But a tie goes to the Defence
+
 	if aT > dT {
 		outText = outText + fmt.Sprintf(Green("%s hits! "), a.Name)
 		return a, d, outText
