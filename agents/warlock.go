@@ -28,8 +28,8 @@ var Warlock = Agent{
 	// Inventory
 	DropChance: 20,
 	Inv:        []Item{},
-	Art: `Y .  . .:.. .. . ...::~={i}{nXYoqdWQQQgy@BRWQQQQmZWWRQmmgggwmQWR#QQQQQQQQQQQQQQQ` + "\n" +
-		`:   .  .    ...-......:==?1suqmSdS3QQQQQQQmwwmQQ##ZoowWVVV$BQWWQQWQQQQQQWQQBRV#Q` + "\n" +
+	//Art: `Y .  . .:.. .. . ...::~={i}{nXYoqdWQQQgy@BRWQQQQmZWWRQmmgggwmQWR#QQQQQQQQQQQQQQQ` + "\n" +
+	Art: `:   .  .    ...-......:==?1suqmSdS3QQQQQQQmwwmQQ##ZoowWVVV$BQWWQQWQQQQQQWQQBRV#Q` + "\n" +
 		`.  ..::........ :.::=auqumBRo3YYDQWQQQQQWQQQQQQQmmQqasaawa}?TVQQQQQQQQWmmXySS   ` + "\n" +
 		`..c+:..........;:=%l*(:--;:-..- -?9$QQQWQWQQQQQQQ$*$WWWWBQQQQQmQ@5XQQZ!?Y|*     ` + "\n" +
 		`....|<c:----.:-:...------ ..    . ..   +9QQQS1UWE1$E!dWQBQQQQQQQQBBUUpdY+|++++  ` + "\n" +
@@ -49,8 +49,8 @@ var Warlock = Agent{
 		`-. ;:""-:<_a... . . .     ..:=iI*^'.  .:;,_..-:)dQQQQE+:.:===|n%l==~.:. .... .  ` + "\n" +
 		`.::-"+aa%TY::-:_.-..  .  . ..----.    .::~+=...:)$WRD1;._;;+=;:::. ... .....    ` + "\n" +
 		`--""Y!~<s:=:+:a%%'..... . ..... :_;.     . .  . =+<|*|=:-.: :......   :::;|:..  ` + "\n" +
-		`::;:+"!|:+%QgQVC.-=_=;-.. . .  =<ac..            ..---'........ .  ..:=/|s=.   .` + "\n" +
-		`|=:<aa={3$EWQaswgmpo(.. . . _,swscx|:_a_..            .   .. . . .:_<;|"*~-. . -` + "\n" +
-		`::==;|=awmWQBQmVVT~=-_xpuATTa2mkn?$(>3oC....        . -. .... ...::.::~+=       ` + "\n" +
-		`:::~<>=1X5pXmWQmapisgwWmmD(wVQmn75u~ij^:_+-.:_:.  .. .._,..:-.=.==>::-.<='.     ` + "\n",
+		`::;:+"!|:+%QgQVC.-=_=;-.. . .  =<ac..            ..---'........ .  ..:=/|s=.   .` + "\n",
+	//		`|=:<aa={3$EWQaswgmpo(.. . . _,swscx|:_a_..            .   .. . . .:_<;|"*~-. . -` + "\n" +
+	//		`::==;|=awmWQBQmVVT~=-_xpuATTa2mkn?$(>3oC....        . -. .... ...::.::~+=       ` + "\n" +
+	//		`:::~<>=1X5pXmWQmapisgwWmmD(wVQmn75u~ij^:_+-.:_:.  .. .._,..:-.=.==>::-.<='.     ` + "\n",
 }

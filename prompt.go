@@ -69,9 +69,8 @@ func Go(c *Agent) {
 	c.StatusBar()
 	fmt.Println()
 	fmt.Printf(":> %sxit, %sack <:", Green("E"), Green("B"))
-	reader := bufio.NewReader(os.Stdin)
-	input, _ := reader.ReadString('\n')
-	choice := string([]byte(input)[0])
+	choice, _, _ := GetChar()
+
 	switch choice {
 	case "e", "E":
 		os.Exit(0)
@@ -119,9 +118,6 @@ func Preferences(c *Agent) {
 func Continue() {
 	fmt.Printf(BlueU("\nAny"))
 	fmt.Printf(Blue(" key to continue...\n"))
-	//reader := bufio.NewReader(os.Stdin)
-	//input, _ := reader.ReadString('\n')
-	//choice := string([]byte(input)[0])
 	choice, _, _ := GetChar()
 	switch choice {
 	default:
@@ -158,9 +154,10 @@ Ask:
 	for {
 		fmt.Printf("%s", Yellow(question))
 
-		scanner := bufio.NewScanner(os.Stdin)
-		scanner.Scan()
-		response = scanner.Text()
+		//scanner := bufio.NewScanner(os.Stdin)
+		//scanner.Scan()
+		//response = scanner.Text()
+		response = GetReturn()
 
 		// Remove all non alpha characters, including spaces
 		response = stripchars(response, " 1234567890,>?<|/{}[]=+-_*&^%$#@!/(/)\\")
@@ -173,9 +170,7 @@ Ask:
 		for {
 			fmt.Printf("You choose: %s. confirm y/n? > ", BlueU(response))
 
-			reader := bufio.NewReader(os.Stdin)
-			input, _ := reader.ReadString('\n')
-			choice := string([]byte(input)[0])
+			choice := GetReturn()
 
 			switch choice {
 			case "y", "Y":
@@ -192,9 +187,7 @@ func Confirm(response string) bool {
 	for {
 		fmt.Printf("%s. confirm y/n? > ", Yellow(response))
 
-		reader := bufio.NewReader(os.Stdin)
-		input, _ := reader.ReadString('\n')
-		choice := string([]byte(input)[0])
+		choice := GetReturn()
 
 		switch choice {
 		case "y", "Y":

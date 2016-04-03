@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -24,9 +23,8 @@ func Character(c *Agent) {
 		fmt.Printf("%snventory, ", Green("I"))
 		fmt.Printf("%sack <:", Green("B"))
 
-		reader := bufio.NewReader(os.Stdin)
-		input, _ := reader.ReadString('\n')
-		choice := string([]byte(input)[0])
+		choice, _, _ := GetChar()
+
 		switch choice {
 		case "r", "R":
 			fmt.Printf(Blue("\nYou rest and recuperate.\n"))
@@ -70,9 +68,7 @@ func PickChar() {
 		}
 		fmt.Printf("\n<: ")
 
-		reader := bufio.NewReader(os.Stdin)
-		input, _ := reader.ReadString('\n')
-		choice := string([]byte(input)[0])
+		choice, _, _ := GetChar()
 
 		cnum := 1
 		for _, f := range files {
@@ -116,9 +112,7 @@ func DeleteCharacter() {
 		}
 		fmt.Printf("\n<: ")
 
-		reader := bufio.NewReader(os.Stdin)
-		input, _ := reader.ReadString('\n')
-		choice := string([]byte(input)[0])
+		choice := GetReturn()
 
 		cnum := 1
 		// Delete the choice

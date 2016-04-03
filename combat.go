@@ -148,6 +148,7 @@ func Spawn() Agent {
 		Coyote,
 		Rogue,
 		Minotaur,
+		Lacrimosa,
 	}
 	return monsters[rand.Intn(len(monsters))]
 

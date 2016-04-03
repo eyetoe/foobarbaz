@@ -10,6 +10,8 @@ import (
 // Fight loop where c is character and f is foe
 func Fight(c *Agent, f *Agent) {
 	ClearScreen()
+	// calculate odd for the ascii art display only once
+	odds := Odds(c, f)
 
 	var charDamageOut, foeDamageOut, healmsg string
 
@@ -17,7 +19,22 @@ func Fight(c *Agent, f *Agent) {
 		c.StatusBar()
 		fmt.Println()
 		FoeBar(*c, *f)
-		fmt.Println(Green(f.Art))
+
+		// Color Foe's name and show victory chance percentage
+		switch {
+		case odds >= 80:
+			fmt.Printf(Green("%s\n"), f.Art)
+		case odds >= 60:
+			fmt.Printf(Cyan("%s\n"), f.Art)
+		case odds >= 40:
+			fmt.Printf(Blue("%s\n"), f.Art)
+		case odds >= 20:
+			fmt.Printf(Yellow("%s\n"), f.Art)
+		case odds >= 0:
+			fmt.Printf(Red("%s\n"), f.Art)
+		}
+
+		//fmt.Println(Green(f.Art))
 	}
 	display()
 
