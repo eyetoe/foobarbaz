@@ -7,7 +7,7 @@ import (
 // an annoying pixie
 var Pixie = Agent{
 	Name:        "Pixie",
-	Description: "looks at you with a mischievous grin.",
+	Description: "small and mischevious, it looks at you with murderous eyes.",
 	// Stats
 	Str: Stat{"Strength", 2},
 	Int: Stat{"Intelligence", 50},
@@ -27,4 +27,26 @@ var Pixie = Agent{
 	// Inventory
 	DropChance: 20,
 	Inv:        []Item{},
+	Art: `                     ,_  .--.      ` + "\n" +
+		`               , ,   _)\/    ;--.  ` + "\n" +
+		`       . ' .    \_\-'   |  .'    \ ` + "\n" +
+		`      -= * =-   (.-,   /  /       |` + "\n" +
+		`       ' .\'    ).  ))/ .'   _/\ / ` + "\n" +
+		`           \_   \_  /( /     \ /(  ` + "\n" +
+		`           /_\ .--'   \-.    //  \ ` + "\n" +
+		`           ||\/        , '._//    |` + "\n" +
+		`           ||/ /^(_ (_,;^-._/     /` + "\n" +
+		`           \_.'   )   / \       .' ` + "\n" +
+		`                .' .  |  ;.   /    ` + "\n" +
+		`               /      |\(  '.(     ` + "\n" +
+		`              |   |/  | '    '     ` + "\n" +
+		`              |   |  /             ` + "\n" +
+		`              |   |.'              ` + "\n" +
+		`           __/'  /                 ` + "\n" +
+		`       _ .'  _.-'                  ` + "\n" +
+		`    _.' '.-;'/                     ` + "\n" +
+		`   /_.-'' / /                      ` + "\n" +
+		`         | /                       ` + "\n" +
+		`        ( /                        ` + "\n" +
+		`       /_/                         ` + "\n",
 }

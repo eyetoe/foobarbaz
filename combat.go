@@ -96,10 +96,10 @@ func Attack(a *Agent, d *Agent) (*Agent, *Agent, string) {
 	// But a tie goes to the Defence
 
 	if aT > dT {
-		outText = outText + fmt.Sprintf(Green("%s hits! "), a.Name)
+		outText = outText + fmt.Sprintf(Green("%s hits!\n "), a.Name)
 		return a, d, outText
 	} else {
-		outText = outText + fmt.Sprintf(Red("%s misses!\n"), a.Name)
+		outText = outText + fmt.Sprintf(Red("%s misses!\n\n"), a.Name)
 		return d, a, outText
 	}
 
@@ -144,8 +144,9 @@ func Spawn() Agent {
 		Phantom,
 		Pixie,
 		Kobold,
-		Oldman,
+		Warlock,
 		Coyote,
+		Rogue,
 		Minotaur,
 	}
 	return monsters[rand.Intn(len(monsters))]

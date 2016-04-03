@@ -6,9 +6,8 @@ import (
 
 var Phantom = Agent{
 	// Name and Description
-	Name: "Phantom",
-	//Description: "Thin and desperate, the coyote shows it's teeth.",
-	Description: "the withered unatural horror loiters.",
+	Name:        "Phantom",
+	Description: "withered, unatural and ethereal the horror loiters.",
 	// Stats
 	Str: Stat{"Strength", 2},
 	Int: Stat{"Intelligence", 15},

@@ -8,7 +8,7 @@ import (
 var Minotaur = Agent{
 	// Name and Description
 	Name:        "Minotaur",
-	Description: "Half man half bull, the minotaur has hatred in it's eyes.",
+	Description: "half man half bull, it has hatred in it's eyes.",
 	// Stats
 	Str: Stat{"Strength", 30},
 	Int: Stat{"Intelligence", 5},

@@ -9,9 +9,6 @@ import (
 
 // Fight loop where c is character and f is foe
 func Fight(c *Agent, f *Agent) {
-	//ClearScreen()
-	//fmt.Printf("\nYou have encountered a %s!\n", YellowU("Monster"))
-	//Continue()
 	ClearScreen()
 
 	var charDamageOut, foeDamageOut, healmsg string
@@ -19,7 +16,7 @@ func Fight(c *Agent, f *Agent) {
 	display := func() {
 		c.StatusBar()
 		fmt.Println()
-		f.FoeBar()
+		FoeBar(*c, *f)
 		fmt.Println(Green(f.Art))
 	}
 	display()
@@ -57,8 +54,6 @@ func Fight(c *Agent, f *Agent) {
 			// Foe Attacks Second
 			winner, loser, foeAttackDetails := Attack(f, c)
 
-			//fmt.Println("debug f.Name,  winner.Name, and done:", f.Name, winner.Name, done)
-			//Continue()
 			if f.Name == winner.Name {
 
 				charDamageOut = Damage(f, c)
@@ -71,10 +66,11 @@ func Fight(c *Agent, f *Agent) {
 			ClearScreen()
 			display()
 			fmt.Printf(charAttackDetails)
-			fmt.Printf(foeDamageOut)
+			fmt.Println(foeDamageOut)
+			foeDamageOut = ""
 			if done == false {
 				fmt.Printf(foeAttackDetails)
-				fmt.Printf(charDamageOut)
+				fmt.Println(charDamageOut)
 				charDamageOut = ""
 			}
 			fmt.Printf(healmsg)
@@ -93,8 +89,9 @@ func Fight(c *Agent, f *Agent) {
 			continue
 			// Describe the Foe
 		case "d", "D":
-			fmt.Printf(Blue("\nYou consider the %s. %s\n"), f.Name, f.Description)
-			f.FoeBar()
+			//fmt.Printf(Blue("\nYou consider the %s. %s\n"), f.Name, f.Description)
+			f.Describe()
+			FoeBar(*c, *f)
 			fmt.Println()
 			continue
 			// Run from the fight
@@ -103,8 +100,6 @@ func Fight(c *Agent, f *Agent) {
 			break
 			// Default back to loop
 		default:
-			//Fight(c, f)
-			//break
 			continue
 		}
 		return

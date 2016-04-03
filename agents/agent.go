@@ -56,8 +56,8 @@ func (c Agent) ExpDrop() int {
 }
 
 func (c *Agent) Describe() {
-	fmt.Printf("You consider the %s. ", c.Name)
-	fmt.Printf("%s\n", c.Description)
+	fmt.Printf(Blue("\nYou consider the %s, "), c.Name)
+	fmt.Printf(Blue("%s\n\n"), c.Description)
 }
 
 // Adjust Hp "hit points"
@@ -158,33 +158,6 @@ func (c Agent) StatusBar() {
 		os.Exit(0)
 	}
 	Meter(c.Hp.Val, c.MxHp.Val, "Health", "=")
-}
-
-// Render character status bar
-func (c Agent) FoeBar() {
-	// this may be useful it clears the screen
-	//fmt.Print("[H[J")
-
-	// For sanity layout the StatusBar vertically here although printing horizonal
-	fmt.Printf("%s", Yellow(" "))
-	fmt.Printf("%s", RedU(c.Name))
-	fmt.Printf("%s", Yellow(" S:"))
-	fmt.Printf("%s", Green(strconv.Itoa(c.Str.Val)))
-	fmt.Printf("%s", Yellow(" I:"))
-	fmt.Printf("%s", Green(strconv.Itoa(c.Int.Val)))
-	fmt.Printf("%s", Yellow(" D:"))
-	fmt.Printf("%s", Green(strconv.Itoa(c.Dex.Val)))
-	fmt.Printf("%s", Yellow(" HP:"))
-	fmt.Printf("%s", Green(strconv.Itoa(c.MxHp.Val)))
-	fmt.Printf("%s", Yellow("|"))
-	fmt.Printf("%s", Red(strconv.Itoa(c.Hp.Val)))
-	fmt.Printf("%s", Yellow(" W:"))
-	fmt.Printf("%s", White(c.Weap.Name))
-	fmt.Printf("%s", Yellow(" A:"))
-	fmt.Printf("%s", White(c.Armor))
-	fmt.Printf("%s", Yellow(" T:"))
-	fmt.Printf("%s", White(c.Trink))
-	fmt.Println()
 }
 
 // StatCost cost increases with the fibonacci number position.

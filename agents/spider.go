@@ -6,7 +6,7 @@ import (
 
 var Spider = Agent{
 	Name:        "Spider",
-	Description: "you feel something on your shoulder.",
+	Description: "poised and ready, you feel something on your shoulder.",
 	// Stats
 	Str: Stat{"Strength", 1},
 	Int: Stat{"Intelligence", 10},

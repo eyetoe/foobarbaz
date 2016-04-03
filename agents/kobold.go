@@ -6,7 +6,7 @@ import (
 
 var Kobold = Agent{
 	Name:        "Kobold",
-	Description: "small and dexterious he draws his knife.",
+	Description: "small and dexterious it draws it's knife.",
 
 	// Stats
 	Str: Stat{"Strength", 5},

@@ -8,7 +8,7 @@ import (
 var Coyote = Agent{
 	// Name and Description
 	Name:        "Coyote",
-	Description: "Thin and desperate, the coyote shows it's teeth.",
+	Description: "thin and desperate, it shows it's teeth.",
 	// Stats
 	Str: Stat{"Strength", 5},
 	Int: Stat{"Intelligence", 4},
