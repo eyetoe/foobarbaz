@@ -156,8 +156,14 @@ func (c Agent) StatusBar() {
 	fmt.Println()
 	if c.Dead == true {
 		fmt.Printf(Red("\n%s collapsed in a sobbing frightned lump and expired.\n\n"), c.Name)
+
+		for t := 0; t < 5; t++ {
+			fmt.Printf(Blue("."))
+			time.Sleep(750 * time.Millisecond)
+		}
+		fmt.Println()
 		Resurrect(&c)
-		//os.Exit(0)
+		os.Exit(0)
 	}
 	Meter(c.Hp.Val, c.MxHp.Val, "Health", "=")
 }
@@ -255,7 +261,10 @@ func Resurrect(c *Agent) {
 		c.Dead = false
 		c.Save()
 		//Continue()
-		time.Sleep(5000 * time.Millisecond)
+		for t := 0; t < 5; t++ {
+			fmt.Printf(Blue("."))
+			time.Sleep(750 * time.Millisecond)
+		}
 	} else {
 		return
 	}

@@ -76,7 +76,8 @@ func Fight(c *Agent, f *Agent) {
 				charDamageOut = Damage(f, c)
 
 				if loser.Dead == true {
-					//Continue()
+					fmt.Printf("\n\n%s died.\n\n", c.Name)
+					Continue()
 					done = true
 				}
 			}
