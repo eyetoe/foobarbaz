@@ -99,7 +99,7 @@ func Attack(a *Agent, d *Agent) (*Agent, *Agent, string) {
 		outText = outText + fmt.Sprintf(Green("%s hits!\n "), a.Name)
 		return a, d, outText
 	} else {
-		outText = outText + fmt.Sprintf(Red("%s misses!\n\n"), a.Name)
+		outText = outText + fmt.Sprintf(Red("%s misses!\n"), a.Name)
 		return d, a, outText
 	}
 

@@ -126,7 +126,7 @@ func DeleteCharacter() {
 						fmt.Println(Red(err))
 					}
 					Continue()
-					continue
+					break
 				} else {
 					continue
 				}

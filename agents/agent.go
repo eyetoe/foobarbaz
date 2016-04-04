@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"os"
 	"strconv"
+	"time"
 
 	. "github.com/eyetoe/foobarbaz/colors"
 	. "github.com/eyetoe/foobarbaz/items"
@@ -155,7 +156,8 @@ func (c Agent) StatusBar() {
 	fmt.Println()
 	if c.Dead == true {
 		fmt.Printf(Red("\n%s collapsed in a sobbing frightned lump and expired.\n\n"), c.Name)
-		os.Exit(0)
+		Resurrect(&c)
+		//os.Exit(0)
 	}
 	Meter(c.Hp.Val, c.MxHp.Val, "Health", "=")
 }
@@ -241,4 +243,20 @@ func EnvSetup() {
 		fmt.Println("list files:", f.Name())
 	}
 	return
+}
+
+func Resurrect(c *Agent) {
+	if c.Dead == true {
+		//Banner()
+		fmt.Printf("[H[J")
+		time.Sleep(1000 * time.Millisecond)
+		fmt.Printf(Blue("\n A mystical light shines down on %s's lifeless corpse.\n\n A sulfurous effluvium expands from the body.\n\n %s takes a gasping breath, and lives!\n\n"), c.Name, c.Name)
+		c.Hp.Val = c.MxHp.Val
+		c.Dead = false
+		c.Save()
+		//Continue()
+		time.Sleep(5000 * time.Millisecond)
+	} else {
+		return
+	}
 }

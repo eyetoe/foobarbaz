@@ -41,19 +41,6 @@ func main() {
 //	Char.StatusBar()
 //}
 
-func Resurrect(c *Agent) {
-	if c.Dead == true {
-		Banner()
-		fmt.Printf(Blue("\n A mystical light shines down on %s's lifeless corpse.\n\n A sulfurous effluvium expands from the body.\n\n %s takes a gasping breath, and lives!\n\n"), c.Name, c.Name)
-		c.Hp.Val = c.MxHp.Val
-		c.Dead = false
-		c.Save()
-		Continue()
-	} else {
-		return
-	}
-}
-
 func Testies() {
 	Char := Agent{File: SaveFile}
 	Char.Load()

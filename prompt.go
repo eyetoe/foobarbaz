@@ -56,6 +56,8 @@ func Prompt() {
 		case "f", "F":
 			Banner()
 			PickChar()
+			Char.Load()
+			Resurrect(&Char)
 			continue
 		case "h", "H":
 			fmt.Println(Blue("\nAll you help are belong to us."))
@@ -116,9 +118,12 @@ func Preferences(c *Agent) {
 }
 
 func Continue() {
-	fmt.Printf(BlueU("\nAny"))
-	fmt.Printf(Blue(" key to continue...\n"))
-	choice, _, _ := GetChar()
+	fmt.Printf(Blue("\nPress "))
+	fmt.Printf(BlueU("Return"))
+	fmt.Printf(Blue(" to continue...\n"))
+
+	//choice, _, _ := GetChar()
+	choice := GetReturn()
 	switch choice {
 	default:
 		return
@@ -154,10 +159,11 @@ Ask:
 	for {
 		fmt.Printf("%s", Yellow(question))
 
-		//scanner := bufio.NewScanner(os.Stdin)
-		//scanner.Scan()
-		//response = scanner.Text()
-		response = GetReturn()
+		scanner := bufio.NewScanner(os.Stdin)
+		scanner.Scan()
+		response = scanner.Text()
+		// don't use this commented func..
+		//response = GetReturn()
 
 		// Remove all non alpha characters, including spaces
 		response = stripchars(response, " 1234567890,>?<|/{}[]=+-_*&^%$#@!/(/)\\")
