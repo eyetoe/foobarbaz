@@ -171,6 +171,16 @@ func ExpMgr(c *Agent) {
 	for {
 		ClearScreen()
 		c.StatusBar()
+
+		fmt.Println(Yellow("\n" + `                .-~~~~~~~~~-._       _.-~~~~~~~~~-.` + "\n" +
+			`            __.'              ~.   .~              ^.__` + "\n" +
+			`          .'//                  \./                  \\^.` + "\n" +
+			`        .'//                     |                     \\^.` + "\n" +
+			`      .'// .-~"""""""~~~~-._     |     _,-~~~~"""""""~-. \\^.` + "\n" +
+			`    .'//.-"                 ^-.  |  .-'                 "-.\\^.` + "\n" +
+			`  .'//______.============-..   \ | /   ..-============.______\\^.` + "\n" +
+			`.'______________________________\|/______________________________^.` + "\n"))
+
 		cost := StatCost(*c)
 		fmt.Printf("\n%s \n", YellowU("Experience Point Store!\n"))
 		fmt.Printf(Blue("You have %s %s\n"), Green(strconv.Itoa(c.Exp)), Blue("experience.\n"))
