@@ -90,7 +90,7 @@ func WinHeal(c *Agent) string {
 	var textOut string
 	h := Roll(2, c.MxHp.Val)
 	if c.MxHp.Val > c.Hp.Val && c.MxHp.Val+30 >= Roll(1, 100) {
-		textOut = textOut + c.AdjHp(h)
+		c.AdjHp(h)
 		textOut = textOut + fmt.Sprintf(Green("\nIn victory heal %d hit points!\n\n"), h)
 		c.Save()
 	}

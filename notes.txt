@@ -1,0 +1,13 @@
+
+Special abilities come in the following rarities:
+	Common
+	Uncommon
+	Rare
+	Unique
+	Legendary
+	Artifact
+
+Special Abilities can only be used once per combat with a given foe.
+
+
+Some abilities only recharge when you hit full health

@@ -56,7 +56,7 @@ func Fight(c *Agent, f *Agent) {
 
 			if c.Name == winner.Name {
 
-				foeDamageOut = Damage(c, f)
+				foeDamageOut = Damage(c, f, odds)
 
 				if loser.Dead == true {
 					if f.Weap.Name != c.Weap.Name && loser.DropChance >= Roll(1, 100) {
@@ -73,7 +73,7 @@ func Fight(c *Agent, f *Agent) {
 
 			if f.Name == winner.Name {
 
-				charDamageOut = Damage(f, c)
+				charDamageOut = Damage(f, c, odds)
 
 				if loser.Dead == true {
 					fmt.Printf("\n\n%s died.\n\n", c.Name)

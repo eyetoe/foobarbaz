@@ -8,7 +8,7 @@ import (
 var Lacrimosa = Agent{
 	// Name and Description
 	Name:        "Lacrimosa",
-	Description: "psychic, flying, eye-snake looks at you with malicious intelligence",
+	Description: "psychic, flying, eye-snake looks at you with malicious intelligence.",
 	// Stats
 	Str: Stat{"Strength", 20},
 	Int: Stat{"Intelligence", 40},

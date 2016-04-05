@@ -10,6 +10,6 @@ var Shriek = Item{
 	Slot:        "Weapon",
 	Affects:     []Affect{Charged},
 	Attack:      -2,
-	Damage:      25,
+	Damage:      15,
 	Crit:        10,
 }

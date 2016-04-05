@@ -37,7 +37,7 @@ func SimFight(c Agent, f Agent) bool {
 		if winner.Name == x.Name {
 			hp := Roll(1, winner.Weap.Damage)
 			//fmt.Println(loser.Name, "takes", hp)
-			_ = loser.AdjHp(0 - hp)
+			loser.AdjHp(0 - hp)
 			if loser.Dead == true {
 				return true
 			}
@@ -48,7 +48,7 @@ func SimFight(c Agent, f Agent) bool {
 		if winner.Name == y.Name {
 			hp := Roll(1, winner.Weap.Damage)
 			//fmt.Println(loser.Name, "takes", hp)
-			_ = loser.AdjHp(0 - hp)
+			loser.AdjHp(0 - hp)
 			if loser.Dead == true {
 				return false
 			}

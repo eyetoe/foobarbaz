@@ -47,13 +47,13 @@ func SkillCheck(a Agent, s Stat, d Skill) bool {
 }
 
 // Calculate and apply damage to Agent
-func Damage(a *Agent, d *Agent) string {
+func Damage(a *Agent, d *Agent, odds int) string {
 
 	var textOut string
 
 	hp := Roll(1, a.Weap.Damage)
 
-	textOut = d.AdjHp(0 - hp)
+	d.AdjHp(0 - hp)
 
 	if d.Dead == false {
 		textOut = textOut + fmt.Sprintf("for %s damage. ", Red(strconv.Itoa(hp)))
@@ -62,8 +62,19 @@ func Damage(a *Agent, d *Agent) string {
 
 	// Monster agents don't have a save file set
 	if d.File == "" && d.Dead == true {
-		a.Exp = a.Exp + d.ExpDrop()
-		textOut = textOut + fmt.Sprintf(Green("You gain %d experience.\n"), d.ExpDrop())
+
+		// reverse the percentage
+		mods := 100 - odds
+
+		percentage := float32(mods) * .01
+
+		// reduce the drop by the reverse percentage
+		exp := float32(d.ExpDrop()) * percentage
+
+		// exp is a float32 so do math back as in
+		a.Exp = a.Exp + int(exp)
+
+		textOut = textOut + fmt.Sprintf(Green("You gain %d experience.\n"), int(exp))
 		a.Save()
 	}
 	d.Save()
@@ -149,6 +160,7 @@ func Spawn() Agent {
 		Rogue,
 		Minotaur,
 		Lacrimosa,
+		Griffon,
 	}
 	return monsters[rand.Intn(len(monsters))]
 

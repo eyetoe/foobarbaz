@@ -53,7 +53,7 @@ type Agent struct {
 
 func (c Agent) ExpDrop() int {
 	t := c.Str.Val + c.Int.Val + c.Dex.Val + c.MxHp.Val
-	return t / 4
+	return t
 }
 
 func (c *Agent) Describe() {
@@ -62,19 +62,15 @@ func (c *Agent) Describe() {
 }
 
 // Adjust Hp "hit points"
-func (c *Agent) AdjHp(a int) string {
-	var textOut string
+func (c *Agent) AdjHp(a int) {
 	c.Hp.Val = c.Hp.Val + a
 	if c.Hp.Val > c.MxHp.Val {
 		c.Hp.Val = c.MxHp.Val
 	}
 	if c.Hp.Val <= 0 {
-		textOut = textOut + fmt.Sprintf("%s", BlueU(c.Name))
-		textOut = textOut + fmt.Sprintf(Red(" has died:( \n"))
 		c.Dead = true
 		c.Exp = 0
 	}
-	return textOut
 }
 
 // Load Character from json file
