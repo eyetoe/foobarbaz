@@ -4,7 +4,10 @@ import (
 	"fmt"
 
 	. "github.com/eyetoe/foobarbaz/agents"
+	. "github.com/eyetoe/foobarbaz/art"
 	. "github.com/eyetoe/foobarbaz/colors"
+	. "github.com/eyetoe/foobarbaz/simulations"
+	. "github.com/eyetoe/foobarbaz/util"
 )
 
 // Fight loop where c is character and f is foe
@@ -121,5 +124,31 @@ func Fight(c *Agent, f *Agent) {
 			continue
 		}
 		return
+	}
+}
+
+func WinHeal(c *Agent) string {
+	var textOut string
+	h := Roll(2, c.MxHp.Val)
+	if c.MxHp.Val > c.Hp.Val && c.MxHp.Val+30 >= Roll(1, 100) {
+		c.AdjHp(h)
+		textOut = textOut + fmt.Sprintf(Green("\nIn victory heal %d hit points!\n\n"), h)
+		c.Save()
+	}
+	return textOut
+}
+
+func OfferItem(c *Agent, f *Agent) {
+	ClearScreen()
+	fmt.Println(Yellow(Sword1()))
+	fmt.Println(Blue("!! ITEM DROP !!\n"))
+	fmt.Printf("%s has dropped it's %s.\n\n", Yellow(f.Name), Yellow(f.Weap.Name))
+	fmt.Printf("Replace?\n	")
+	c.Weap.Display()
+	fmt.Printf("with..\n	")
+	f.Weap.Display()
+	if Confirm("\nWould you like to make this swap?") == true {
+		c.Weap = f.Weap
+		c.Save()
 	}
 }

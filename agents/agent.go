@@ -11,7 +11,7 @@ import (
 	. "github.com/eyetoe/foobarbaz/colors"
 	. "github.com/eyetoe/foobarbaz/items"
 	. "github.com/eyetoe/foobarbaz/locations"
-	. "github.com/eyetoe/foobarbaz/meters"
+	. "github.com/eyetoe/foobarbaz/util"
 )
 
 // HOME is the game working dir
@@ -155,7 +155,7 @@ func (c Agent) StatusBar() {
 
 		for t := 0; t < 5; t++ {
 			fmt.Printf(Blue("."))
-			time.Sleep(750 * time.Millisecond)
+			time.Sleep(250 * time.Millisecond)
 		}
 		fmt.Println()
 		Resurrect(&c)
@@ -259,7 +259,7 @@ func Resurrect(c *Agent) {
 		//Continue()
 		for t := 0; t < 5; t++ {
 			fmt.Printf(Blue("."))
-			time.Sleep(750 * time.Millisecond)
+			time.Sleep(250 * time.Millisecond)
 		}
 	} else {
 		return

@@ -1,6 +1,9 @@
-package main
+package simulations
 
-import . "github.com/eyetoe/foobarbaz/agents"
+import (
+	. "github.com/eyetoe/foobarbaz/agents"
+	. "github.com/eyetoe/foobarbaz/util"
+)
 
 func Odds(c *Agent, f *Agent) int {
 	charWins := 0

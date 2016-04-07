@@ -9,48 +9,8 @@ import (
 
 	. "github.com/eyetoe/foobarbaz/agents"
 	. "github.com/eyetoe/foobarbaz/colors"
+	. "github.com/eyetoe/foobarbaz/util"
 )
-
-func Character(c *Agent) {
-	for {
-		ClearScreen()
-		c.StatusBar()
-
-		fmt.Printf("\n%s \n:> ", BlueU("Character"))
-		fmt.Printf("%sest, ", Green("R"))
-		fmt.Printf("%sp, ", Green("X"))
-		fmt.Printf("%sbility, ", Green("A"))
-		fmt.Printf("%snventory, ", Green("I"))
-		fmt.Printf("%sack <:", Green("B"))
-
-		choice, _, _ := GetChar()
-
-		switch choice {
-		case "r", "R":
-			fmt.Printf(Blue("\nYou rest and recuperate.\n"))
-			if c.Hp.Val < c.MxHp.Val/2 {
-				c.Hp.Val = c.MxHp.Val / 2
-				fmt.Printf(Green("You heal.\n"))
-				c.Save()
-			}
-			Continue()
-			continue
-		case "x", "X":
-			ExpMgr(c)
-			continue
-		case "a", "A":
-			fmt.Printf(Blue("\nAbility 1: %s.\n"), c.Abl1)
-			fmt.Printf(Blue("Ability 2: %s.\n"), c.Abl2)
-			fmt.Printf(Blue("Ability 3: %s.\n"), c.Abl3)
-			continue
-		case "i", "I":
-			fmt.Printf(Blue(c.Inv))
-			continue
-		case "b", "B":
-			return
-		}
-	}
-}
 
 // PickChar is the initial character load/create prompt
 func PickChar() {

@@ -1,4 +1,4 @@
-package meters
+package util
 
 import (
 	"fmt"

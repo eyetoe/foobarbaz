@@ -6,6 +6,7 @@ import (
 
 	. "github.com/eyetoe/foobarbaz/agents"
 	. "github.com/eyetoe/foobarbaz/colors"
+	. "github.com/eyetoe/foobarbaz/simulations"
 )
 
 // Render character status bar
