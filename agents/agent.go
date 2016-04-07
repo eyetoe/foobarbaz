@@ -169,7 +169,7 @@ func (c Agent) StatusBar() {
 // then the product of the postion and the multiplier var = Stat Cost
 func StatCost(c Agent) int {
 	m := 1 // multiplier
-	tStat := c.Str.Val + c.Int.Val + c.Dex.Val + c.Hp.Val
+	tStat := c.Str.Val + c.Int.Val + c.Dex.Val + c.MxHp.Val
 	avStat := tStat / 4
 
 	switch {
