@@ -15,12 +15,17 @@ import (
 
 // Fight loop where c is character and f is foe
 func Fight(c *Agent, f *Agent) {
-	ClearScreen()
-	// calculate odd for the ascii art display only once
+
+	// calculate odds for the ascii art display only once
 	odds := Odds(c, f)
 
-	var charDamageOut, foeDamageOut, healmsg string
+	// declare strings
+	var charDamageOut, charAttackDetails, foeDamageOut, foeAttackDetails, healmsg string
 
+	// declare attack winner
+	var winner *Agent
+
+	// display
 	display := func() {
 		c.StatusBar()
 		fmt.Println()
@@ -40,73 +45,67 @@ func Fight(c *Agent, f *Agent) {
 			fmt.Printf(Red("%s\n"), f.Art)
 		}
 
-		//fmt.Println(Green(f.Art))
 	}
-	display()
 
+	// Fight loop start here
 	for {
-		fmt.Printf(":> %sight, %svade, %sescribe, %sun\n<: ", GreenU("F"), GreenU("E"), GreenU("D"), GreenU("R"))
+
+		// redraw and display stats
+		ClearScreen()
+		display()
+		fmt.Printf(charAttackDetails)
+		fmt.Printf(foeDamageOut)
+		fmt.Printf(foeAttackDetails)
+		fmt.Printf(charDamageOut)
+		fmt.Printf(healmsg)
+
+		// clear vars between runs
+		charAttackDetails = ""
+		foeDamageOut = ""
+		foeAttackDetails = ""
+		charDamageOut = ""
+		healmsg = ""
+
+		// check pulse
+		if f.Dead == true {
+			if f.Weap.Name != c.Weap.Name && f.DropChance >= Roll(1, 100) {
+				OfferItem(c, f)
+			}
+			fmt.Printf(RedU("%s has died!\n"), f.Name)
+			Continue()
+			break
+		}
+		if c.Dead == true {
+			fmt.Printf(RedU("%s has died!\n"), c.Name)
+			Continue()
+			break
+		}
+
+		// Combat Prompt
+		fmt.Printf("\n:> %sight, %svade, %sescribe, %sun\n<: ", GreenU("F"), GreenU("E"), GreenU("D"), GreenU("R"))
 		choice, _, _ := GetChar()
-		var done bool = false
 
 		switch choice {
 		// Fight
 		case "f", "F":
 			ClearScreen()
 			display()
-
-			fmt.Printf("\n%s attacks %s with %s.\n", c.Name, f.Name, c.Weap.Name)
-
 			// Player Attacks First
-			winner, loser, charAttackDetails := Attack(c, f)
-
+			winner, _, charAttackDetails = Attack(c, f)
 			if c.Name == winner.Name {
-
 				foeDamageOut = Damage(c, f, odds)
-
-				if loser.Dead == true {
-					if f.Weap.Name != c.Weap.Name && loser.DropChance >= Roll(1, 100) {
-						OfferItem(c, f)
-					}
+				if f.Dead == true {
 					healmsg = WinHeal(c)
-					done = true
+					continue
 				}
 			}
-			fmt.Printf("\n%s attacks %s with %s.\n", f.Name, c.Name, f.Weap.Name)
-
 			// Foe Attacks Second
-			winner, loser, foeAttackDetails := Attack(f, c)
-
+			winner, _, foeAttackDetails = Attack(f, c)
 			if f.Name == winner.Name {
-
 				charDamageOut = Damage(f, c, odds)
-
-				if loser.Dead == true {
-					fmt.Printf("\n\n%s died.\n\n", c.Name)
-					Continue()
-					done = true
-				}
 			}
-			ClearScreen()
-			display()
-			fmt.Printf(charAttackDetails)
-			fmt.Println(foeDamageOut)
-			foeDamageOut = ""
-			if done == false {
-				fmt.Printf(foeAttackDetails)
-				fmt.Println(charDamageOut)
-				charDamageOut = ""
-			}
-			fmt.Printf(healmsg)
-			//Continue()
-			if done == true {
-				Continue()
-				break
-			} else {
-				continue
-			}
-
 			// Evade
+			continue
 		case "e", "E":
 			fmt.Println("Evade!\n You stall for time, looking for an opening!")
 			fmt.Println("Note: should have a separate menu here where you can use items.  So you have to take a break from the fight, to be able to pull out an item or potion.  including switching weapons, drinking potions, using magic items.")
@@ -128,6 +127,7 @@ func Fight(c *Agent, f *Agent) {
 		}
 		return
 	}
+
 }
 
 // Attack takes two structs and returns two structs.
@@ -149,14 +149,14 @@ func Attack(a *Agent, d *Agent) (*Agent, *Agent, string) {
 	aT := ar + arB
 	dT := dr + drB
 
-	outText = fmt.Sprintf(Black("Attack roll: %d plus Bonus: %d for Total: %d\n"), ar, arB, aT)
-	outText = outText + fmt.Sprintf(Black("Defence roll: %d plus Bonus: %d for Total: %d\n"), dr, drB, dT)
+	// uncomment here to 'show your work'
+	//outText = fmt.Sprintf(Black("Attack roll: %d plus Bonus: %d for Total: %d\n"), ar, arB, aT)
+	//outText = outText + fmt.Sprintf(Black("Defence roll: %d plus Bonus: %d for Total: %d\n"), dr, drB, dT)
 
 	// Attack wins if greater than Defence
 	// But a tie goes to the Defence
-
 	if aT > dT {
-		outText = outText + fmt.Sprintf(Green("%s hits!\n "), a.Name)
+		outText = outText + fmt.Sprintf(Green("%s hits with %s!\n "), a.Name, a.Weap.Name)
 		return a, d, outText
 	} else {
 		outText = outText + fmt.Sprintf(Red("%s misses!\n"), a.Name)
@@ -174,10 +174,10 @@ func Damage(a *Agent, d *Agent, odds int) string {
 
 	d.AdjHp(0 - hp)
 
-	if d.Dead == false {
-		textOut = textOut + fmt.Sprintf("for %s damage. ", Red(strconv.Itoa(hp)))
-		textOut = textOut + fmt.Sprintf("%s's health = %s.\n", d.Name, Red(strconv.Itoa(d.Hp.Val)))
-	}
+	//if d.Dead == false {
+	textOut = textOut + fmt.Sprintf("for %s damage. ", Red(strconv.Itoa(hp)))
+	textOut = textOut + fmt.Sprintf("%s's health = %s.\n", d.Name, Red(strconv.Itoa(d.Hp.Val)))
+	//}
 
 	// Monster agents don't have a save file set
 	if d.File == "" && d.Dead == true {
@@ -190,10 +190,15 @@ func Damage(a *Agent, d *Agent, odds int) string {
 		// reduce the drop by the reverse percentage
 		exp := float32(d.ExpDrop()) * percentage
 
-		// exp is a float32 so do math back as in
+		// int to float conversion rounds down towards zero by dropping
+		// everything after the decimal point. So I add 1 to the exp here
+		// so the player never gets 0 exp reward
+		exp++
+
+		// exp is a float32 so do math with exp as an int
 		a.Exp = a.Exp + int(exp)
 
-		textOut = textOut + fmt.Sprintf(Green("You gain %d experience.\n"), int(exp))
+		textOut = textOut + fmt.Sprintf(Green("\nYou gain %d experience.\n"), int(exp))
 		a.Save()
 	}
 	d.Save()
@@ -226,7 +231,7 @@ func OfferItem(c *Agent, f *Agent) {
 	}
 }
 
-func Spawn() Agent {
+func Spawn(c Agent) Agent {
 	rand.Seed(time.Now().UTC().UnixNano())
 	monsters := []Agent{
 		// Add monsters here to be included in random spawn
@@ -240,7 +245,24 @@ func Spawn() Agent {
 		Minotaur,
 		Lacrimosa,
 		Griffon,
+		Blackshuck,
 	}
-	return monsters[rand.Intn(len(monsters))]
 
+	// candidate is a proposed foe.  The candidate is tested with the Odds()
+	// function to see if it's got >5% and <95% chance to win combat.  If it
+	// does we return that candidate.   We also cap the number of candidate
+	// loops at 100, so that we don't keep looping forever looking for a foe
+	// we will never find.
+	var candidate Agent
+	for i := 0; i < 100; i++ {
+
+		candidate = monsters[rand.Intn(len(monsters))]
+		candidateOdds := Odds(&c, &candidate)
+
+		if candidateOdds < 95 && candidateOdds > 5 {
+			return candidate
+		}
+	}
+	// we didn't find a candidate after a 100 tries, so just return one
+	return candidate
 }

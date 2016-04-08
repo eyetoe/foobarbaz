@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"time"
 
 	. "github.com/eyetoe/foobarbaz/agents"
 	. "github.com/eyetoe/foobarbaz/colors"
@@ -16,6 +17,22 @@ func Prompt() {
 		Char := Agent{File: SaveFile}
 		Char.Load()
 		ClearScreen()
+		if Char.Dead == true {
+			fmt.Printf(Red("\n%s collapsed in a sobbing frightned lump and expired.\n\n"), Char.Name)
+
+			for t := 0; t < 5; t++ {
+				fmt.Printf(Blue("."))
+				time.Sleep(100 * time.Millisecond)
+			}
+			Continue()
+			fmt.Println(Dying())
+			if Confirm(Magenta("Rage against the dying of the light?")) == true {
+				Resurrect(&Char)
+				continue
+			} else {
+				os.Exit(0)
+			}
+		}
 		Char.StatusBar()
 		Char.Save()
 		fmt.Printf("\n%s <- You are here.\n", BlueU(Char.Loc.Name))
@@ -25,7 +42,8 @@ func Prompt() {
 		fmt.Printf("%sest, ", Green("R"))
 		fmt.Printf("%srain ", Green("T"))
 		fmt.Printf("%sile, ", GreenU("F"))
-		fmt.Printf("%so <: ", GreenU("G"))
+		fmt.Printf("%so, ", GreenU("G"))
+		fmt.Printf("%snventory <: ", GreenU("I"))
 
 		choice, _, _ := GetChar()
 
@@ -33,7 +51,7 @@ func Prompt() {
 		switch choice {
 		case "e", "E":
 			var Foe Agent
-			Foe = Spawn()
+			Foe = Spawn(Char)
 			Fight(&Char, &Foe)
 			continue
 		case "r", "R":
@@ -56,6 +74,9 @@ func Prompt() {
 			continue
 		case "g", "G":
 			Go(&Char)
+			break
+		case "i", "I":
+			Inventory(&Char)
 			break
 		}
 	}
