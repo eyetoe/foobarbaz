@@ -10,7 +10,7 @@ func Dying() string {
 	var outText string
 
 	ClearScreen()
-	outText = fmt.Sprintf(YellowU("Do not go gentle into that good night\n"))
+	outText = fmt.Sprintf(YellowU("\nDo not go gentle into that good night\n"))
 
 	outText = outText + fmt.Sprintf(Blue(`
 Do not go gentle into that good night,
