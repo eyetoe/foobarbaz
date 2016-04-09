@@ -57,8 +57,15 @@ func (c Agent) ExpDrop() int {
 }
 
 func (c *Agent) Describe() {
-	fmt.Printf(Blue("\nYou consider the %s, "), c.Name)
-	fmt.Printf(Blue("%s\n\n"), c.Description)
+	fmt.Printf(YellowU("\n%s:\n"), c.Name)
+	fmt.Printf(Cyan("You consider the %s, "), c.Name)
+	fmt.Printf(Cyan("%s\n"), c.Description)
+	fmt.Printf("  %s:\n", YellowU(c.Weap.Name))
+	fmt.Printf(Cyan("  %s\n"), c.Weap.Description)
+	if c.DropChance > 0 {
+		fmt.Printf("  %s%% %s\n\n", Yellow(strconv.Itoa(c.DropChance)), Cyan("drop chance"))
+	}
+	Continue()
 }
 
 // Adjust Hp "hit points"
