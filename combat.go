@@ -9,6 +9,7 @@ import (
 	. "github.com/eyetoe/foobarbaz/agents"
 	. "github.com/eyetoe/foobarbaz/art"
 	. "github.com/eyetoe/foobarbaz/colors"
+	. "github.com/eyetoe/foobarbaz/items"
 	. "github.com/eyetoe/foobarbaz/simulations"
 	. "github.com/eyetoe/foobarbaz/util"
 )
@@ -211,6 +212,16 @@ func WinHeal(c *Agent) string {
 	if c.MxHp.Val > c.Hp.Val && c.MxHp.Val+30 >= Roll(1, 100) {
 		c.AdjHp(h)
 		textOut = textOut + fmt.Sprintf(Green("\nIn victory heal %d hit points!\n\n"), h)
+		c.Save()
+	}
+	return textOut
+}
+
+func DropPotion(c *Agent) string {
+	var textOut string
+	if c.MxHp.Val > c.Hp.Val && c.MxHp.Val+30 >= Roll(1, 100) {
+		c.Inv = append(c.Inv, Potion)
+		textOut = textOut + fmt.Sprintf(Green("\nYou find a potion!\n\n"))
 		c.Save()
 	}
 	return textOut
