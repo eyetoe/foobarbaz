@@ -254,8 +254,10 @@ func Spawn(c Agent) Agent {
 	// loops at 100, so that we don't keep looping forever looking for a foe
 	// we will never find.
 	var candidate Agent
+	fmt.Println(Cyan("\n\n\nFinding opponent"))
 	for i := 0; i < 100; i++ {
 
+		fmt.Printf(".")
 		candidate = monsters[rand.Intn(len(monsters))]
 		candidateOdds := Odds(&c, &candidate)
 
