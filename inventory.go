@@ -6,7 +6,7 @@ import (
 
 	. "github.com/eyetoe/foobarbaz/agents"
 	. "github.com/eyetoe/foobarbaz/colors"
-	. "github.com/eyetoe/foobarbaz/items"
+	//	. "github.com/eyetoe/foobarbaz/items"
 	. "github.com/eyetoe/foobarbaz/util"
 )
 
@@ -35,11 +35,11 @@ func Inventory(c *Agent) {
 	//		`            jgs '-._'-.|| |' '_.-'        ` + "\n" +
 	//		`                    '-.||_/.-'            ` + "\n"))
 
-	c.Inv = append(c.Inv, Hatchet)
-	c.Inv = append(c.Inv, Knife)
-	c.Inv = append(c.Inv, Dagger)
-	c.Inv = append(c.Inv, Staff)
-	c.Inv = append(c.Inv, Tack)
+	//c.Inv = append(c.Inv, Hatchet)
+	//c.Inv = append(c.Inv, Knife)
+	//c.Inv = append(c.Inv, Dagger)
+	//c.Inv = append(c.Inv, Staff)
+	//c.Inv = append(c.Inv, Tack)
 
 	fmt.Println(YellowU("Inventory\n"))
 

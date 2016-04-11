@@ -21,7 +21,7 @@ func Fight(c *Agent, f *Agent) {
 	odds := Odds(c, f)
 
 	// declare strings
-	var charDamageOut, charAttackDetails, foeDamageOut, foeAttackDetails, healmsg string
+	var charDamageOut, charAttackDetails, foeDamageOut, foeAttackDetails, healmsg, dropmsg string
 
 	// declare attack winner
 	var winner *Agent
@@ -59,6 +59,7 @@ func Fight(c *Agent, f *Agent) {
 		fmt.Printf(foeAttackDetails)
 		fmt.Printf(charDamageOut)
 		fmt.Printf(healmsg)
+		fmt.Printf(dropmsg)
 
 		// clear vars between runs
 		charAttackDetails = ""
@@ -83,7 +84,7 @@ func Fight(c *Agent, f *Agent) {
 		}
 
 		// Combat Prompt
-		fmt.Printf("\n:> %sight, %svade, %sescribe, %sun\n<: ", GreenU("F"), GreenU("E"), GreenU("D"), GreenU("R"))
+		fmt.Printf("\n:> %sight, %sse, %svade, %sescribe, %sun\n<: ", GreenU("F"), GreenU("U"), GreenU("E"), GreenU("D"), GreenU("R"))
 		choice, _, _ := GetChar()
 
 		switch choice {
@@ -97,6 +98,7 @@ func Fight(c *Agent, f *Agent) {
 				foeDamageOut = Damage(c, f, odds)
 				if f.Dead == true {
 					healmsg = WinHeal(c)
+					dropmsg = DropPotion(c)
 					continue
 				}
 			}
@@ -107,22 +109,28 @@ func Fight(c *Agent, f *Agent) {
 			}
 			// Evade
 			continue
+		// Event
 		case "e", "E":
 			fmt.Println("Evade!\n You stall for time, looking for an opening!")
 			fmt.Println("Note: should have a separate menu here where you can use items.  So you have to take a break from the fight, to be able to pull out an item or potion.  including switching weapons, drinking potions, using magic items.")
 			continue
-			// Describe the Foe
+		// Use Item
+		case "u", "U":
+			fmt.Printf(Use(c, Potion))
+			Continue()
+			continue
+		// Describe Foe
 		case "d", "D":
 			//fmt.Printf(Blue("\nYou consider the %s. %s\n"), f.Name, f.Description)
 			f.Describe()
 			FoeBar(*c, *f)
 			fmt.Println()
 			continue
-			// Run from the fight
+		// Run from the fight
 		case "r", "R":
 			fmt.Println("Run!\n You have lost this battle, but may yet win the war!")
 			break
-			// Default back to loop
+		// Default back to loop
 		default:
 			continue
 		}
@@ -219,7 +227,8 @@ func WinHeal(c *Agent) string {
 
 func DropPotion(c *Agent) string {
 	var textOut string
-	if c.MxHp.Val > c.Hp.Val && c.MxHp.Val+30 >= Roll(1, 100) {
+	//if c.MxHp.Val > c.Hp.Val && c.MxHp.Val+30 >= Roll(1, 100) {
+	if c.MxHp.Val > c.Hp.Val && c.MxHp.Val+100 >= Roll(1, 100) {
 		c.Inv = append(c.Inv, Potion)
 		textOut = textOut + fmt.Sprintf(Green("\nYou find a potion!\n\n"))
 		c.Save()
