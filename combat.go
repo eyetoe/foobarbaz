@@ -230,7 +230,7 @@ func DropPotion(c *Agent) string {
 	//if c.MxHp.Val > c.Hp.Val && c.MxHp.Val+30 >= Roll(1, 100) {
 	if c.MxHp.Val > c.Hp.Val && c.MxHp.Val+100 >= Roll(1, 100) {
 		c.Inv = append(c.Inv, Potion)
-		textOut = textOut + fmt.Sprintf(Green("\nYou find a potion!\n\n"))
+		textOut = textOut + fmt.Sprintf("%s %s!\n\n", Green("You find a"), YellowU("potion"))
 		c.Save()
 	}
 	return textOut
