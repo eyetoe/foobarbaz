@@ -266,6 +266,9 @@ func Spawn(c Agent) Agent {
 		Lacrimosa,
 		Griffon,
 		Blackshuck,
+		Goat,
+		Drake,
+		FlyingPig,
 	}
 
 	// candidate is a proposed foe.  The candidate is tested with the Odds()

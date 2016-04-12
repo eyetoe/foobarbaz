@@ -150,27 +150,7 @@ func (c Agent) StatusBar() {
 	fmt.Printf("%s", ItemC(c.Armor))
 	fmt.Printf("%s", Yellow(" T:"))
 	fmt.Printf("%s", ItemC(c.Trink))
-	//	if c.Dead == false {
-	//		fmt.Printf("%s", Yellow(" E?:"))
-	//		fmt.Printf("%s", MagentaU("none"))
-	//	} else {
-	//		fmt.Printf("%s", Red(" Dead :("))
-	//	}
 	fmt.Println()
-	//	if c.Dead == true {
-	//		fmt.Printf(Red("\n%s collapsed in a sobbing frightned lump and expired.\n\n"), c.Name)
-	//
-	//		for t := 0; t < 5; t++ {
-	//			fmt.Printf(Blue("."))
-	//			time.Sleep(100 * time.Millisecond)
-	//		}
-	//		fmt.Println()
-	//		if Confirm(Yellow("Retry?")) == true {
-	//			Resurrect(&c)
-	//		} else {
-	//			os.Exit(0)
-	//		}
-	//	}
 	Meter(c.Hp.Val, c.MxHp.Val, "Health", "=")
 }
 
@@ -267,7 +247,7 @@ func Resurrect(c *Agent) {
 		c.Save()
 		for t := 0; t < 5; t++ {
 			fmt.Printf(Blue("."))
-			time.Sleep(250 * time.Millisecond)
+			time.Sleep(100 * time.Millisecond)
 		}
 		Continue()
 	} else {
