@@ -18,7 +18,7 @@ var Drake = Agent{
 	Hp:   Stat{"Current Health", 45},
 	Dead: false,
 	// Equiped items
-	Weap:  DrakeBite,
+	Weap:  Drakesooth,
 	Armor: "none",
 	Trink: "none",
 	// Special Abilities
@@ -26,7 +26,7 @@ var Drake = Agent{
 	Abl2: "Tail Slap",
 	Abl3: "Horrible Bite",
 	// Inventory
-	DropChance: 0,
+	DropChance: 20,
 	Inv:        []Item{},
 	Art: `              /|                                           |\              ` + "\n" +
 		`             /||             ^               ^             ||\             ` + "\n" +

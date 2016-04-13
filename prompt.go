@@ -39,8 +39,8 @@ func Prompt() {
 
 		// ask the first question
 		fmt.Printf("%svent, ", GreenU("E"))
-		fmt.Printf("%sest, ", Green("R"))
-		fmt.Printf("%srain ", Green("T"))
+		fmt.Printf("%sest, ", GreenU("R"))
+		fmt.Printf("%srain ", GreenU("T"))
 		fmt.Printf("%sile, ", GreenU("F"))
 		fmt.Printf("%so, ", GreenU("G"))
 		fmt.Printf("%snventory <: ", GreenU("I"))

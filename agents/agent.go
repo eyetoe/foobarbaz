@@ -241,7 +241,13 @@ func Resurrect(c *Agent) {
 	if c.Dead == true {
 		fmt.Printf("[H[J")
 		time.Sleep(1000 * time.Millisecond)
-		fmt.Printf(Blue("\n A mystical light shines down on %s's lifeless corpse.\n\n A sulfurous effluvium expands from the body.\n\n %s takes a gasping breath, and lives!\n\n"), c.Name, c.Name)
+
+		fmt.Printf(Blue("\n A mystical light shines down on %s's lifeless corpse.\n\n "), c.Name)
+		time.Sleep(1000 * time.Millisecond)
+		fmt.Printf(Blue("A sulfurous effluvium expands from the body.\n\n"))
+		time.Sleep(1000 * time.Millisecond)
+		fmt.Printf(Blue("%s takes a gasping breath, and lives!\n\n"), c.Name)
+
 		c.Hp.Val = c.MxHp.Val
 		c.Dead = false
 		c.Save()
