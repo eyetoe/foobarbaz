@@ -70,7 +70,7 @@ func Fight(c *Agent, f *Agent) {
 
 		// check pulse
 		if f.Dead == true {
-			if f.Weap.Name != c.Weap.Name && f.DropChance >= Roll(1, 100) {
+			if f.Weap.Name != c.Weap.Name && f.DropChance >= Roll(2, 100) {
 				OfferItem(c, f)
 			}
 			fmt.Printf(RedU("%s has died!\n"), f.Name)
@@ -149,8 +149,8 @@ func Attack(a *Agent, d *Agent) (*Agent, *Agent, string) {
 	var outText string
 
 	// roll for attacker and defender
-	ar := Roll(1, 100)
-	dr := Roll(1, 100)
+	ar := Roll(2, 100)
+	dr := Roll(2, 100)
 	// bonuses
 	arB := a.Str.Val + a.Weap.Attack
 	drB := d.Dex.Val
@@ -179,7 +179,7 @@ func Damage(a *Agent, d *Agent, odds int) string {
 
 	var textOut string
 
-	hp := Roll(1, a.Weap.Damage)
+	hp := Roll(2, a.Weap.Damage)
 
 	d.AdjHp(0 - hp)
 
@@ -217,7 +217,7 @@ func Damage(a *Agent, d *Agent, odds int) string {
 func WinHeal(c *Agent) string {
 	var textOut string
 	h := Roll(2, c.MxHp.Val)
-	if c.MxHp.Val > c.Hp.Val && c.MxHp.Val+30 >= Roll(1, 100) {
+	if c.MxHp.Val > c.Hp.Val && c.MxHp.Val+30 >= Roll(2, 100) {
 		c.AdjHp(h)
 		textOut = textOut + fmt.Sprintf(Green("\nIn victory heal %d hit points!\n\n"), h)
 		c.Save()
@@ -228,7 +228,7 @@ func WinHeal(c *Agent) string {
 func DropPotion(c *Agent) string {
 	var textOut string
 	//if c.MxHp.Val > c.Hp.Val && c.MxHp.Val+30 >= Roll(1, 100) {
-	if c.MxHp.Val > c.Hp.Val && c.MxHp.Val+100 >= Roll(1, 100) {
+	if c.MxHp.Val > c.Hp.Val && c.MxHp.Val+100 >= Roll(2, 100) {
 		c.Inv = append(c.Inv, Potion)
 		textOut = textOut + fmt.Sprintf("%s %s!\n\n", Green("You find a"), YellowU("potion"))
 		c.Save()
