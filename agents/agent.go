@@ -49,6 +49,9 @@ type Agent struct {
 	Loc        Loc
 	File       string
 	Art        string
+	// set this during combat, and clear after.  Used to decide when to show
+	// red in health meter to indicate when you are within range of a killing blow.
+	FoeMaxHit int
 }
 
 func (c Agent) ExpDrop() int {
@@ -151,7 +154,7 @@ func (c Agent) StatusBar() {
 	fmt.Printf("%s", Yellow(" T:"))
 	fmt.Printf("%s", ItemC(c.Trink))
 	fmt.Println()
-	Meter(c.Hp.Val, c.MxHp.Val, "Health", "=")
+	Meter(c.Hp.Val, c.MxHp.Val, c.FoeMaxHit, "Health", "@")
 }
 
 // StatCost cost increases with the fibonacci number position.

@@ -18,7 +18,7 @@ var Drake = Agent{
 	Hp:   Stat{"Current Health", 45},
 	Dead: false,
 	// Equiped items
-	Weap:  Drakesooth,
+	Weap:  Drakestooth,
 	Armor: "none",
 	Trink: "none",
 	// Special Abilities

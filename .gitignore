@@ -3,6 +3,7 @@
 *.a
 *.so
 tags
+foobarbaz
 
 # Folders
 _obj

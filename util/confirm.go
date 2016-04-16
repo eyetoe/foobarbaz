@@ -8,7 +8,7 @@ import (
 
 func Confirm(response string) bool {
 	for {
-		fmt.Printf("%s. confirm y/n? > ", Yellow(response))
+		fmt.Printf("%s confirm y/n? > ", Yellow(response))
 
 		choice := GetReturn()
 

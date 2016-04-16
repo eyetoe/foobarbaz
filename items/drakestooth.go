@@ -4,12 +4,12 @@ import (
 	. "github.com/eyetoe/foobarbaz/affects"
 )
 
-var Drakesooth = Item{
-	Name:        "Drakesooth",
+var Drakestooth = Item{
+	Name:        "Drakestooth",
 	Description: "sword tooth of molten rock to divide a torso!",
 	Slot:        "Weapon",
 	Affects:     []Affect{},
-	Attack:      20,
-	Damage:      12,
+	Attack:      6,
+	Damage:      10,
 	Crit:        10,
 }

@@ -16,6 +16,7 @@ import (
 
 // Fight loop where c is character and f is foe
 func Fight(c *Agent, f *Agent) {
+	c.FoeMaxHit = f.Weap.Damage
 
 	// calculate odds for the ascii art display only once
 	odds := Odds(c, f)
@@ -74,11 +75,15 @@ func Fight(c *Agent, f *Agent) {
 				OfferItem(c, f)
 			}
 			fmt.Printf(RedU("%s has died!\n"), f.Name)
+			c.FoeMaxHit = 0
+			c.Save()
 			Continue()
 			break
 		}
 		if c.Dead == true {
 			fmt.Printf(RedU("%s has died!\n"), c.Name)
+			c.FoeMaxHit = 0
+			c.Save()
 			Continue()
 			break
 		}
@@ -129,6 +134,9 @@ func Fight(c *Agent, f *Agent) {
 		// Run from the fight
 		case "r", "R":
 			fmt.Println("Run!\n You have lost this battle, but may yet win the war!")
+			c.FoeMaxHit = 0
+			c.Save()
+			//Continue()
 			break
 		// Default back to loop
 		default:
