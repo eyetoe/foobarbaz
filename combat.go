@@ -70,7 +70,7 @@ func Fight(c *Agent, f *Agent) {
 
 		// check pulse
 		if f.Dead == true {
-			if f.Weap.Name != c.Weap.Name && f.DropChance >= Roll(2, 100) {
+			if f.Weap.Name != c.Weap.Name && f.DropChance >= Roll(1, 100) {
 				OfferItem(c, f)
 			}
 			fmt.Printf(RedU("%s has died!\n"), f.Name)
