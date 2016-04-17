@@ -22,7 +22,7 @@ func main() {
 
 	// uncomment Sandbox() to run testing function before starting game
 	// see sandbox.go
-	//Sandbox()
+	//;wqSandbox()
 	// This is the main loop
 	Prompt()
 	return

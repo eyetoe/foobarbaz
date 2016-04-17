@@ -5,6 +5,7 @@ package color
 
 import (
 	"fmt"
+	"math/rand"
 
 	"github.com/fatih/color"
 )
@@ -58,4 +59,46 @@ var ItemC = color.New(color.FgHiWhite, color.Bold).SprintFunc()
 func Clear() {
 
 	fmt.Print("[H[J")
+}
+
+// Switcheroo randomizes color in a byte slice
+func Switcheroo(s string) string {
+
+	textOut := ""
+	rainbow := []func(...interface{}) string{
+		Green,
+		Blue,
+		Red,
+		Yellow,
+		Cyan,
+		Magenta,
+		White,
+		Black,
+	}
+
+	for _, i := range s {
+		textOut = textOut + fmt.Sprintf("%s", rainbow[rand.Intn(len(rainbow))](string(i)))
+	}
+	return textOut
+}
+
+// ColorBanner randomizes color of items in byte slice, specifically for logo banner
+func ColorBanner(s string) string {
+	textOut := ""
+	rainbow := []func(...interface{}) string{
+		Green,
+		Green,
+		Green,
+		Green,
+		Green,
+		Green,
+		Green,
+		Yellow,
+		Blue,
+	}
+
+	for _, i := range s {
+		textOut = textOut + fmt.Sprintf("%s", rainbow[rand.Intn(len(rainbow))](string(i)))
+	}
+	return textOut
 }
