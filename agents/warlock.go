@@ -26,8 +26,7 @@ var Warlock = Agent{
 	Abl2: "Shocking Touch",
 	Abl3: "Heal",
 	// Inventory
-	DropChance: 20,
-	Inv:        []Item{},
+	Inv: []Item{},
 	//Art: `Y .  . .:.. .. . ...::~={i}{nXYoqdWQQQgy@BRWQQQQmZWWRQmmgggwmQWR#QQQQQQQQQQQQQQQ` + "\n" +
 	Art: `:   .  .    ...-......:==?1suqmSdS3QQQQQQQmwwmQQ##ZoowWVVV$BQWWQQWQQQQQQWQQBRV#Q` + "\n" +
 		`.  ..::........ :.::=auqumBRo3YYDQWQQQQQWQQQQQQQmmQqasaawa}?TVQQQQQQQQWmmXySS   ` + "\n" +

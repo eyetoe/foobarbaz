@@ -12,4 +12,5 @@ var Tack = Item{
 	Attack:      4,
 	Damage:      4,
 	Crit:        10,
+	DropChance:  20,
 }

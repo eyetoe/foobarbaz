@@ -26,8 +26,7 @@ var Blackshuck = Agent{
 	Abl2: "Sneak",
 	Abl3: "Leap",
 	// Inventory
-	DropChance: 0,
-	Inv:        []Item{},
+	Inv: []Item{},
 	Art: `                                            ` + "\n" +
 		`                     /\                     ` + "\n" +
 		`                    ( ;'~v/~~~ ;._          ` + "\n" +

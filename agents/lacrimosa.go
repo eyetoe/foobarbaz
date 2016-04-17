@@ -19,15 +19,14 @@ var Lacrimosa = Agent{
 	Dead: false,
 	// Equiped items
 	Weap:  Malaise,
-	Armor: Empty,
+	Armor: Chainmail,
 	Trink: Empty,
 	// Special Abilities
 	Abl1: "Psychic Blast",
 	Abl2: "Fear",
 	Abl3: "Regenerate",
 	// Inventory
-	DropChance: 0,
-	Inv:        []Item{},
+	Inv: []Item{},
 	Art: `                                                    '-. ` + "\n" +
 		`                                                      .'` + "\n" +
 		`                                                   _.'.'` + "\n" +

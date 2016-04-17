@@ -12,4 +12,5 @@ var Dagger = Item{
 	Attack:      5,
 	Damage:      4,
 	Crit:        10,
+	DropChance:  20,
 }

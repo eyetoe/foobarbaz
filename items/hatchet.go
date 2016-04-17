@@ -12,4 +12,5 @@ var Hatchet = Item{
 	Attack:      2,
 	Damage:      4,
 	Crit:        10,
+	DropChance:  20,
 }

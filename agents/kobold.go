@@ -20,14 +20,13 @@ var Kobold = Agent{
 
 	// Equiped items
 	Weap:  Hatchet,
-	Armor: Empty,
+	Armor: Waistcoat,
 	Trink: Empty,
 
 	// Special Abilities
-	Abl1:       "Bite",
-	Abl2:       "kick",
-	Abl3:       "howl",
-	DropChance: 20,
+	Abl1: "Bite",
+	Abl2: "kick",
+	Abl3: "howl",
 
 	// Inventory
 	Inv: []Item{},

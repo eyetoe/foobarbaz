@@ -43,12 +43,12 @@ type Agent struct {
 	Abl2 string
 	Abl3 string
 	//
-	Exp        int
-	DropChance int
-	Inv        []Item
-	Loc        Loc
-	File       string
-	Art        string
+	Exp int
+	//DropChance int
+	Inv  []Item
+	Loc  Loc
+	File string
+	Art  string
 	// set this during combat, and clear after.  Used to decide when to show
 	// red in health meter to indicate when you are within range of a killing blow.
 	FoeMaxHit int
@@ -64,8 +64,8 @@ func (c *Agent) Describe() {
 	fmt.Printf(Cyan("You consider the %s, "), c.Name)
 	fmt.Printf(Cyan("%s\n"), c.Description)
 	c.Weap.Display()
-	if c.DropChance > 0 {
-		fmt.Printf("	%s%% %s\n\n", Yellow(strconv.Itoa(c.DropChance)), Cyan("drop chance"))
+	if c.Weap.DropChance > 0 {
+		fmt.Printf("	%s%% %s\n\n", Yellow(strconv.Itoa(c.Weap.DropChance)), Cyan("drop chance"))
 	}
 	Continue()
 }
@@ -153,7 +153,8 @@ func (c Agent) StatusBar() {
 	fmt.Printf("%s", Yellow(" T:"))
 	fmt.Printf("%s", ItemC(c.Trink.Name))
 	fmt.Println()
-	Meter(c.Hp.Val, c.MxHp.Val, c.FoeMaxHit, "Health", "@")
+	Meter(c.Hp.Val, c.MxHp.Val, c.FoeMaxHit, "Health", "▓")
+	//░▒█░   ░ ████▓▒░░ ████▓▒░░▓█  ▀█▓ ▓█   ▓██▒░██▓ ▒██▒░▓█  ▀█▓ ▓█   ▓██▒███████▒
 }
 
 // StatCost cost increases with the fibonacci number position.

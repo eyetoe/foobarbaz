@@ -19,15 +19,14 @@ var Minotaur = Agent{
 	Dead: false,
 	// Equiped items
 	Weap:  Battleaxe,
-	Armor: Empty,
+	Armor: Leathers,
 	Trink: Empty,
 	// Special Abilities
 	Abl1: "Roar",
 	Abl2: "Stomp",
 	Abl3: "Snort",
 	// Inventory
-	DropChance: 20,
-	Inv:        []Item{},
+	Inv: []Item{},
 	Art: `                                                                _    ` + "\n" +
 		`                                                              _( (~\ ` + "\n" +
 		`       _ _                        /                          ( \> > \` + "\n" +

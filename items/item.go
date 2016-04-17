@@ -17,14 +17,17 @@ type Item struct {
 	Attack int
 	// modify damage dealt if hit
 	Damage int
-	// passive defence. heavier armor, Str = better Defence
+	// Passive Defence is damage resistance
 	Defence int
-	// active defence. lighter armor, Dex = better Dodge
+	// A measure of how impared agent is from armor.  This int is the subtracted
+	// percentage adjusted from Dex
 	Dodge int
 	// dammage over time adjustment. Bleed, Poison, Fire, etc
 	DoT int
 	// modify critical chance.
 	Crit int
+	// chance to drop from foe
+	DropChance int
 }
 
 func (i *Item) Display() {
@@ -52,8 +55,9 @@ func (i *Item) Display() {
 	if i.Defence != 0 {
 		fmt.Printf("	Defence:	+%s, \n", Yellow(strconv.Itoa(i.Defence)))
 	}
-	if i.Dodge != 0 {
-		fmt.Printf("	Dodge:	+%s, \n", Yellow(strconv.Itoa(i.Dodge)))
+	// display dodge if it's an armor piece
+	if i.Slot == "Armor" {
+		fmt.Printf("	Dodge:  	-%s%%, \n", Yellow(strconv.Itoa(i.Dodge)))
 	}
 	if i.DoT != 0 {
 		fmt.Printf("	DoT:	%s, \n", Yellow(strconv.Itoa(i.DoT)))

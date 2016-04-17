@@ -26,8 +26,7 @@ var Griffon = Agent{
 	Abl2: "Stomp",
 	Abl3: "Rush",
 	// Inventory
-	DropChance: 0,
-	Inv:        []Item{},
+	Inv: []Item{},
 	Art: `                         //           //                     ` + "\n" +
 		//		`                        ///          ///                     ` + "\n" +
 		`                       ////         ////                     ` + "\n" +

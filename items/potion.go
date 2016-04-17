@@ -10,6 +10,7 @@ var Potion = Item{
 	Attack:      0,
 	Damage:      0,
 	Crit:        0,
+	DropChance:  20,
 }
 
 //func (p Potion) Use(a *Agent) {

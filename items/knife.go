@@ -12,4 +12,5 @@ var Knife = Item{
 	Attack:      3,
 	Damage:      3,
 	Crit:        10,
+	DropChance:  20,
 }

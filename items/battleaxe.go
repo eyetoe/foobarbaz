@@ -12,4 +12,5 @@ var Battleaxe = Item{
 	Attack:      4,
 	Damage:      8,
 	Crit:        10,
+	DropChance:  20,
 }

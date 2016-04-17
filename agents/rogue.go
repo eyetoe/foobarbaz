@@ -19,15 +19,14 @@ var Rogue = Agent{
 	Dead: false,
 	// Equiped items
 	Weap:  Dagger,
-	Armor: Empty,
+	Armor: Jacket,
 	Trink: Empty,
 	// Special Abilities
 	Abl1: "Pickpocket",
 	Abl2: "Hide in shadows",
 	Abl3: "Backstab",
 	// Inventory
-	DropChance: 20,
-	Inv:        []Item{},
+	Inv: []Item{},
 	Art: `                       __.------.                          ` + "\n" +
 		`                      (__  ___   )                         ` + "\n" +
 		`                        .)e  )\ /                          ` + "\n" +

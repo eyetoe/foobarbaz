@@ -26,8 +26,7 @@ var FlyingPig = Agent{
 	Abl2: "Snorting Swoop",
 	Abl3: "Trash Gobble",
 	// Inventory
-	DropChance: 0,
-	Inv:        []Item{},
+	Inv: []Item{},
 	Art: `           ____ _____    ` + "\n" +
 		`          (    /,----'   ` + "\n" +
 		`           \  //==--'    ` + "\n" +

@@ -19,15 +19,14 @@ var Goat = Agent{
 	Dead: false,
 	// Equiped items
 	Weap:  GoatKick,
-	Armor: Empty,
+	Armor: Platemail,
 	Trink: Empty,
 	// Special Abilities
 	Abl1: "Horns-o-doom",
 	Abl2: "Goat Scream",
 	Abl3: "Iron Stomach",
 	// Inventory
-	DropChance: 0,
-	Inv:        []Item{},
+	Inv: []Item{},
 	Art: `             / /                            ` + "\n" +
 		`          (\/_//')                          ` + "\n" +
 		`           /   '/                           ` + "\n" +

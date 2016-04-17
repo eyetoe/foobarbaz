@@ -12,4 +12,5 @@ var Drakestooth = Item{
 	Attack:      6,
 	Damage:      10,
 	Crit:        10,
+	DropChance:  20,
 }

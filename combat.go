@@ -71,8 +71,14 @@ func Fight(c *Agent, f *Agent) {
 
 		// check pulse
 		if f.Dead == true {
-			if f.Weap.Name != c.Weap.Name && f.DropChance >= Roll(1, 100) {
-				OfferItem(c, f)
+			if f.Weap.Name != c.Weap.Name && f.Weap.DropChance >= Roll(1, 100) {
+				OfferItem(c, f, f.Weap)
+			}
+			if f.Armor.Name != c.Armor.Name && f.Armor.DropChance >= Roll(1, 100) {
+				OfferItem(c, f, f.Armor)
+			}
+			if f.Trink.Name != c.Trink.Name && f.Trink.DropChance >= Roll(1, 100) {
+				OfferItem(c, f, f.Trink)
 			}
 			fmt.Printf(RedU("%s has died!\n"), f.Name)
 			c.FoeMaxHit = 0
@@ -163,7 +169,9 @@ func Attack(a *Agent, d *Agent) (*Agent, *Agent, string) {
 	dr := Roll(2, 100)
 	// bonuses
 	arB := a.Str.Val + a.Weap.Attack
-	drB := d.Dex.Val
+	// subtract the dodge percentage hit from armor
+	drB := int(float64(d.Dex.Val) - float64(d.Dex.Val)*(float64(d.Armor.Dodge)*.01))
+
 	// totals
 	aT := ar + arB
 	dT := dr + drB
@@ -246,19 +254,43 @@ func DropPotion(c *Agent) string {
 	return textOut
 }
 
-func OfferItem(c *Agent, f *Agent) {
+func OfferItem(c, f *Agent, i Item) {
 	ClearScreen()
 	fmt.Println(Yellow(Sword1()))
 	fmt.Println(Blue("!! ITEM DROP !!\n"))
-	fmt.Printf("%s has dropped it's %s.\n\n", Yellow(f.Name), Yellow(f.Weap.Name))
-	fmt.Printf("Replace?\n	")
-	c.Weap.Display()
-	fmt.Printf("with..\n	")
-	f.Weap.Display()
-	if Confirm("\nWould you like to make this swap?") == true {
-		c.Weap = f.Weap
-		c.Save()
+	//fmt.Printf("%s has dropped it's %s.\n\n", Yellow(f.Name), Yellow(f.Weap.Name))
+	fmt.Printf("%s has dropped it's %s.\n\n", Yellow(f.Name), Yellow(i.Name))
+
+	switch i.Slot {
+	case "Weapon":
+		fmt.Printf("Replace?\n")
+		c.Weap.Display()
+		fmt.Printf("with..\n")
+		f.Weap.Display()
+		if Confirm("\nWould you like to make this swap?") == true {
+			c.Weap = f.Weap
+			c.Save()
+		}
+	case "Armor":
+		fmt.Printf("Replace?\n")
+		c.Armor.Display()
+		fmt.Printf("with..\n")
+		f.Armor.Display()
+		if Confirm("\nWould you like to make this swap?") == true {
+			c.Armor = f.Armor
+			c.Save()
+		}
+	case "Trinket":
+		fmt.Printf("Replace?\n")
+		c.Trink.Display()
+		fmt.Printf("with..\n")
+		f.Trink.Display()
+		if Confirm("\nWould you like to make this swap?") == true {
+			c.Trink = f.Trink
+			c.Save()
+		}
 	}
+
 }
 
 func Spawn(c Agent) Agent {

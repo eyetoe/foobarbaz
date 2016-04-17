@@ -26,8 +26,7 @@ var Drake = Agent{
 	Abl2: "Tail Slap",
 	Abl3: "Horrible Bite",
 	// Inventory
-	DropChance: 20,
-	Inv:        []Item{},
+	Inv: []Item{},
 	Art: `              /|                                           |\              ` + "\n" +
 		`             /||             ^               ^             ||\             ` + "\n" +
 		`            / \\__          //               \\          __// \            ` + "\n" +

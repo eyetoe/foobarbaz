@@ -18,15 +18,14 @@ var Pixie = Agent{
 	Dead: false,
 	// Equiped items
 	Weap:  Tack,
-	Armor: Empty,
+	Armor: Vest,
 	Trink: Empty,
 	// Special Abilities
 	Abl1: "Bite",
 	Abl2: "kick",
 	Abl3: "howl",
 	// Inventory
-	DropChance: 20,
-	Inv:        []Item{},
+	Inv: []Item{},
 	Art: `                     ,_  .--.      ` + "\n" +
 		`               , ,   _)\/    ;--.  ` + "\n" +
 		`       . ' .    \_\-'   |  .'    \ ` + "\n" +
