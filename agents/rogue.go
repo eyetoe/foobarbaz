@@ -19,8 +19,8 @@ var Rogue = Agent{
 	Dead: false,
 	// Equiped items
 	Weap:  Dagger,
-	Armor: "Leather",
-	Trink: "Coin",
+	Armor: Empty,
+	Trink: Empty,
 	// Special Abilities
 	Abl1: "Pickpocket",
 	Abl2: "Hide in shadows",

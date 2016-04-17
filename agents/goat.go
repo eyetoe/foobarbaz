@@ -19,8 +19,8 @@ var Goat = Agent{
 	Dead: false,
 	// Equiped items
 	Weap:  GoatKick,
-	Armor: "none",
-	Trink: "none",
+	Armor: Empty,
+	Trink: Empty,
 	// Special Abilities
 	Abl1: "Horns-o-doom",
 	Abl2: "Goat Scream",

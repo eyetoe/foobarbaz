@@ -19,8 +19,8 @@ var Drake = Agent{
 	Dead: false,
 	// Equiped items
 	Weap:  Drakestooth,
-	Armor: "none",
-	Trink: "none",
+	Armor: Empty,
+	Trink: Empty,
 	// Special Abilities
 	Abl1: "Fire Breath",
 	Abl2: "Tail Slap",

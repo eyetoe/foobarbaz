@@ -19,8 +19,8 @@ var FlyingPig = Agent{
 	Dead: false,
 	// Equiped items
 	Weap:  Snort,
-	Armor: "none",
-	Trink: "none",
+	Armor: Empty,
+	Trink: Empty,
 	// Special Abilities
 	Abl1: "Flying Fart",
 	Abl2: "Snorting Swoop",

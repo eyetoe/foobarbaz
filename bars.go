@@ -47,8 +47,8 @@ func FoeBar(c Agent, f Agent) {
 	fmt.Printf("%s", Yellow(" W:"))
 	fmt.Printf("%s", White(f.Weap.Name))
 	fmt.Printf("%s", Yellow(" A:"))
-	fmt.Printf("%s", White(f.Armor))
+	fmt.Printf("%s", White(f.Armor.Name))
 	fmt.Printf("%s", Yellow(" T:"))
-	fmt.Printf("%s", White(f.Trink))
+	fmt.Printf("%s", White(f.Trink.Name))
 	fmt.Println()
 }

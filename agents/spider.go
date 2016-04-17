@@ -17,8 +17,8 @@ var Spider = Agent{
 	Dead: false,
 	// Equiped items
 	Weap:  Fang,
-	Armor: "hair",
-	Trink: "eggs",
+	Armor: Empty,
+	Trink: Empty,
 	// Special Abilities
 	Abl1: "Bite",
 	Abl2: "kick",

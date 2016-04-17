@@ -20,8 +20,8 @@ var Kobold = Agent{
 
 	// Equiped items
 	Weap:  Hatchet,
-	Armor: "Hide",
-	Trink: "Amulet",
+	Armor: Empty,
+	Trink: Empty,
 
 	// Special Abilities
 	Abl1:       "Bite",

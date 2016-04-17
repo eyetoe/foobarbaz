@@ -5,6 +5,7 @@ import (
 	// this means functions in the imported package don't need to have the
 	// directory prefixed, soo you can use Agent() rather than agents.Agent()
 	. "github.com/eyetoe/foobarbaz/agents"
+	. "github.com/eyetoe/foobarbaz/items"
 )
 
 // Global SaveFile available to all code

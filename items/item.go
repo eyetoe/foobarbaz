@@ -69,6 +69,6 @@ func (i *Item) Display() {
 			fmt.Printf("%s, ", Yellow(e.Name))
 
 		}
-		fmt.Printf("\n\n")
+		fmt.Printf("\n")
 	}
 }

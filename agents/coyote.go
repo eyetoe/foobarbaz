@@ -20,8 +20,8 @@ var Coyote = Agent{
 	Dead: false,
 	// Equiped items
 	Weap:  Maw,
-	Armor: "Hide",
-	Trink: "Amulet",
+	Armor: Empty,
+	Trink: Empty,
 	// Special Abilities
 	Abl1: "Bite",
 	Abl2: "kick",

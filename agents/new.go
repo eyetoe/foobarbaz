@@ -20,8 +20,8 @@ var New = Agent{
 	Dead: false,
 	// Equiped items
 	Weap:  Fist,
-	Armor: "Pancho",
-	Trink: "Lint",
+	Armor: Pancho,
+	Trink: Empty,
 	// Special Abilities
 	Abl1: "",
 	Abl2: "",

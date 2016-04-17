@@ -19,8 +19,8 @@ var Blackshuck = Agent{
 	Dead: false,
 	// Equiped items
 	Weap:  Bite,
-	Armor: "Hide",
-	Trink: "Fang",
+	Armor: Empty,
+	Trink: Empty,
 	// Special Abilities
 	Abl1: "Growl",
 	Abl2: "Sneak",

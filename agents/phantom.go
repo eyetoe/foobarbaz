@@ -18,8 +18,8 @@ var Phantom = Agent{
 	Dead: false,
 	// Equiped items
 	Weap:  Shriek,
-	Armor: "Ectoplasm",
-	Trink: "skull",
+	Armor: Empty,
+	Trink: Empty,
 	// Special Abilities
 	Abl1: "Bite",
 	Abl2: "kick",

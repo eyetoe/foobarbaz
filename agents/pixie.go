@@ -18,8 +18,8 @@ var Pixie = Agent{
 	Dead: false,
 	// Equiped items
 	Weap:  Tack,
-	Armor: "none",
-	Trink: "none",
+	Armor: Empty,
+	Trink: Empty,
 	// Special Abilities
 	Abl1: "Bite",
 	Abl2: "kick",

@@ -19,8 +19,8 @@ var Minotaur = Agent{
 	Dead: false,
 	// Equiped items
 	Weap:  Battleaxe,
-	Armor: "Hide",
-	Trink: "Amulet",
+	Armor: Empty,
+	Trink: Empty,
 	// Special Abilities
 	Abl1: "Roar",
 	Abl2: "Stomp",

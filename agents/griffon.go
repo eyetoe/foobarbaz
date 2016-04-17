@@ -19,8 +19,8 @@ var Griffon = Agent{
 	Dead: false,
 	// Equiped items
 	Weap:  Beak,
-	Armor: "Feathers",
-	Trink: "Quill",
+	Armor: Empty,
+	Trink: Empty,
 	// Special Abilities
 	Abl1: "Bite",
 	Abl2: "Stomp",

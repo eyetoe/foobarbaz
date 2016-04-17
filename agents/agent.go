@@ -36,8 +36,8 @@ type Agent struct {
 	Dead bool
 	// 3 item slots: Weapon, Armor, Trinket
 	Weap  Item
-	Armor string
-	Trink string
+	Armor Item
+	Trink Item
 	// Special Abilities
 	Abl1 string
 	Abl2 string
@@ -65,7 +65,7 @@ func (c *Agent) Describe() {
 	fmt.Printf(Cyan("%s\n"), c.Description)
 	c.Weap.Display()
 	if c.DropChance > 0 {
-		fmt.Printf("  %s%% %s\n\n", Yellow(strconv.Itoa(c.DropChance)), Cyan("drop chance"))
+		fmt.Printf("	%s%% %s\n\n", Yellow(strconv.Itoa(c.DropChance)), Cyan("drop chance"))
 	}
 	Continue()
 }
@@ -149,9 +149,9 @@ func (c Agent) StatusBar() {
 	fmt.Printf("%s", Yellow(" W:"))
 	fmt.Printf("%s", ItemC(c.Weap.Name))
 	fmt.Printf("%s", Yellow(" A:"))
-	fmt.Printf("%s", ItemC(c.Armor))
+	fmt.Printf("%s", ItemC(c.Armor.Name))
 	fmt.Printf("%s", Yellow(" T:"))
-	fmt.Printf("%s", ItemC(c.Trink))
+	fmt.Printf("%s", ItemC(c.Trink.Name))
 	fmt.Println()
 	Meter(c.Hp.Val, c.MxHp.Val, c.FoeMaxHit, "Health", "@")
 }

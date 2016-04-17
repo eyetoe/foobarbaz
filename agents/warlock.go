@@ -19,8 +19,8 @@ var Warlock = Agent{
 	Dead: false,
 	// Equiped items
 	Weap:  Staff,
-	Armor: "Tattered Robes",
-	Trink: "Black Cat",
+	Armor: Empty,
+	Trink: Empty,
 	// Special Abilities
 	Abl1: "Fireball",
 	Abl2: "Shocking Touch",
