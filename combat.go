@@ -127,6 +127,8 @@ func Fight(c *Agent, f *Agent) {
 		// Describe Foe
 		case "d", "D":
 			//fmt.Printf(Blue("\nYou consider the %s. %s\n"), f.Name, f.Description)
+			fmt.Println("Bacon bits")
+			//c.Weap.Display()
 			f.Describe()
 			FoeBar(*c, *f)
 			fmt.Println()

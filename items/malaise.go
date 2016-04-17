@@ -6,7 +6,7 @@ import (
 
 var Malaise = Item{
 	Name:        "Malaise",
-	Description: "You are overwrought with a feeling of dread and dispair!",
+	Description: "you are overwrought with a feeling of dread and dispair!",
 	Slot:        "Weapon",
 	Affects:     []Affect{Charged},
 	Attack:      5,
