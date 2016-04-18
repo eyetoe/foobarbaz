@@ -69,16 +69,41 @@ func Fight(c *Agent, f *Agent) {
 		charDamageOut = ""
 		healmsg = ""
 
+		var hasWeapon, hasArmor, hasTrinket = false, false, false
 		// check pulse
 		if f.Dead == true {
-			if f.Weap.Name != c.Weap.Name && f.Weap.DropChance >= Roll(1, 100) {
-				OfferItem(c, f, f.Weap)
+			// check and only offer weapon is the character doesn't already have it
+			if f.Weap.Name != c.Weap.Name && f.Weap.DropChance != Roll(1, 100) {
+				for n, _ := range c.Inv {
+					if f.Weap.Name == c.Inv[n].Name {
+						hasWeapon = true
+					}
+				}
+				if hasWeapon == false {
+					OfferItem(c, f, f.Weap)
+				}
 			}
-			if f.Armor.Name != c.Armor.Name && f.Armor.DropChance >= Roll(1, 100) {
-				OfferItem(c, f, f.Armor)
+			// check and only offer armor is the character doesn't already have it
+			if f.Armor.Name != c.Armor.Name && f.Armor.DropChance != Roll(1, 100) {
+				for n, _ := range c.Inv {
+					if f.Armor.Name == c.Inv[n].Name {
+						hasArmor = true
+					}
+				}
+				if hasArmor == false {
+					OfferItem(c, f, f.Armor)
+				}
 			}
-			if f.Trink.Name != c.Trink.Name && f.Trink.DropChance >= Roll(1, 100) {
-				OfferItem(c, f, f.Trink)
+			// check and only offer trinket is the character doesn't already have it
+			if f.Trink.Name != c.Trink.Name && f.Trink.DropChance != Roll(1, 100) {
+				for n, _ := range c.Inv {
+					if f.Trink.Name == c.Inv[n].Name {
+						hasTrinket = true
+					}
+				}
+				if hasTrinket == false {
+					OfferItem(c, f, f.Trink)
+				}
 			}
 			fmt.Printf(RedU("%s has died!\n"), f.Name)
 			c.FoeMaxHit = 0
@@ -286,6 +311,7 @@ func OfferItem(c, f *Agent, i Item) {
 		fmt.Printf("with..\n")
 		f.Weap.Display()
 		if Confirm("\nWould you like to make this swap?") == true {
+			c.Inv = append(c.Inv, c.Weap)
 			c.Weap = f.Weap
 			c.Save()
 		} else {
@@ -298,6 +324,7 @@ func OfferItem(c, f *Agent, i Item) {
 		fmt.Printf("with..\n")
 		f.Armor.Display()
 		if Confirm("\nWould you like to make this swap?") == true {
+			c.Inv = append(c.Inv, c.Armor)
 			c.Armor = f.Armor
 			c.Save()
 		} else {
@@ -310,6 +337,7 @@ func OfferItem(c, f *Agent, i Item) {
 		fmt.Printf("with..\n")
 		f.Trink.Display()
 		if Confirm("\nWould you like to make this swap?") == true {
+			c.Inv = append(c.Inv, c.Trink)
 			c.Trink = f.Trink
 			c.Save()
 		} else {
@@ -324,20 +352,20 @@ func Spawn(c Agent) Agent {
 	rand.Seed(time.Now().UTC().UnixNano())
 	monsters := []Agent{
 		// Add monsters here to be included in random spawn
-		Spider,
-		Phantom,
+		//		Spider,
+		//		Phantom,
 		Pixie,
 		Kobold,
 		Warlock,
-		Coyote,
+		//		Coyote,
 		Rogue,
 		Minotaur,
 		Lacrimosa,
-		Griffon,
-		Blackshuck,
-		Goat,
+		//		Griffon,
+		//		Blackshuck,
+		//		Goat,
 		Drake,
-		FlyingPig,
+		//		FlyingPig,
 	}
 
 	// candidate is a proposed foe.  The candidate is tested with the Odds()

@@ -70,26 +70,34 @@ func Inventory(c *Agent) {
 		}
 
 	}
+	fmt.Println(YellowU("Equiped:\n"))
+	fmt.Printf(":	%s %s Attack: +%s Damage: 1d%s\n", WhiteU(c.Weap.Name), Blue(c.Weap.Slot), Red(strconv.Itoa(c.Weap.Attack)), Red(strconv.Itoa(c.Weap.Damage)))
+	fmt.Println("	", Blue(c.Weap.Description))
+	fmt.Printf(":	%s %s Attack: +%s Damage: 1d%s\n", WhiteU(c.Armor.Name), Blue(c.Armor.Slot), Red(strconv.Itoa(c.Armor.Attack)), Red(strconv.Itoa(c.Armor.Damage)))
+	fmt.Println("	", Blue(c.Armor.Description))
+	fmt.Printf(":	%s %s Attack: +%s Damage: 1d%s\n", WhiteU(c.Trink.Name), Blue(c.Trink.Slot), Red(strconv.Itoa(c.Trink.Attack)), Red(strconv.Itoa(c.Trink.Damage)))
+	fmt.Println("	", Blue(c.Trink.Description))
+
 	fmt.Printf("(%s) %s:\n  %s\n\n", Cyan(strconv.Itoa(numPotions)), Yellow(Potion.Name), Cyan(Potion.Description))
 
-	fmt.Println(YellowU("Weapons:\n\n"))
+	fmt.Println(YellowU("Weapons:\n"))
 	for n, t := range allWeapons {
 		fmt.Printf("%s:	%s %s Attack: +%s Damage: 1d%s\n", GreenU(strconv.Itoa(n)), WhiteU(t.Name), Blue(t.Slot), Red(strconv.Itoa(t.Attack)), Red(strconv.Itoa(t.Damage)))
-		fmt.Println("	", Blue(t.Description), "\n")
+		fmt.Println("	", Blue(t.Description))
 
 	}
 
-	fmt.Println(YellowU("Armor:\n\n"))
+	fmt.Println(YellowU("Armor:\n"))
 	for n, t := range allArmor {
 		fmt.Printf("%s:	%s %s Attack: +%s Damage: 1d%s\n", GreenU(strconv.Itoa(n)), WhiteU(t.Name), Blue(t.Slot), Red(strconv.Itoa(t.Attack)), Red(strconv.Itoa(t.Damage)))
-		fmt.Println("	", Blue(t.Description), "\n")
+		fmt.Println("	", Blue(t.Description))
 
 	}
 
-	fmt.Println(YellowU("Trinkets:\n\n"))
+	fmt.Println(YellowU("Trinkets:\n"))
 	for n, t := range allTrinkets {
 		fmt.Printf("%s:	%s %s Attack: +%s Damage: 1d%s\n", GreenU(strconv.Itoa(n)), WhiteU(t.Name), Blue(t.Slot), Red(strconv.Itoa(t.Attack)), Red(strconv.Itoa(t.Damage)))
-		fmt.Println("	", Blue(t.Description), "\n")
+		fmt.Println("	", Blue(t.Description))
 
 	}
 
