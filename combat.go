@@ -73,7 +73,7 @@ func Fight(c *Agent, f *Agent) {
 		// check pulse
 		if f.Dead == true {
 			// check and only offer weapon is the character doesn't already have it
-			if f.Weap.Name != c.Weap.Name && f.Weap.DropChance != Roll(1, 100) {
+			if f.Weap.Name != c.Weap.Name && f.Weap.DropChance >= Roll(1, 100) {
 				for n, _ := range c.Inv {
 					if f.Weap.Name == c.Inv[n].Name {
 						hasWeapon = true
@@ -84,7 +84,7 @@ func Fight(c *Agent, f *Agent) {
 				}
 			}
 			// check and only offer armor is the character doesn't already have it
-			if f.Armor.Name != c.Armor.Name && f.Armor.DropChance != Roll(1, 100) {
+			if f.Armor.Name != c.Armor.Name && f.Armor.DropChance >= Roll(1, 100) {
 				for n, _ := range c.Inv {
 					if f.Armor.Name == c.Inv[n].Name {
 						hasArmor = true
@@ -95,7 +95,7 @@ func Fight(c *Agent, f *Agent) {
 				}
 			}
 			// check and only offer trinket is the character doesn't already have it
-			if f.Trink.Name != c.Trink.Name && f.Trink.DropChance != Roll(1, 100) {
+			if f.Trink.Name != c.Trink.Name && f.Trink.DropChance >= Roll(1, 100) {
 				for n, _ := range c.Inv {
 					if f.Trink.Name == c.Inv[n].Name {
 						hasTrinket = true
@@ -351,21 +351,21 @@ func OfferItem(c, f *Agent, i Item) {
 func Spawn(c Agent) Agent {
 	rand.Seed(time.Now().UTC().UnixNano())
 	monsters := []Agent{
-		// Add monsters here to be included in random spawn
-		//		Spider,
-		//		Phantom,
+		//Add monsters here to be included in random spawn
+		Spider,
+		Phantom,
 		Pixie,
 		Kobold,
 		Warlock,
-		//		Coyote,
+		Coyote,
 		Rogue,
 		Minotaur,
 		Lacrimosa,
-		//		Griffon,
-		//		Blackshuck,
-		//		Goat,
+		Griffon,
+		Blackshuck,
+		Goat,
 		Drake,
-		//		FlyingPig,
+		FlyingPig,
 	}
 
 	// candidate is a proposed foe.  The candidate is tested with the Odds()
