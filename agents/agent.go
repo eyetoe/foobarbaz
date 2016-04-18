@@ -153,7 +153,8 @@ func (c Agent) StatusBar() {
 	fmt.Printf("%s", Yellow(" T:"))
 	fmt.Printf("%s", ItemC(c.Trink.Name))
 	fmt.Println()
-	Meter(c.Hp.Val, c.MxHp.Val, c.FoeMaxHit, "Health", "▓")
+	Meter(c.Hp.Val, c.MxHp.Val, c.FoeMaxHit, "Health", "█")
+	// interesting palate of ascii for perusing
 	//░▒█░   ░ ████▓▒░░ ████▓▒░░▓█  ▀█▓ ▓█   ▓██▒░██▓ ▒██▒░▓█  ▀█▓ ▓█   ▓██▒███████▒
 }
 

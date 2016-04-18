@@ -6,6 +6,7 @@ package color
 import (
 	"fmt"
 	"math/rand"
+	"time"
 
 	"github.com/fatih/color"
 )
@@ -101,4 +102,13 @@ func ColorBanner(s string) string {
 		textOut = textOut + fmt.Sprintf("%s", rainbow[rand.Intn(len(rainbow))](string(i)))
 	}
 	return textOut
+}
+
+func Teletype(s string) {
+
+	for _, c := range s {
+		fmt.Printf(White(string(c)))
+		time.Sleep(100 * time.Millisecond)
+
+	}
 }

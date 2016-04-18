@@ -94,8 +94,21 @@ func Fight(c *Agent, f *Agent) {
 			break
 		}
 
+		numPotions := 0
+		for _, c := range c.Inv {
+			if c.Name == "Potion" {
+				numPotions++
+			}
+
+		}
+
 		// Combat Prompt
-		fmt.Printf("\n:> %sight, %sse, %svade, %sescribe, %sun\n<: ", GreenU("F"), GreenU("U"), GreenU("E"), GreenU("D"), GreenU("R"))
+		fmt.Printf("\n:> %sight, ", GreenU("F"))
+		fmt.Printf("%sse, ", GreenU("U"))
+		fmt.Printf("%svade, ", GreenU("E"))
+		fmt.Printf("%sescribe, ", GreenU("D"))
+		fmt.Printf("%sotion(%s), ", GreenU("P"), Yellow(strconv.Itoa(numPotions)))
+		fmt.Printf("%sun\n<: ", GreenU("R"))
 		choice, _, _ := GetChar()
 
 		switch choice {
@@ -127,8 +140,8 @@ func Fight(c *Agent, f *Agent) {
 			continue
 		// Use Item
 		case "u", "U":
-			fmt.Printf(Use(c, Potion))
-			Continue()
+			//fmt.Printf(Use(c, Potion))
+			//Continue()
 			continue
 		// Describe Foe
 		case "d", "D":
@@ -138,6 +151,11 @@ func Fight(c *Agent, f *Agent) {
 			f.Describe()
 			FoeBar(*c, *f)
 			fmt.Println()
+			continue
+		// Use Potion
+		case "p", "P":
+			fmt.Printf(Use(c, Potion))
+			Continue()
 			continue
 		// Run from the fight
 		case "r", "R":
@@ -270,6 +288,9 @@ func OfferItem(c, f *Agent, i Item) {
 		if Confirm("\nWould you like to make this swap?") == true {
 			c.Weap = f.Weap
 			c.Save()
+		} else {
+			c.Inv = append(c.Inv, f.Weap)
+			c.Save()
 		}
 	case "Armor":
 		fmt.Printf("Replace?\n")
@@ -279,6 +300,9 @@ func OfferItem(c, f *Agent, i Item) {
 		if Confirm("\nWould you like to make this swap?") == true {
 			c.Armor = f.Armor
 			c.Save()
+		} else {
+			c.Inv = append(c.Inv, f.Armor)
+			c.Save()
 		}
 	case "Trinket":
 		fmt.Printf("Replace?\n")
@@ -287,6 +311,9 @@ func OfferItem(c, f *Agent, i Item) {
 		f.Trink.Display()
 		if Confirm("\nWould you like to make this swap?") == true {
 			c.Trink = f.Trink
+			c.Save()
+		} else {
+			c.Inv = append(c.Inv, f.Trink)
 			c.Save()
 		}
 	}

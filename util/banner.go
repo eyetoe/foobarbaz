@@ -2,6 +2,7 @@ package util
 
 import (
 	"fmt"
+	"time"
 
 	. "github.com/eyetoe/foobarbaz/colors"
 )
@@ -9,7 +10,16 @@ import (
 func Banner() {
 
 	ClearScreen()
-	fmt.Printf(White("\nWelcome to ...\n"))
+	//fmt.Printf(White("\nWelcome to ...\n"))
+
+	Teletype("\nWelcome to ...\n")
+	//for _, c := range "\nWelcome to ...\n" {
+	//fmt.Printf(White(string(c)))
+	//time.Sleep(100 * time.Millisecond)
+
+	//}
+
+	time.Sleep(1000 * time.Millisecond)
 	//	fmt.Println(Red(
 	//		`   ______         ______           ______              ` + "\n" +
 	//			`   |  ___|        | ___ \          | ___ \             ` + "\n" +
@@ -32,6 +42,11 @@ func Banner() {
 			`           ░ ░      ░ ░   ░            ░  ░   ░      ░            ░  ░ ░ ░    ` + "\n" +
 			`                               ░                          ░          ░        `
 
-	fmt.Println(ColorBanner(foobarbaz))
+	for i := 0; i <= 40; i++ {
+		ClearScreen()
+		fmt.Printf(White("\nWelcome to ...\n"))
+		fmt.Println(ColorBanner(foobarbaz))
+		time.Sleep(100 * time.Millisecond)
+	}
 
 }

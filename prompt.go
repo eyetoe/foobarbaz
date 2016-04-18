@@ -26,7 +26,7 @@ func Prompt() {
 			}
 			Continue()
 			fmt.Println(Dying())
-			if Confirm(Magenta("Rage against the dying of the light?\n")) == true {
+			if Confirm(Magenta("Rage against the dying of the light?\n\n")) == true {
 				Resurrect(&Char)
 				continue
 			} else {

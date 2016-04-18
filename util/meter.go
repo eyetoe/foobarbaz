@@ -33,7 +33,6 @@ func Meter(num, max, fmax int, l, t string) {
 			}
 		}
 		if c == barWidth {
-			//fmt.Println(">")
 			fmt.Println(":")
 		}
 	}
