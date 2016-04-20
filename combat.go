@@ -277,8 +277,8 @@ func Damage(a *Agent, d *Agent, odds int) string {
 
 func WinHeal(c *Agent) string {
 	var textOut string
-	h := Roll(2, c.MxHp.Val)
-	if c.MxHp.Val > c.Hp.Val && c.MxHp.Val+30 >= Roll(2, 100) {
+	h := Roll(1, (c.MxHp.Val - c.Hp.Val))
+	if c.MxHp.Val > c.Hp.Val && c.MxHp.Val+50 >= Roll(2, 100) {
 		c.AdjHp(h)
 		textOut = textOut + fmt.Sprintf(Green("\nIn victory heal %d hit points!\n\n"), h)
 		c.Save()

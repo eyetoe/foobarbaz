@@ -10,6 +10,36 @@ import (
 func Banner() {
 
 	ClearScreen()
+
+	//Teletype("\nWelcome to ...\n")
+	fmt.Printf("\nWelcome to ...\n")
+
+	//time.Sleep(500 * time.Millisecond)
+
+	foobarbaz :=
+		`  █████▒▒█████   ▒█████   ▄▄▄▄    ▄▄▄       ██▀███   ▄▄▄▄    ▄▄▄     ▒███████▒` + "\n" +
+			`▓██   ▒▒██▒  ██▒▒██▒  ██▒▓█████▄ ▒████▄    ▓██ ▒ ██▒▓█████▄ ▒████▄   ▒ ▒ ▒ ▄▀░` + "\n" +
+			`▒████ ░▒██░  ██▒▒██░  ██▒▒██▒ ▄██▒██  ▀█▄  ▓██ ░▄█ ▒▒██▒ ▄██▒██  ▀█▄ ░ ▒ ▄▀▒░ ` + "\n" +
+			`░▓█▒  ░▒██   ██░▒██   ██░▒██░█▀  ░██▄▄▄▄██ ▒██▀▀█▄  ▒██░█▀  ░██▄▄▄▄██  ▄▀▒   ░` + "\n" +
+			`░▒█░   ░ ████▓▒░░ ████▓▒░░▓█  ▀█▓ ▓█   ▓██▒░██▓ ▒██▒░▓█  ▀█▓ ▓█   ▓██▒███████▒` + "\n" +
+			` ▒ ░   ░ ▒░▒░▒░ ░ ▒░▒░▒░ ░▒▓███▀▒ ▒▒   ▓▒█░░ ▒▓ ░▒▓░░▒▓███▀▒ ▒▒   ▓▒█░▒▒ ▓░▒░▒` + "\n" +
+			` ░       ░ ▒ ▒░   ░ ▒ ▒░ ▒░▒   ░   ▒   ▒▒ ░  ░▒ ░ ▒░▒░▒   ░   ▒   ▒▒ ░░▒ ▒ ░ ▒` + "\n" +
+			` ░ ░   ░ ░ ░ ▒  ░ ░ ░ ▒   ░    ░   ░   ▒     ░░   ░  ░    ░   ░   ▒  ░ ░ ░ ░ ░` + "\n" +
+			`           ░ ░      ░ ░   ░            ░  ░   ░      ░            ░  ░ ░ ░    ` + "\n" +
+			`                               ░                          ░          ░        `
+
+		//for i := 0; i <= 4; i++ {
+	ClearScreen()
+	fmt.Printf(White("\nWelcome to ...\n"))
+	fmt.Println(ColorBanner(foobarbaz))
+	//	time.Sleep(100 * time.Millisecond)
+	//}
+
+}
+
+func StartBanner() {
+
+	ClearScreen()
 	//fmt.Printf(White("\nWelcome to ...\n"))
 
 	Teletype("\nWelcome to ...\n")
@@ -19,7 +49,7 @@ func Banner() {
 
 	//}
 
-	time.Sleep(1000 * time.Millisecond)
+	time.Sleep(500 * time.Millisecond)
 	//	fmt.Println(Red(
 	//		`   ______         ______           ______              ` + "\n" +
 	//			`   |  ___|        | ___ \          | ___ \             ` + "\n" +
@@ -42,7 +72,7 @@ func Banner() {
 			`           ░ ░      ░ ░   ░            ░  ░   ░      ░            ░  ░ ░ ░    ` + "\n" +
 			`                               ░                          ░          ░        `
 
-	for i := 0; i <= 40; i++ {
+	for i := 0; i <= 20; i++ {
 		ClearScreen()
 		fmt.Printf(White("\nWelcome to ...\n"))
 		fmt.Println(ColorBanner(foobarbaz))

@@ -162,7 +162,7 @@ func (c Agent) StatusBar() {
 // The average stat is compared with the position in the fibonacci sequence
 // then the product of the postion and the multiplier var = Stat Cost
 func StatCost(c Agent) int {
-	m := 1 // multiplier
+	m := 5 // multiplier
 	tStat := c.Str.Val + c.Int.Val + c.Dex.Val + c.MxHp.Val
 	avStat := tStat / 4
 
