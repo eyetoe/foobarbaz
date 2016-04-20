@@ -38,9 +38,16 @@ func SimFight(c Agent, f Agent) bool {
 		// Character Attacks
 		winner, loser := SimAttack(&x, &y)
 		if winner.Name == x.Name {
+
 			hp := Roll(2, winner.Weap.Damage)
-			//fmt.Println(loser.Name, "takes", hp)
-			loser.AdjHp(0 - hp)
+			if hp > loser.Armor.Defence {
+				hp = hp - loser.Armor.Defence
+				loser.AdjHp(0 - hp)
+				//else don't adjust
+			} else {
+				hp = 0
+			}
+
 			if loser.Dead == true {
 				return true
 			}
@@ -50,8 +57,13 @@ func SimFight(c Agent, f Agent) bool {
 		winner, loser = SimAttack(&y, &x)
 		if winner.Name == y.Name {
 			hp := Roll(2, winner.Weap.Damage)
-			//fmt.Println(loser.Name, "takes", hp)
-			loser.AdjHp(0 - hp)
+			if hp > loser.Armor.Defence {
+				hp = hp - loser.Armor.Defence
+				loser.AdjHp(0 - hp)
+				//else don't adjust
+			} else {
+				hp = 0
+			}
 			if loser.Dead == true {
 				return false
 			}

@@ -242,11 +242,22 @@ func Damage(a *Agent, d *Agent, odds int) string {
 
 	hp := Roll(2, a.Weap.Damage)
 
-	d.AdjHp(0 - hp)
+	// if hp is greater than the damage resist then subtract
+	if hp > d.Armor.Defence {
+		hp = hp - d.Armor.Defence
+		d.AdjHp(0 - hp)
+		textOut = textOut + fmt.Sprintf("for %s damage. ", Red(strconv.Itoa(hp)))
+		textOut = textOut + fmt.Sprintf("%s's health = %s.\n", d.Name, Red(strconv.Itoa(d.Hp.Val)))
+		//else don't adjust
+	} else {
+		hp = 0
+		textOut = textOut + fmt.Sprintf("%s! for %s damage. ", YellowU("Resist"), Red(strconv.Itoa(hp)))
+		textOut = textOut + fmt.Sprintf("%s's health = %s.\n", d.Name, Red(strconv.Itoa(d.Hp.Val)))
+	}
 
 	//if d.Dead == false {
-	textOut = textOut + fmt.Sprintf("for %s damage. ", Red(strconv.Itoa(hp)))
-	textOut = textOut + fmt.Sprintf("%s's health = %s.\n", d.Name, Red(strconv.Itoa(d.Hp.Val)))
+	//textOut = textOut + fmt.Sprintf("for %s damage. ", Red(strconv.Itoa(hp)))
+	//textOut = textOut + fmt.Sprintf("%s's health = %s.\n", d.Name, Red(strconv.Itoa(d.Hp.Val)))
 	//}
 
 	// Monster agents don't have a save file set
@@ -277,11 +288,13 @@ func Damage(a *Agent, d *Agent, odds int) string {
 
 func WinHeal(c *Agent) string {
 	var textOut string
-	h := Roll(1, (c.MxHp.Val - c.Hp.Val))
-	if c.MxHp.Val > c.Hp.Val && c.MxHp.Val+50 >= Roll(2, 100) {
-		c.AdjHp(h)
-		textOut = textOut + fmt.Sprintf(Green("\nIn victory heal %d hit points!\n\n"), h)
-		c.Save()
+	if c.MxHp.Val != c.Hp.Val {
+		h := Roll(1, (c.MxHp.Val - c.Hp.Val))
+		if c.MxHp.Val > c.Hp.Val && c.MxHp.Val+50 >= Roll(2, 100) {
+			c.AdjHp(h)
+			textOut = textOut + fmt.Sprintf(Green("\nIn victory heal %d hit points!\n\n"), h)
+			c.Save()
+		}
 	}
 	return textOut
 }

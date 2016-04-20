@@ -41,8 +41,8 @@ func Prompt() {
 		fmt.Printf("%svent, ", GreenU("E"))
 		fmt.Printf("%sest, ", GreenU("R"))
 		fmt.Printf("%srain ", GreenU("T"))
-		fmt.Printf("%sile, ", GreenU("F"))
 		fmt.Printf("%so, ", GreenU("G"))
+		fmt.Printf("%soad, ", GreenU("L"))
 		fmt.Printf("%snventory <: ", GreenU("I"))
 
 		choice, _, _ := GetChar()
@@ -66,7 +66,7 @@ func Prompt() {
 		case "t", "T":
 			ExpMgr(&Char)
 			continue
-		case "f", "F":
+		case "l", "L":
 			Banner()
 			PickChar()
 			Char.Load()
