@@ -9,7 +9,7 @@ var Malaise = Item{
 	Description: "you are overwrought with a feeling of dread and dispair!",
 	Slot:        "Weapon",
 	Affects:     []Affect{Charged},
-	Attack:      5,
-	Damage:      25,
+	Attack:      0,
+	Damage:      18,
 	Crit:        10,
 }

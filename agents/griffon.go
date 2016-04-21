@@ -10,7 +10,7 @@ var Griffon = Agent{
 	Name:        "Griffon",
 	Description: "majestic yet ferocious, the beast is hungry.",
 	// Stats
-	Str: Stat{"Strength", 20},
+	Str: Stat{"Strength", 40},
 	Int: Stat{"Intelligence", 5},
 	Dex: Stat{"Dexterity", 5},
 	// Health and Wellness

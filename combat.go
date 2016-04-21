@@ -170,9 +170,6 @@ func Fight(c *Agent, f *Agent) {
 			continue
 		// Describe Foe
 		case "d", "D":
-			//fmt.Printf(Blue("\nYou consider the %s. %s\n"), f.Name, f.Description)
-			fmt.Println("Bacon bits")
-			//c.Weap.Display()
 			f.Describe()
 			FoeBar(*c, *f)
 			fmt.Println()
@@ -365,20 +362,20 @@ func Spawn(c Agent) Agent {
 	rand.Seed(time.Now().UTC().UnixNano())
 	monsters := []Agent{
 		//Add monsters here to be included in random spawn
+		Kobold,
 		Spider,
 		Phantom,
-		Pixie,
-		Kobold,
-		Warlock,
 		Coyote,
+		Pixie,
+		Warlock,
 		Rogue,
-		Minotaur,
-		Lacrimosa,
-		Griffon,
 		Blackshuck,
-		Goat,
+		Minotaur,
+		Griffon,
+		Lacrimosa,
 		Drake,
 		FlyingPig,
+		Goat,
 	}
 
 	// candidate is a proposed foe.  The candidate is tested with the Odds()

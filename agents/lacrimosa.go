@@ -12,7 +12,7 @@ var Lacrimosa = Agent{
 	// Stats
 	Str: Stat{"Strength", 20},
 	Int: Stat{"Intelligence", 40},
-	Dex: Stat{"Dexterity", 30},
+	Dex: Stat{"Dexterity", 10},
 	// Health and Wellness
 	MxHp: Stat{"Max Health", 25},
 	Hp:   Stat{"Current Health", 25},
