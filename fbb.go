@@ -11,6 +11,9 @@ import (
 var SaveFile string
 
 func main() {
+	// uncomment Sandbox() to run testing function before starting game
+	// see sandbox.go
+	//Sandbox()
 
 	EnvSetup()
 	PickChar()
@@ -20,9 +23,6 @@ func main() {
 	// for testing, Resurrect if character is dead
 	Resurrect(&Char)
 
-	// uncomment Sandbox() to run testing function before starting game
-	// see sandbox.go
-	//;wqSandbox()
 	// This is the main loop
 	Prompt()
 	return

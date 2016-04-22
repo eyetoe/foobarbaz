@@ -246,19 +246,29 @@ func Resurrect(c *Agent) {
 		fmt.Printf("[H[J")
 		time.Sleep(1000 * time.Millisecond)
 
-		fmt.Printf(Blue("\n A mystical light shines down on %s's lifeless corpse.\n\n "), c.Name)
+		for _, c := range string(fmt.Sprintf("\n A mystical light shines down on %s's lifeless corpse.\n\n", c.Name)) {
+			fmt.Printf(Blue(string(c)))
+			time.Sleep(50 * time.Millisecond)
+		}
 		time.Sleep(1000 * time.Millisecond)
-		fmt.Printf(Blue("A sulfurous effluvium expands from the body.\n\n"))
+		for _, c := range string(fmt.Sprintf(" A sulfurous effluvium expands from the body.\n\n")) {
+			fmt.Printf(Blue(string(c)))
+			time.Sleep(50 * time.Millisecond)
+		}
 		time.Sleep(1000 * time.Millisecond)
-		fmt.Printf(Blue("%s takes a gasping breath, and lives!\n\n"), c.Name)
+		for _, c := range string(fmt.Sprintf(" %s takes a gasping breath, and lives", c.Name)) {
+			fmt.Printf(Blue(string(c)))
+			time.Sleep(50 * time.Millisecond)
+		}
+		for t := 0; t < 5; t++ {
+			fmt.Printf(Blue(" ."))
+			time.Sleep(250 * time.Millisecond)
+		}
+		fmt.Println("\n")
 
 		c.Hp.Val = c.MxHp.Val
 		c.Dead = false
 		c.Save()
-		for t := 0; t < 5; t++ {
-			fmt.Printf(Blue("."))
-			time.Sleep(100 * time.Millisecond)
-		}
 		Continue()
 	} else {
 		return
