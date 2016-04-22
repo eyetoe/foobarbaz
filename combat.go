@@ -144,7 +144,7 @@ func Fight(c *Agent, f *Agent) {
 			// Player Attacks First
 			winner, _, charAttackDetails = Attack(c, f)
 			if c.Name == winner.Name {
-				foeDamageOut = Damage(c, f, odds)
+				foeDamageOut = DoDamage(c, f, odds)
 				if f.Dead == true {
 					healmsg = WinHeal(c)
 					dropmsg = DropPotion(c)
@@ -154,7 +154,7 @@ func Fight(c *Agent, f *Agent) {
 			// Foe Attacks Second
 			winner, _, foeAttackDetails = Attack(f, c)
 			if f.Name == winner.Name {
-				charDamageOut = Damage(f, c, odds)
+				charDamageOut = DoDamage(f, c, odds)
 			}
 			// Evade
 			continue
@@ -233,11 +233,15 @@ func Attack(a *Agent, d *Agent) (*Agent, *Agent, string) {
 }
 
 // Calculate and apply damage to Agent
-func Damage(a *Agent, d *Agent, odds int) string {
+func DoDamage(a *Agent, d *Agent, odds int) string {
 
 	var textOut string
 
 	hp := Roll(2, a.Weap.Damage)
+	if a.Weap.Crit >= Roll(1, 100) {
+		hp = hp + a.Weap.Damage
+		textOut = fmt.Sprintf(MagentaU("Critical") + " ")
+	}
 
 	// if hp is greater than the damage resist then subtract
 	if hp > d.Armor.Defence {
