@@ -15,7 +15,9 @@ import (
 // PickChar is the initial character load/create prompt
 func PickChar() {
 	var files []os.FileInfo
-	StartBanner()
+	if SaveFile == "" {
+		StartBanner()
+	}
 	for {
 		Banner()
 		num := 1

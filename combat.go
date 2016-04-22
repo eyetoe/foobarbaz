@@ -240,7 +240,7 @@ func DoDamage(a *Agent, d *Agent, odds int) string {
 	hp := Roll(2, a.Weap.Damage)
 	if a.Weap.Crit >= Roll(1, 100) {
 		hp = hp + a.Weap.Damage
-		textOut = fmt.Sprintf(MagentaU("Critical") + " ")
+		textOut = fmt.Sprintf(CyanU("Critical") + " ")
 	}
 
 	// if hp is greater than the damage resist then subtract
