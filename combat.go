@@ -376,6 +376,7 @@ func Spawn(c Agent) Agent {
 		Drake,
 		FlyingPig,
 		Goat,
+		Blob,
 	}
 
 	// candidate is a proposed foe.  The candidate is tested with the Odds()

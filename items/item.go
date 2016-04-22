@@ -49,7 +49,7 @@ func (i *Item) Display() {
 	if i.Attack != 0 {
 		fmt.Printf("	Attack:	+%s, \n", Yellow(strconv.Itoa(i.Attack)))
 	}
-	if i.Attack != 0 {
+	if i.Damage != 0 {
 		fmt.Printf("	Damage:	1d%s, \n", Yellow(strconv.Itoa(i.Damage)))
 	}
 	if i.Defence != 0 {
