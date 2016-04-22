@@ -377,6 +377,12 @@ func Spawn(c Agent) Agent {
 		FlyingPig,
 		Goat,
 		Blob,
+		MakeMonster(&c),
+		MakeMonster(&c),
+		MakeMonster(&c),
+		MakeMonster(&c),
+		MakeMonster(&c),
+		MakeMonster(&c),
 	}
 
 	// candidate is a proposed foe.  The candidate is tested with the Odds()

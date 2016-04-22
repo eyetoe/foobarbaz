@@ -264,3 +264,60 @@ func Resurrect(c *Agent) {
 		return
 	}
 }
+func MakeMonster(c *Agent) Agent {
+
+	power := (c.Str.Val + c.Int.Val + c.Dex.Val + c.MxHp.Val) / 2
+	health := Roll(2, power)
+
+	var Monster = Agent{
+		// Name and Description
+		Name:        "Shoggoth",
+		Description: "is a rancid writhing ball of organic components.",
+		// Stats
+		Str: Stat{"Strength", Roll(2, power)},
+		Int: Stat{"Intelligence", Roll(1, power)},
+		Dex: Stat{"Dexterity", Roll(2, power)},
+		// Health and Wellness
+		MxHp: Stat{"Max Health", health},
+		Hp:   Stat{"Current Health", health},
+		Dead: false,
+		// Equiped items
+		Weap:  MakeWeapon(c),
+		Armor: Empty,
+		Trink: Empty,
+		// Inventory
+		Inv: []Item{},
+		Art: "\n" +
+			`            oo88888888boo                        ` + "\n" +
+			`            '""88888888888bo                     ` + "\n" +
+			`                ""888; '"Y888o                   ` + "\n" +
+			`                   Y88;    "Y88.                 ` + "\n" +
+			`                    "88.     '88b.    ,          ` + "\n" +
+			`                     'Yb      '888.   :8b        ` + "\n" +
+			`                       Yb    , '888.   88b       ` + "\n" +
+			`                        Y.    ' '"88.  Y8"8.     ` + "\n" +
+			`                         Y. '. b ''8b  :8 Y8.    ` + "\n" +
+			`           ,oooooooo      Yo :.'b'b'8;  8  8b    ` + "\n" +
+			`    ,ood8P""""""""88888oo  8b Y.:b:b:8;,8 ,:8.   ` + "\n" +
+			`,od88888bo  ' ,o.   """888o'8b'8 Y.8.88d8 : 8;   ` + "\n" +
+			`"""""""""""8oo',. 'oo.   ""888b8b:8db8888 d :8 :;` + "\n" +
+			`          d8888boP , "Y88o. ""Y8888888888 8 d8.88` + "\n" +
+			`        o""""888888o''o'"88bood8888888888:8,;8888` + "\n",
+	}
+	return Monster
+}
+
+func MakeWeapon(c *Agent) Item {
+	power := (c.Str.Val + c.Int.Val + c.Dex.Val + c.MxHp.Val) / 6
+
+	var Tentacle = Item{
+		Name:        "Tentacle",
+		Description: "a writhing limb of seeking flesh!",
+		Slot:        "Weapon",
+		//Affects:     []Affect{},
+		Attack: Roll(1, power),
+		Damage: Roll(1, power),
+		Crit:   10,
+	}
+	return Tentacle
+}
