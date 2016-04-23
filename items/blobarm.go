@@ -12,5 +12,5 @@ var Blobarm = Item{
 	Affects:     []Affect{},
 	Attack:      Roll(1, 50),
 	Damage:      Roll(1, 50),
-	Crit:        10,
+	Crit:        1,
 }

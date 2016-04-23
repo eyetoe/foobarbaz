@@ -1,7 +1,7 @@
 package affects
 
 var OnFire = Affect{
-	Name:        "Flamming",
+	Name:        "Flaming",
 	Description: "is hot to the touch, and displays an ominous red glow",
 	Proc:        25,
 	Message:     "your foe is aflame!",

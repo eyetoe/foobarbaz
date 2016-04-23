@@ -9,7 +9,7 @@ import (
 
 // Meter provides a health meter to represent health scaled to
 // barWidth.
-func Meter(num, max, fmax int, l, t string) {
+func Meter(num, max, fmax int, l, t string, c string) {
 	// calculate the actual percentage
 	p := float32(num) / float32(max)
 
@@ -20,20 +20,40 @@ func Meter(num, max, fmax int, l, t string) {
 
 	// display meter
 	fmt.Printf("%s	%s	:", Yellow(l), White(strconv.Itoa(num)))
-	// drawing from left to right
-	for c := 1; c <= barWidth; c++ {
 
-		if c <= int(percentBar) {
-			fmt.Printf(Green(t))
-		} else {
-			if num <= fmax {
-				fmt.Printf(Magenta(t))
+	if c == "hero" {
+		// drawing from left to right
+		for c := 1; c <= barWidth; c++ {
+
+			if c <= int(percentBar) {
+				fmt.Printf(Green(t))
 			} else {
-				fmt.Printf(Red(t))
+				if num <= fmax {
+					fmt.Printf(Magenta(t))
+				} else {
+					fmt.Printf(Red(t))
+				}
+			}
+			if c == barWidth {
+				fmt.Println(":")
 			}
 		}
-		if c == barWidth {
-			fmt.Println(":")
+	} else {
+		// drawing from left to right
+		for c := 1; c <= barWidth; c++ {
+
+			if c <= int(percentBar) {
+				fmt.Printf(Cyan(t))
+			} else {
+				if num <= fmax {
+					fmt.Printf(Red(t))
+				} else {
+					fmt.Printf(Black(t))
+				}
+			}
+			if c == barWidth {
+				fmt.Println(":")
+			}
 		}
 	}
 

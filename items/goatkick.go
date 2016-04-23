@@ -11,5 +11,5 @@ var GoatKick = Item{
 	Affects:     []Affect{Charged},
 	Attack:      10,
 	Damage:      8,
-	Crit:        10,
+	Crit:        1,
 }

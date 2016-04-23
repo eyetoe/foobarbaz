@@ -11,5 +11,5 @@ var Fang = Item{
 	Affects:     []Affect{Charged},
 	Attack:      0,
 	Damage:      2,
-	Crit:        10,
+	Crit:        1,
 }

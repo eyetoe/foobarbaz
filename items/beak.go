@@ -11,5 +11,5 @@ var Beak = Item{
 	Affects:     []Affect{},
 	Attack:      6,
 	Damage:      12,
-	Crit:        10,
+	Crit:        1,
 }

@@ -44,7 +44,7 @@ func SimFight(c Agent, f Agent) bool {
 				hp = hp - loser.Armor.Defence
 
 				// Critical Strike
-				if winner.Weap.Crit >= Roll(1, 100) {
+				if winner.Weap.Crit+(winner.Int.Val/4) >= Roll(1, 100) {
 					hp = hp + winner.Weap.Crit
 				}
 
@@ -67,7 +67,7 @@ func SimFight(c Agent, f Agent) bool {
 				hp = hp - loser.Armor.Defence
 
 				// Critical Strike
-				if winner.Weap.Crit >= Roll(1, 100) {
+				if winner.Weap.Crit+(winner.Int.Val/4) >= Roll(1, 100) {
 					hp = hp + winner.Weap.Crit
 				}
 

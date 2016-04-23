@@ -63,7 +63,7 @@ func (i *Item) Display() {
 		fmt.Printf("	DoT:	%s, \n", Yellow(strconv.Itoa(i.DoT)))
 	}
 	if i.Crit != 0 {
-		fmt.Printf("	Crit:	%s%%, \n", Yellow(strconv.Itoa(i.Crit)))
+		fmt.Printf("	Crit:	+%s%%, \n", Yellow(strconv.Itoa(i.Crit)))
 	}
 
 	// Prety print var Affects if defined

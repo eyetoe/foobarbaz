@@ -11,5 +11,5 @@ var Shriek = Item{
 	Affects:     []Affect{Charged},
 	Attack:      -2,
 	Damage:      15,
-	Crit:        10,
+	Crit:        1,
 }

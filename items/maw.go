@@ -11,5 +11,5 @@ var Maw = Item{
 	Affects:     []Affect{Charged},
 	Attack:      1,
 	Damage:      4,
-	Crit:        10,
+	Crit:        1,
 }

@@ -55,14 +55,20 @@ type Agent struct {
 }
 
 func (c Agent) ExpDrop() int {
-	t := c.Str.Val + c.Int.Val + c.Dex.Val + c.MxHp.Val
-	return t
+	// add character stats
+	s := c.Str.Val + c.Int.Val + c.Dex.Val + c.MxHp.Val
+	// and weapon stats
+	w := c.Weap.Attack + c.Weap.Damage + c.Weap.Defence + c.Weap.Dodge + c.Weap.Crit + c.Weap.DropChance
+	// and armor stats
+	a := c.Armor.Attack + c.Armor.Damage + c.Armor.Defence + c.Armor.Dodge + c.Armor.Crit + c.Armor.DropChance
+	return s + w + a
 }
 
 func (c *Agent) Describe() {
 	fmt.Printf(YellowU("\n%s:\n"), c.Name)
 	fmt.Printf(Cyan("You consider the %s, "), c.Name)
 	fmt.Printf(Cyan("%s\n"), c.Description)
+	fmt.Printf("%s %s\n", White(" Total critical chance:"), Yellow(strconv.Itoa(c.Weap.Crit+(c.Int.Val/4)), "%\n"))
 	c.Weap.Display()
 	if c.Weap.DropChance > 0 {
 		fmt.Printf("	%s%% %s\n\n", Yellow(strconv.Itoa(c.Weap.DropChance)), Cyan("drop chance"))
@@ -153,7 +159,7 @@ func (c Agent) StatusBar() {
 	fmt.Printf("%s", Yellow(" T:"))
 	fmt.Printf("%s", ItemC(c.Trink.Name))
 	fmt.Println()
-	Meter(c.Hp.Val, c.MxHp.Val, c.FoeMaxHit, "Health", "█")
+	Meter(c.Hp.Val, c.MxHp.Val, c.FoeMaxHit, "Health", "█", "hero")
 	// interesting palate of ascii for perusing
 	//░▒█░   ░ ████▓▒░░ ████▓▒░░▓█  ▀█▓ ▓█   ▓██▒░██▓ ▒██▒░▓█  ▀█▓ ▓█   ▓██▒███████▒
 }
@@ -162,7 +168,7 @@ func (c Agent) StatusBar() {
 // The average stat is compared with the position in the fibonacci sequence
 // then the product of the postion and the multiplier var = Stat Cost
 func StatCost(c Agent) int {
-	m := 3 // multiplier
+	m := 5 // multiplier
 	tStat := c.Str.Val + c.Int.Val + c.Dex.Val + c.MxHp.Val
 	avStat := tStat / 4
 
@@ -285,7 +291,7 @@ func MakeMonster(c *Agent) Agent {
 		Description: "is a rancid writhing ball of organic components.",
 		// Stats
 		Str: Stat{"Strength", Roll(2, power)},
-		Int: Stat{"Intelligence", Roll(1, power)},
+		Int: Stat{"Intelligence", Roll(3, power/2)},
 		Dex: Stat{"Dexterity", Roll(2, power)},
 		// Health and Wellness
 		MxHp: Stat{"Max Health", health},
@@ -298,27 +304,29 @@ func MakeMonster(c *Agent) Agent {
 		// Inventory
 		Inv: []Item{},
 		Art: "\n" +
-			`            oo88888888boo                        ` + "\n" +
-			`            '""88888888888bo                     ` + "\n" +
-			`                ""888; '"Y888o                   ` + "\n" +
-			`                   Y88;    "Y88.                 ` + "\n" +
-			`                    "88.     '88b.    ,          ` + "\n" +
-			`                     'Yb      '888.   :8b        ` + "\n" +
-			`                       Yb    , '888.   88b       ` + "\n" +
-			`                        Y.    ' '"88.  Y8"8.     ` + "\n" +
-			`                         Y. '. b ''8b  :8 Y8.    ` + "\n" +
-			`           ,oooooooo      Yo :.'b'b'8;  8  8b    ` + "\n" +
-			`    ,ood8P""""""""88888oo  8b Y.:b:b:8;,8 ,:8.   ` + "\n" +
-			`,od88888bo  ' ,o.   """888o'8b'8 Y.8.88d8 : 8;   ` + "\n" +
-			`"""""""""""8oo',. 'oo.   ""888b8b:8db8888 d :8 :;` + "\n" +
-			`          d8888boP , "Y88o. ""Y8888888888 8 d8.88` + "\n" +
+			`           .ooO8O80^^^^o_                        ` + "\n" +
+			`           '^""\0... 0 .^^\                      ` + "\n" +
+			`          .'    "\0. .0  0.0\                    ` + "\n" +
+			`           .       \0..0' '"Y8\.                 ` + "\n" +
+			`                   .\0..0' '0'88\.    ,          ` + "\n" +
+			`                   ..\0..0'  0'88\.   :8b        ` + "\n" +
+			`                   ..-\0..0' ,0'88\.   88b       ` + "\n" +
+			`                 ..--no\0..0' '0'"8\.  Y8"8.     ` + "\n" +
+			`               ...-noo.ob0..0. b ''8\  :8 Y8.    ` + "\n" +
+			`           ,oooooooooobb.bYo :.'b'b'8;  8  8b    ` + "\n" +
+			`    ,ood8P0"0"0"0"88888ooi 8b Y.:b:b:8;,8 ,:8.   ` + "\n" +
+			`,od88888bo 0'0,  0 0"0"888o'8b'8 Y.8.88d8 : 8;   ` + "\n" +
+			`"""""""""""8oo',0   0.0  ""888b8b:8db8888 d :8 :;` + "\n" +
+			`          d8888boP 0 "Y88o. ""Y8888888888 8 d8.88` + "\n" +
 			`        o""""888888o''o'"88bood8888888888:8,;8888` + "\n",
 	}
 	return Monster
 }
 
 func MakeWeapon(c *Agent) Item {
-	power := (c.Str.Val + c.Int.Val + c.Dex.Val + c.MxHp.Val) / 6
+	// divisor: larger divisor makes easier weapon
+	divisor := 6
+	power := (c.Str.Val + c.Int.Val + c.Dex.Val + c.MxHp.Val) / divisor
 
 	var Tentacle = Item{
 		Name:        "Tentacle",
@@ -327,7 +335,7 @@ func MakeWeapon(c *Agent) Item {
 		//Affects:     []Affect{},
 		Attack: Roll(1, power),
 		Damage: Roll(1, power),
-		Crit:   10,
+		Crit:   1,
 	}
 	return Tentacle
 }

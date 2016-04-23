@@ -31,7 +31,7 @@ func Fight(c *Agent, f *Agent) {
 	display := func() {
 		c.StatusBar()
 		fmt.Println()
-		FoeBar(*c, *f)
+		//FoeBar(*c, *f)
 
 		// Color Foe's name and show victory chance percentage
 		switch {
@@ -46,6 +46,9 @@ func Fight(c *Agent, f *Agent) {
 		case odds >= 0:
 			fmt.Printf(Red("%s\n"), f.Art)
 		}
+		FoeBar(*c, *f)
+		Meter(f.Hp.Val, f.MxHp.Val, c.Weap.Damage, "Health", "█", "foe")
+		//░▒█░   ░ ████▓▒░░ ████▓▒░░▓█  ▀█▓ ▓█   ▓██▒░██▓ ▒██▒░▓█  ▀█▓ ▓█   ▓██▒███████▒
 
 	}
 
@@ -238,7 +241,9 @@ func DoDamage(a *Agent, d *Agent, odds int) string {
 	var textOut string
 
 	hp := Roll(2, a.Weap.Damage)
-	if a.Weap.Crit >= Roll(1, 100) {
+	//fmt.Println(a.Name, "critical chance is: ", a.Weap.Crit+(a.Int.Val/4))
+	//Continue()
+	if a.Weap.Crit+(a.Int.Val/4) >= Roll(1, 100) {
 		hp = hp + a.Weap.Damage
 		textOut = fmt.Sprintf(CyanU("Critical") + " ")
 	}

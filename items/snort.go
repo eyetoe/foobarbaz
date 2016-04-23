@@ -11,5 +11,5 @@ var Snort = Item{
 	Affects:     []Affect{Charged},
 	Attack:      5,
 	Damage:      4,
-	Crit:        10,
+	Crit:        1,
 }

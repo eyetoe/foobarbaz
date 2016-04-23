@@ -11,5 +11,5 @@ var Malaise = Item{
 	Affects:     []Affect{Charged},
 	Attack:      0,
 	Damage:      18,
-	Crit:        10,
+	Crit:        1,
 }
