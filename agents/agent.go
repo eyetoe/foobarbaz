@@ -162,7 +162,7 @@ func (c Agent) StatusBar() {
 // The average stat is compared with the position in the fibonacci sequence
 // then the product of the postion and the multiplier var = Stat Cost
 func StatCost(c Agent) int {
-	m := 5 // multiplier
+	m := 3 // multiplier
 	tStat := c.Str.Val + c.Int.Val + c.Dex.Val + c.MxHp.Val
 	avStat := tStat / 4
 
@@ -248,21 +248,21 @@ func Resurrect(c *Agent) {
 
 		for _, c := range string(fmt.Sprintf("\n A mystical light shines down on %s's lifeless corpse.\n\n", c.Name)) {
 			fmt.Printf(Blue(string(c)))
-			time.Sleep(50 * time.Millisecond)
+			time.Sleep(20 * time.Millisecond)
 		}
 		time.Sleep(1000 * time.Millisecond)
 		for _, c := range string(fmt.Sprintf(" A sulfurous effluvium expands from the body.\n\n")) {
 			fmt.Printf(Blue(string(c)))
-			time.Sleep(50 * time.Millisecond)
+			time.Sleep(20 * time.Millisecond)
 		}
 		time.Sleep(1000 * time.Millisecond)
 		for _, c := range string(fmt.Sprintf(" %s takes a gasping breath, and lives", c.Name)) {
 			fmt.Printf(Blue(string(c)))
-			time.Sleep(50 * time.Millisecond)
+			time.Sleep(20 * time.Millisecond)
 		}
 		for t := 0; t < 5; t++ {
-			fmt.Printf(Blue(" ."))
-			time.Sleep(250 * time.Millisecond)
+			fmt.Printf(Blue("."))
+			time.Sleep(150 * time.Millisecond)
 		}
 		fmt.Println("\n")
 
