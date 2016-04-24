@@ -48,6 +48,7 @@ func Fight(c *Agent, f *Agent) {
 		}
 		FoeBar(*c, *f)
 		Meter(f.Hp.Val, f.MxHp.Val, c.Weap.Damage, "Health", "█", "foe")
+		fmt.Println()
 		//░▒█░   ░ ████▓▒░░ ████▓▒░░▓█  ▀█▓ ▓█   ▓██▒░██▓ ▒██▒░▓█  ▀█▓ ▓█   ▓██▒███████▒
 
 	}
@@ -407,7 +408,7 @@ func Spawn(c Agent) Agent {
 		candidate = monsters[rand.Intn(len(monsters))]
 		candidateOdds := Odds(&c, &candidate)
 
-		if candidateOdds < 95 && candidateOdds > 5 {
+		if candidateOdds < 95 && candidateOdds > 30 {
 			return candidate
 		}
 	}

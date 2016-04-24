@@ -13,9 +13,9 @@ var Blob = Agent{
 	Name:        "Blob",
 	Description: "undulating mass of living tissue, it senses you, and gurgles in your direction.",
 	// Stats
-	Str: Stat{"Strength", Roll(1, 50)},
-	Int: Stat{"Intelligence", Roll(1, 50)},
-	Dex: Stat{"Dexterity", Roll(1, 50)},
+	Str: Stat{"Strength", Roll(3, 50)},
+	Int: Stat{"Intelligence", Roll(3, 50)},
+	Dex: Stat{"Dexterity", Roll(3, 50)},
 	// Health and Wellness
 	MxHp: Stat{"Max Health", randHP},
 	Hp:   Stat{"Current Health", randHP},

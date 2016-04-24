@@ -10,7 +10,7 @@ var Blobarm = Item{
 	Description: "extends in your direction with a horrifying yearning.",
 	Slot:        "Weapon",
 	Affects:     []Affect{},
-	Attack:      Roll(1, 50),
-	Damage:      Roll(1, 50),
+	Attack:      Roll(3, 50),
+	Damage:      Roll(3, 50),
 	Crit:        1,
 }

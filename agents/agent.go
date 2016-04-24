@@ -168,7 +168,7 @@ func (c Agent) StatusBar() {
 // The average stat is compared with the position in the fibonacci sequence
 // then the product of the postion and the multiplier var = Stat Cost
 func StatCost(c Agent) int {
-	m := 5 // multiplier
+	m := 4 // multiplier
 	tStat := c.Str.Val + c.Int.Val + c.Dex.Val + c.MxHp.Val
 	avStat := tStat / 4
 
@@ -282,7 +282,9 @@ func Resurrect(c *Agent) {
 }
 func MakeMonster(c *Agent) Agent {
 
-	power := (c.Str.Val + c.Int.Val + c.Dex.Val + c.MxHp.Val) / 2
+	divisor := 2
+
+	power := (c.Str.Val + c.Int.Val + c.Dex.Val + c.MxHp.Val) / divisor
 	health := Roll(2, power)
 
 	var Monster = Agent{
@@ -290,9 +292,9 @@ func MakeMonster(c *Agent) Agent {
 		Name:        "Shoggoth",
 		Description: "is a rancid writhing ball of organic components.",
 		// Stats
-		Str: Stat{"Strength", Roll(2, power)},
+		Str: Stat{"Strength", Roll(3, power)},
 		Int: Stat{"Intelligence", Roll(3, power/2)},
-		Dex: Stat{"Dexterity", Roll(2, power)},
+		Dex: Stat{"Dexterity", Roll(3, power)},
 		// Health and Wellness
 		MxHp: Stat{"Max Health", health},
 		Hp:   Stat{"Current Health", health},
@@ -325,7 +327,7 @@ func MakeMonster(c *Agent) Agent {
 
 func MakeWeapon(c *Agent) Item {
 	// divisor: larger divisor makes easier weapon
-	divisor := 6
+	divisor := 8
 	power := (c.Str.Val + c.Int.Val + c.Dex.Val + c.MxHp.Val) / divisor
 
 	var Tentacle = Item{
@@ -334,7 +336,7 @@ func MakeWeapon(c *Agent) Item {
 		Slot:        "Weapon",
 		//Affects:     []Affect{},
 		Attack: Roll(1, power),
-		Damage: Roll(1, power),
+		Damage: Roll(2, power),
 		Crit:   1,
 	}
 	return Tentacle
