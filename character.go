@@ -149,7 +149,7 @@ func ExpMgr(c *Agent) {
 		fmt.Printf(Blue("You have %s %s\n"), Green(strconv.Itoa(c.Exp)), Blue("experience.\n"))
 		fmt.Printf(Blue("Choose a Stat to increase 1 point\n"))
 		fmt.Printf(":>	%strength	 (%s xp), %s +%s %s\n", Green("S"), Yellow(strconv.Itoa(cost)), Cyan("current"), Yellow(strconv.Itoa(c.Str.Val)), Cyan("bonus to attack roll."))
-		fmt.Printf("	%sntelligence	 (%s xp), %s +%s%% %s\n", Green("I"), Yellow(strconv.Itoa(cost)), Cyan("current"), Yellow(strconv.Itoa(c.Int.Val/4)), Cyan("crital strice chance."))
+		fmt.Printf("	%sntelligence	 (%s xp), %s +%s%% %s\n", Green("I"), Yellow(strconv.Itoa(cost)), Cyan("current"), Yellow(strconv.Itoa(c.Int.Val/2)), Cyan("crital strice chance."))
 		fmt.Printf("	%sexterity	 (%s xp), %s +%s %s\n", Green("D"), Yellow(strconv.Itoa(cost)), Cyan("current"), Yellow(strconv.Itoa(c.Dex.Val)), Cyan("bonus to dodge roll."))
 		fmt.Printf("	%sP		 (%s xp), %s  %s %s\n", Green("H"), Yellow(strconv.Itoa(cost)), Cyan("current"), Yellow(strconv.Itoa(c.MxHp.Val)), Cyan("max health."))
 		fmt.Printf("	%sack\n", Green("B"))

@@ -68,7 +68,7 @@ func (c *Agent) Describe() {
 	fmt.Printf(YellowU("\n%s:\n"), c.Name)
 	fmt.Printf(Cyan("You consider the %s, "), c.Name)
 	fmt.Printf(Cyan("%s\n"), c.Description)
-	fmt.Printf("%s %s\n", White(" Total critical chance:"), Yellow(strconv.Itoa(c.Weap.Crit+(c.Int.Val/4)), "%\n"))
+	fmt.Printf("%s %s\n", White(" Total critical chance:"), Yellow(strconv.Itoa(c.Weap.Crit+(c.Int.Val/2)), "%\n"))
 	c.Weap.Display()
 	if c.Weap.DropChance > 0 {
 		fmt.Printf("	%s%% %s\n\n", Yellow(strconv.Itoa(c.Weap.DropChance)), Cyan("drop chance"))

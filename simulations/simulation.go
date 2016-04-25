@@ -27,6 +27,7 @@ func Odds(c *Agent, f *Agent) int {
 // this metric where fights with long odds give greater experience.
 func SimFight(c Agent, f Agent) bool {
 
+	critDivisor := 2
 	// operate on a copy of structs for the simulation
 	var x, y Agent
 	x = c
@@ -40,12 +41,14 @@ func SimFight(c Agent, f Agent) bool {
 		if winner.Name == x.Name {
 
 			hp := Roll(2, winner.Weap.Damage)
+
+			// Damage Resistance
 			if hp > loser.Armor.Defence {
 				hp = hp - loser.Armor.Defence
 
 				// Critical Strike
-				if winner.Weap.Crit+(winner.Int.Val/4) >= Roll(1, 100) {
-					hp = hp + winner.Weap.Crit
+				if winner.Weap.Crit+(winner.Int.Val/critDivisor) >= Roll(1, 100) {
+					hp = winner.Weap.Damage
 				}
 
 				loser.AdjHp(0 - hp)
@@ -62,13 +65,16 @@ func SimFight(c Agent, f Agent) bool {
 		// Foe Attacks Second
 		winner, loser = SimAttack(&y, &x)
 		if winner.Name == y.Name {
+
 			hp := Roll(2, winner.Weap.Damage)
+
+			// Damage Resistance
 			if hp > loser.Armor.Defence {
 				hp = hp - loser.Armor.Defence
 
 				// Critical Strike
-				if winner.Weap.Crit+(winner.Int.Val/4) >= Roll(1, 100) {
-					hp = hp + winner.Weap.Crit
+				if winner.Weap.Crit+(winner.Int.Val/critDivisor) >= Roll(1, 100) {
+					hp = winner.Weap.Damage
 				}
 
 				loser.AdjHp(0 - hp)

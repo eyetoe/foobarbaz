@@ -239,13 +239,14 @@ func Attack(a *Agent, d *Agent) (*Agent, *Agent, string) {
 // Calculate and apply damage to Agent
 func DoDamage(a *Agent, d *Agent, odds int) string {
 
+	critDivisor := 2
 	var textOut string
 
 	hp := Roll(2, a.Weap.Damage)
-	//fmt.Println(a.Name, "critical chance is: ", a.Weap.Crit+(a.Int.Val/4))
-	//Continue()
-	if a.Weap.Crit+(a.Int.Val/4) >= Roll(1, 100) {
-		hp = hp + a.Weap.Damage
+
+	// Critical strike
+	if a.Weap.Crit+(a.Int.Val/critDivisor) >= Roll(1, 100) {
+		hp = a.Weap.Damage
 		textOut = fmt.Sprintf(CyanU("Critical") + " ")
 	}
 
@@ -386,9 +387,8 @@ func Spawn(c Agent) Agent {
 		Drake,
 		FlyingPig,
 		Goat,
-		Blob,
-		MakeMonster(&c),
-		MakeMonster(&c),
+		//Blob, // blob dosn't work, dynamic stats are persistent until game is reloaded
+		//  so the MakeMonster generator is much better.
 		MakeMonster(&c),
 		MakeMonster(&c),
 		MakeMonster(&c),

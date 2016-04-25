@@ -5,7 +5,9 @@ import (
 	. "github.com/eyetoe/foobarbaz/util"
 )
 
-var randHP = Roll(1, 50)
+var randBase = Roll(1, 100)
+
+//var randHP = Roll(1, randBase)
 
 // A mighty minotaur
 var Blob = Agent{
@@ -13,12 +15,17 @@ var Blob = Agent{
 	Name:        "Blob",
 	Description: "undulating mass of living tissue, it senses you, and gurgles in your direction.",
 	// Stats
-	Str: Stat{"Strength", Roll(3, 50)},
-	Int: Stat{"Intelligence", Roll(3, 50)},
-	Dex: Stat{"Dexterity", Roll(3, 50)},
+	//Str: Stat{"Strength", Roll(1, randBase)},
+	Str: Stat{"Strength", randBase},
+	//Int: Stat{"Intelligence", Roll(1, randBase)},
+	Int: Stat{"Intelligence", randBase},
+	//Dex: Stat{"Dexterity", Roll(1, randBase)},
+	Dex: Stat{"Dexterity", randBase},
 	// Health and Wellness
-	MxHp: Stat{"Max Health", randHP},
-	Hp:   Stat{"Current Health", randHP},
+	//MxHp: Stat{"Max Health", randHP},
+	MxHp: Stat{"Max Health", randBase},
+	//Hp:   Stat{"Current Health", randHP},
+	Hp:   Stat{"Current Health", randBase},
 	Dead: false,
 	// Equiped items
 	Weap:  Blobarm,
