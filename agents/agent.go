@@ -57,7 +57,7 @@ type Agent struct {
 // BaseAttack() returns an the average of 1 part Int and 1/2 part Dex and Str
 // - Add this number to the attack roll
 func (c Agent) BaseAttack() int {
-	return (c.Dex.Val + c.Str.Val/2 + c.Int.Val/2) / 2
+	return ((c.Dex.Val + c.Str.Val/2 + c.Int.Val/2) / 2) + c.Weap.Attack
 }
 
 // BaseDamage() returns 1/15th of the Strength value.
@@ -77,7 +77,10 @@ func (c Agent) BaseResist() int {
 // BaseDodge() returns average of Int and Dex.
 // - Compare against attack role
 func (c Agent) BaseDodge() int {
-	return ((c.Int.Val + c.Dex.Val) / 2)
+	dodge := ((c.Int.Val + c.Dex.Val) / 2)
+	armorDodgePercentage := float64(c.Armor.Dodge) * .01
+	return int(float64(dodge) - float64(dodge)*armorDodgePercentage)
+	//return ((c.Int.Val + c.Dex.Val) / 2)
 }
 
 // Natural regeneration

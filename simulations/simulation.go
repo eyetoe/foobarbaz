@@ -97,8 +97,11 @@ func SimAttack(a *Agent, d *Agent) (*Agent, *Agent) {
 	ar := Roll(2, 100)
 	dr := Roll(2, 100)
 	// bonuses
-	arB := a.Str.Val + a.Weap.Attack
-	drB := int(float64(d.Dex.Val) - float64(d.Dex.Val)*(float64(d.Armor.Dodge)*.01))
+	//arB := a.Str.Val + a.Weap.Attack
+	//drB := int(float64(d.Dex.Val) - float64(d.Dex.Val)*(float64(d.Armor.Dodge)*.01))
+
+	arB := a.BaseAttack()
+	drB := d.BaseDodge()
 	// totals
 	aT := ar + arB
 	dT := dr + drB

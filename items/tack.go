@@ -11,6 +11,6 @@ var Tack = Item{
 	Affects:     []Affect{Charged},
 	Attack:      4,
 	Damage:      4,
-	Crit:        10,
+	Crit:        6,
 	DropChance:  20,
 }

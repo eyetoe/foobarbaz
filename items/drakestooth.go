@@ -11,6 +11,6 @@ var Drakestooth = Item{
 	Affects:     []Affect{},
 	Attack:      6,
 	Damage:      10,
-	Crit:        10,
+	Crit:        5,
 	DropChance:  20,
 }

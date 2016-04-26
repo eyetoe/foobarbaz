@@ -9,8 +9,8 @@ var Battleaxe = Item{
 	Description: "is caked in blood and shows signs of recent use.",
 	Slot:        "Weapon",
 	Affects:     []Affect{Charged},
-	Attack:      4,
+	Attack:      8,
 	Damage:      8,
-	Crit:        10,
+	Crit:        8,
 	DropChance:  20,
 }

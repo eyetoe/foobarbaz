@@ -212,9 +212,11 @@ func Attack(a *Agent, d *Agent) (*Agent, *Agent, string) {
 	ar := Roll(2, 100)
 	dr := Roll(2, 100)
 	// bonuses
-	arB := a.Str.Val + a.Weap.Attack
+	//arB := a.Str.Val + a.Weap.Attack
+	arB := a.BaseAttack()
 	// subtract the dodge percentage hit from armor
-	drB := int(float64(d.Dex.Val) - float64(d.Dex.Val)*(float64(d.Armor.Dodge)*.01))
+	//drB := int(float64(d.Dex.Val) - float64(d.Dex.Val)*(float64(d.Armor.Dodge)*.01))
+	drB := d.BaseDodge()
 
 	// totals
 	aT := ar + arB

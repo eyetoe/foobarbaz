@@ -11,6 +11,6 @@ var Knife = Item{
 	Affects:     []Affect{Charged},
 	Attack:      3,
 	Damage:      3,
-	Crit:        10,
+	Crit:        2,
 	DropChance:  20,
 }

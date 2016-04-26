@@ -11,6 +11,6 @@ var Hatchet = Item{
 	Affects:     []Affect{Charged},
 	Attack:      2,
 	Damage:      4,
-	Crit:        10,
+	Crit:        3,
 	DropChance:  20,
 }

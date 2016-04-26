@@ -11,5 +11,5 @@ var Fist = Item{
 	Affects:     []Affect{},
 	Attack:      2,
 	Damage:      2,
-	Crit:        10,
+	Crit:        1,
 }

@@ -11,6 +11,6 @@ var Staff = Item{
 	Affects:     []Affect{OnFire},
 	Attack:      8,
 	Damage:      6,
-	Crit:        10,
+	Crit:        7,
 	DropChance:  20,
 }
