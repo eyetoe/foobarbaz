@@ -54,6 +54,37 @@ type Agent struct {
 	FoeMaxHit int
 }
 
+// BaseAttack() returns an the average of 1 part Int and 1/2 part Dex and Str
+// - Add this number to the attack roll
+func (c Agent) BaseAttack() int {
+	return (c.Dex.Val + c.Str.Val/2 + c.Int.Val/2) / 2
+}
+
+// BaseDamage() returns 1/15th of the Strength value.
+// - Add this number to damage done in combat
+func (c Agent) BaseDamage() int {
+	return c.Str.Val / 15
+}
+
+// BaseResist() returns the average of Strength and Intelligence divided by 30.
+// unlock this skill by getting str and hp up to 30, and you get first point
+// of damage reduction.  both up to 60 unlocks  second point and 3rd at 90.
+// - Subtract this number from damage done in combat.
+func (c Agent) BaseResist() int {
+	return ((c.Str.Val + c.MxHp.Val) / 2) / 30
+}
+
+// BaseDodge() returns average of Int and Dex.
+// - Compare against attack role
+func (c Agent) BaseDodge() int {
+	return ((c.Int.Val + c.Dex.Val) / 2)
+}
+
+// Natural regeneration
+func (c Agent) BaseRegeneration() int {
+	return ((c.Str.Val + c.MxHp.Val) / 2) / 30
+}
+
 func (c Agent) ExpDrop() int {
 	// add character stats
 	s := c.Str.Val + c.Int.Val + c.Dex.Val + c.MxHp.Val
@@ -317,7 +348,7 @@ func MakeMonster(c *Agent) Agent {
 			`               ...-noo.ob0..0. b ''8\  :8 Y8.    ` + "\n" +
 			`           ,oooooooooobb.bYo :.'b'b'8;  8  8b    ` + "\n" +
 			`    ,ood8P0"0"0"0"88888ooi 8b Y.:b:b:8;,8 ,:8.   ` + "\n" +
-			`,od88888bo 0'0,  0 0"0"888o'8b'8 Y.8.88d8 : 8;   ` + "\n" +
+			`,od8o o8oo 0'0,  0 0"0"888o'8b'8 Y.8.88d8 : 8;   ` + "\n" +
 			`"""""""""""8oo',0   0.0  ""888b8b:8db8888 d :8 :;` + "\n" +
 			`          d8888boP 0 "Y88o. ""Y8888888888 8 d8.88` + "\n" +
 			`        o""""888888o''o'"88bood8888888888:8,;8888` + "\n",

@@ -253,6 +253,7 @@ func DoDamage(a *Agent, d *Agent, odds int) string {
 	// if hp is greater than the damage resist then subtract
 	if hp > d.Armor.Defence {
 		hp = hp - d.Armor.Defence
+		// if unlocked, hp = hp - BaseResist()
 		d.AdjHp(0 - hp)
 		textOut = textOut + fmt.Sprintf("for %s damage. ", Red(strconv.Itoa(hp)))
 		textOut = textOut + fmt.Sprintf("%s's health = %s.\n", d.Name, Red(strconv.Itoa(d.Hp.Val)))

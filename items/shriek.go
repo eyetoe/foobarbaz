@@ -9,7 +9,7 @@ var Shriek = Item{
 	Description: "A blood curdling shriek damages your soul!",
 	Slot:        "Weapon",
 	Affects:     []Affect{Charged},
-	Attack:      -2,
-	Damage:      15,
+	Attack:      0,
+	Damage:      13,
 	Crit:        1,
 }
