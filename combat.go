@@ -222,10 +222,10 @@ func Attack(a *Agent, d *Agent) (*Agent, *Agent, string) {
 
 	// uncomment here to 'show your work'
 	//outText = fmt.Sprintf(Black("Attack roll: %d plus Bonus: %d for Total: %d\n"), ar, arB, aT)
-	//outText = outText + fmt.Sprintf(Black("Defence roll: %d plus Bonus: %d for Total: %d\n"), dr, drB, dT)
+	//outText = outText + fmt.Sprintf(Black("Resist roll: %d plus Bonus: %d for Total: %d\n"), dr, drB, dT)
 
-	// Attack wins if greater than Defence
-	// But a tie goes to the Defence
+	// Attack wins if greater than Resist
+	// But a tie goes to the Resist
 	if aT > dT {
 		outText = outText + fmt.Sprintf(Green("%s hits with %s!\n "), a.Name, a.Weap.Name)
 		return a, d, outText
@@ -251,8 +251,8 @@ func DoDamage(a *Agent, d *Agent, odds int) string {
 	}
 
 	// if hp is greater than the damage resist then subtract
-	if hp > d.Armor.Defence {
-		hp = hp - d.Armor.Defence
+	if hp > d.Armor.Resist {
+		hp = hp - d.Armor.Resist
 		// if unlocked, hp = hp - BaseResist()
 		d.AdjHp(0 - hp)
 		textOut = textOut + fmt.Sprintf("for %s damage. ", Red(strconv.Itoa(hp)))

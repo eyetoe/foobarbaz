@@ -43,8 +43,8 @@ func SimFight(c Agent, f Agent) bool {
 			hp := Roll(2, winner.Weap.Damage)
 
 			// Damage Resistance
-			if hp > loser.Armor.Defence {
-				hp = hp - loser.Armor.Defence
+			if hp > loser.Armor.Resist {
+				hp = hp - loser.Armor.Resist
 
 				// Critical Strike
 				if winner.Weap.Crit+(winner.Int.Val/critDivisor) >= Roll(1, 100) {
@@ -69,8 +69,8 @@ func SimFight(c Agent, f Agent) bool {
 			hp := Roll(2, winner.Weap.Damage)
 
 			// Damage Resistance
-			if hp > loser.Armor.Defence {
-				hp = hp - loser.Armor.Defence
+			if hp > loser.Armor.Resist {
+				hp = hp - loser.Armor.Resist
 
 				// Critical Strike
 				if winner.Weap.Crit+(winner.Int.Val/critDivisor) >= Roll(1, 100) {
@@ -103,8 +103,8 @@ func SimAttack(a *Agent, d *Agent) (*Agent, *Agent) {
 	aT := ar + arB
 	dT := dr + drB
 
-	// Attack wins if greater than Defence
-	// But a tie goes to the Defence
+	// Attack wins if greater than Resist
+	// But a tie goes to the Resist
 
 	if aT > dT {
 		return a, d

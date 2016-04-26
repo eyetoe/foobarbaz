@@ -23,8 +23,7 @@ func Contest(a *Agent, as Stat, d *Agent, ds Stat) (*Agent, *Agent) {
 
 	fmt.Printf("%s rolls: %d plus Bonus: %d for Total: %d\n", a.Name, ar, arB, aT)
 	fmt.Printf("%s rolls: %d plus Bonus: %d for Total: %d\n", d.Name, dr, drB, dT)
-	// Attack wins if greater than Defence
-	// But a tie goes to the Defence
+
 	if aT > dT {
 		return a, d
 	} else if dT > aT {

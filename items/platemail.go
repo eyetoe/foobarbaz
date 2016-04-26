@@ -9,7 +9,7 @@ var Platemail = Item{
 	Description: "full plate armor designed for heavy combat, with significant compromise to dodge.",
 	Slot:        "Armor",
 	Affects:     []Affect{},
-	Defence:     3,
+	Resist:      3,
 	Dodge:       15,
 	DropChance:  20,
 }

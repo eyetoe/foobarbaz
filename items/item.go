@@ -17,8 +17,8 @@ type Item struct {
 	Attack int
 	// modify damage dealt if hit
 	Damage int
-	// Passive Defence is damage resistance
-	Defence int
+	// Passive Resist is damage resistance
+	Resist int
 	// A measure of how impared agent is from armor.  This int is the subtracted
 	// percentage adjusted from Dex
 	Dodge int
@@ -52,8 +52,8 @@ func (i *Item) Display() {
 	if i.Damage != 0 {
 		fmt.Printf("	Damage:	1d%s, \n", Yellow(strconv.Itoa(i.Damage)))
 	}
-	if i.Defence != 0 {
-		fmt.Printf("	Defence:	+%s, \n", Yellow(strconv.Itoa(i.Defence)))
+	if i.Resist != 0 {
+		fmt.Printf("	Resist:	+%s, \n", Yellow(strconv.Itoa(i.Resist)))
 	}
 	// display dodge if it's an armor piece
 	if i.Slot == "Armor" {

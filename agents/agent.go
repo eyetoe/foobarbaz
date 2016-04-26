@@ -89,9 +89,9 @@ func (c Agent) ExpDrop() int {
 	// add character stats
 	s := c.Str.Val + c.Int.Val + c.Dex.Val + c.MxHp.Val
 	// and weapon stats
-	w := c.Weap.Attack + c.Weap.Damage + c.Weap.Defence + c.Weap.Dodge + c.Weap.Crit + c.Weap.DropChance
+	w := c.Weap.Attack + c.Weap.Damage + c.Weap.Resist + c.Weap.Dodge + c.Weap.Crit + c.Weap.DropChance
 	// and armor stats
-	a := c.Armor.Attack + c.Armor.Damage + c.Armor.Defence + c.Armor.Dodge + c.Armor.Crit + c.Armor.DropChance
+	a := c.Armor.Attack + c.Armor.Damage + c.Armor.Resist + c.Armor.Dodge + c.Armor.Crit + c.Armor.DropChance
 	return s + w + a
 }
 

@@ -9,7 +9,7 @@ var Waistcoat = Item{
 	Description: "work worn solid garment.",
 	Slot:        "Armor",
 	Affects:     []Affect{},
-	Defence:     0,
+	Resist:      0,
 	Dodge:       5,
 	DropChance:  20,
 }

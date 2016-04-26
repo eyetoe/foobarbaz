@@ -9,7 +9,7 @@ var Vest = Item{
 	Description: "modest, no sleeves.",
 	Slot:        "Armor",
 	Affects:     []Affect{},
-	Defence:     0,
+	Resist:      0,
 	Dodge:       1,
 	DropChance:  20,
 }

@@ -9,7 +9,7 @@ var Jacket = Item{
 	Description: "old durable weather resistant.",
 	Slot:        "Armor",
 	Affects:     []Affect{},
-	Defence:     1,
+	Resist:      1,
 	Dodge:       2,
 	DropChance:  20,
 }

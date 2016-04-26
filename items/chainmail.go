@@ -9,7 +9,7 @@ var Chainmail = Item{
 	Description: "full chain armor designed for medium combat, with a compromise to dodge.",
 	Slot:        "Armor",
 	Affects:     []Affect{},
-	Defence:     2,
+	Resist:      2,
 	Dodge:       10,
 	DropChance:  20,
 }

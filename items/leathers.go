@@ -9,7 +9,7 @@ var Leathers = Item{
 	Description: "full leather armor designed for light combat.",
 	Slot:        "Armor",
 	Affects:     []Affect{},
-	Defence:     1,
+	Resist:      1,
 	Dodge:       0,
 	DropChance:  20,
 }
