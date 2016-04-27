@@ -172,9 +172,9 @@ func Fight(c *Agent, f *Agent) {
 			//fmt.Printf(Use(c, Potion))
 			//Continue()
 			continue
-		// Describe Foe
+		// Consider Foe
 		case "d", "D":
-			f.Describe()
+			f.Consider()
 			FoeBar(*c, *f)
 			fmt.Println()
 			continue

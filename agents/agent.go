@@ -98,7 +98,7 @@ func (c Agent) ExpDrop() int {
 	return s + w + a
 }
 
-func (c *Agent) Describe() {
+func (c *Agent) Consider() {
 	fmt.Printf(YellowU("\n%s:\n"), c.Name)
 	fmt.Printf(Cyan("You consider the %s, "), c.Name)
 	fmt.Printf(Cyan("%s\n"), c.Description)
