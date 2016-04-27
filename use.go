@@ -13,11 +13,9 @@ func Use(c *Agent, p Item) string {
 	var textOut string
 	if c.MaxHealth.Val > c.Health.Val {
 
-		//c.Inv = append(c.Inv, Potion)
-
 		// remove the potion from inventory
 		for i, _ := range c.Inv {
-			//if c.Inv[i].Name == "Potion" {
+
 			if c.Inv[i].Name == p.Name {
 				c.Inv[i] = c.Inv[len(c.Inv)-1]
 				c.Inv = c.Inv[:len(c.Inv)-1]
@@ -25,7 +23,7 @@ func Use(c *Agent, p Item) string {
 				// random health up to MaxHealth, noralized by 2 rolls / 2
 				h := Roll(2, c.MaxHealth.Val)
 
-				textOut = textOut + fmt.Sprintf(Cyan("\nYou drink the potion.\n"))
+				textOut = textOut + fmt.Sprintf(Cyan("You drink the potion.\n"))
 				textOut = textOut + fmt.Sprintf(Yellow("You heal %d health!\n"), h)
 				c.AdjHealth(h)
 				c.Save()

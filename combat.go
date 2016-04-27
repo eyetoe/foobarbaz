@@ -22,7 +22,13 @@ func Fight(c *Agent, f *Agent) {
 	odds := Odds(c, f)
 
 	// declare strings
-	var charDamageOut, charAttackDetails, foeDamageOut, foeAttackDetails, healmsg, dropmsg string
+	var charDamageOut,
+		charAttackDetails,
+		foeDamageOut,
+		foeAttackDetails,
+		healmsg,
+		dropmsg,
+		potionOut string
 
 	// declare attack winner
 	var winner *Agent
@@ -33,7 +39,7 @@ func Fight(c *Agent, f *Agent) {
 		fmt.Println()
 		//FoeBar(*c, *f)
 
-		if f.Dead == false {
+		if f.Dead == false && c.Dead == false {
 			// Color Foe's name and show victory chance percentage
 			switch {
 			case odds >= 80:
@@ -47,17 +53,29 @@ func Fight(c *Agent, f *Agent) {
 			case odds >= 0:
 				fmt.Printf(Red("%s\n"), f.Art)
 			}
-		} else {
+		}
+		if f.Dead == true {
 
-			victory := ` 		  _    ___      __                   __` + "\n" +
-				`		 | |  / (_)____/ /_____  _______  __/ /` + "\n" +
-				`		 | | / / / ___/ __/ __ \/ ___/ / / / / ` + "\n" +
-				`		 | |/ / / /__/ /_/ /_/ / /  / /_/ /_/  ` + "\n" +
-				`		 |___/_/\___/\__/\____/_/   \__, (_)   ` + "\n" +
-				`		                           /____/      ` + "\n\n"
+			victory := ` 		 _    ___      __                   __` + "\n" +
+				`		| |  / (_)____/ /_____  _______  __/ /` + "\n" +
+				`		| | / / / ___/ __/ __ \/ ___/ / / / / ` + "\n" +
+				`		| |/ / / /__/ /_/ /_/ / /  / /_/ /_/  ` + "\n" +
+				`		|___/_/\___/\__/\____/_/   \__, (_)   ` + "\n" +
+				`		                          /____/      ` + "\n\n"
 
 			fmt.Printf("%s", Green(victory))
 		}
+		if c.Dead == true {
+
+			defeat := `		    ____       ____           __  __ ` + "\n" +
+				`		   / __ \___  / __/__  ____ _/ /_/ / ` + "\n" +
+				`		  / / / / _ \/ /_/ _ \/ __ '/ __/ /  ` + "\n" +
+				`		 / /_/ /  __/ __/  __/ /_/ / /_/_/   ` + "\n" +
+				`		/_____/\___/_/  \___/\__,_/\__(_)    ` + "\n\n"
+
+			fmt.Printf("%s", Red(defeat))
+		}
+
 		FoeBar(*c, *f)
 		Meter(f.Health.Val, f.MaxHealth.Val, c.Weap.Damage, "Health", "█", "foe")
 		fmt.Println()
@@ -75,6 +93,7 @@ func Fight(c *Agent, f *Agent) {
 		fmt.Printf(foeDamageOut)
 		fmt.Printf(foeAttackDetails)
 		fmt.Printf(charDamageOut)
+		fmt.Printf(potionOut)
 		fmt.Printf(healmsg)
 		fmt.Printf(dropmsg)
 
@@ -83,7 +102,9 @@ func Fight(c *Agent, f *Agent) {
 		foeDamageOut = ""
 		foeAttackDetails = ""
 		charDamageOut = ""
+		potionOut = ""
 		healmsg = ""
+		dropmsg = ""
 
 		var hasWeapon, hasArmor, hasTrinket = false, false, false
 		// check pulse
@@ -148,7 +169,7 @@ func Fight(c *Agent, f *Agent) {
 		fmt.Printf("%sse, ", GreenU("U"))
 		fmt.Printf("%svade, ", GreenU("E"))
 		fmt.Printf("%sescribe, ", GreenU("D"))
-		fmt.Printf("%sotion(%s), ", GreenU("P"), Yellow(strconv.Itoa(numPotions)))
+		fmt.Printf("%sealth Potion(%s), ", GreenU("H"), Yellow(strconv.Itoa(numPotions)))
 		fmt.Printf("%sun\n<: ", GreenU("R"))
 		choice, _, _ := GetChar()
 
@@ -172,17 +193,14 @@ func Fight(c *Agent, f *Agent) {
 			if f.Name == winner.Name {
 				charDamageOut = DoDamage(f, c, odds)
 			}
-			// Evade
 			continue
-		// Event
+		// Evade
 		case "e", "E":
 			fmt.Println("Evade!\n You stall for time, looking for an opening!")
 			fmt.Println("Note: should have a separate menu here where you can use items.  So you have to take a break from the fight, to be able to pull out an item or potion.  including switching weapons, drinking potions, using magic items.")
 			continue
 		// Use Item
 		case "u", "U":
-			//fmt.Printf(Use(c, Potion))
-			//Continue()
 			continue
 		// Consider Foe
 		case "d", "D":
@@ -191,9 +209,8 @@ func Fight(c *Agent, f *Agent) {
 			fmt.Println()
 			continue
 		// Use Potion
-		case "p", "P":
-			fmt.Printf(Use(c, Potion))
-			Continue()
+		case "h", "H":
+			potionOut = Use(c, Potion)
 			continue
 		// Run from the fight
 		case "r", "R":
@@ -278,11 +295,6 @@ func DoDamage(a *Agent, d *Agent, odds int) string {
 		textOut = textOut + fmt.Sprintf("%s's health = %s.\n", d.Name, Red(strconv.Itoa(d.Health.Val)))
 	}
 
-	//if d.Dead == false {
-	//textOut = textOut + fmt.Sprintf("for %s damage. ", Red(strconv.Itoa(hp)))
-	//textOut = textOut + fmt.Sprintf("%s's health = %s.\n", d.Name, Red(strconv.Itoa(d.Health.Val)))
-	//}
-
 	// Monster agents don't have a save file set
 	if d.File == "" && d.Dead == true {
 
@@ -324,8 +336,8 @@ func WinHeal(c *Agent) string {
 
 func DropPotion(c *Agent) string {
 	var textOut string
-	//if c.MaxHealth.Val > c.Health.Val && c.MaxHealth.Val+30 >= Roll(1, 100) {
-	if c.MaxHealth.Val > c.Health.Val && c.MaxHealth.Val+100 >= Roll(2, 100) {
+	potionDropChance := 100
+	if c.MaxHealth.Val > c.Health.Val && c.MaxHealth.Val+potionDropChance >= Roll(2, 100) {
 		c.Inv = append(c.Inv, Potion)
 		textOut = textOut + fmt.Sprintf("%s %s!\n\n", Green("You find a"), YellowU("potion"))
 		c.Save()
@@ -337,7 +349,6 @@ func OfferItem(c, f *Agent, i Item) {
 	ClearScreen()
 	fmt.Println(Yellow(Sword1()))
 	fmt.Println(Blue("!! ITEM DROP !!\n"))
-	//fmt.Printf("%s has dropped it's %s.\n\n", Yellow(f.Name), Yellow(f.Weap.Name))
 	fmt.Printf("%s has dropped it's %s.\n\n", Yellow(f.Name), Yellow(i.Name))
 
 	switch i.Slot {
