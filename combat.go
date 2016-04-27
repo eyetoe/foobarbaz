@@ -33,18 +33,30 @@ func Fight(c *Agent, f *Agent) {
 		fmt.Println()
 		//FoeBar(*c, *f)
 
-		// Color Foe's name and show victory chance percentage
-		switch {
-		case odds >= 80:
-			fmt.Printf(Green("%s\n"), f.Art)
-		case odds >= 60:
-			fmt.Printf(Cyan("%s\n"), f.Art)
-		case odds >= 40:
-			fmt.Printf(Blue("%s\n"), f.Art)
-		case odds >= 20:
-			fmt.Printf(Yellow("%s\n"), f.Art)
-		case odds >= 0:
-			fmt.Printf(Red("%s\n"), f.Art)
+		if f.Dead == false {
+			// Color Foe's name and show victory chance percentage
+			switch {
+			case odds >= 80:
+				fmt.Printf(Green("%s\n"), f.Art)
+			case odds >= 60:
+				fmt.Printf(Cyan("%s\n"), f.Art)
+			case odds >= 40:
+				fmt.Printf(Blue("%s\n"), f.Art)
+			case odds >= 20:
+				fmt.Printf(Yellow("%s\n"), f.Art)
+			case odds >= 0:
+				fmt.Printf(Red("%s\n"), f.Art)
+			}
+		} else {
+
+			victory := ` 		  _    ___      __                   __` + "\n" +
+				`		 | |  / (_)____/ /_____  _______  __/ /` + "\n" +
+				`		 | | / / / ___/ __/ __ \/ ___/ / / / / ` + "\n" +
+				`		 | |/ / / /__/ /_/ /_/ / /  / /_/ /_/  ` + "\n" +
+				`		 |___/_/\___/\__/\____/_/   \__, (_)   ` + "\n" +
+				`		                           /____/      ` + "\n\n"
+
+			fmt.Printf("%s", Green(victory))
 		}
 		FoeBar(*c, *f)
 		Meter(f.Health.Val, f.MaxHealth.Val, c.Weap.Damage, "Health", "█", "foe")

@@ -32,8 +32,8 @@ type Agent struct {
 	Dex Stat
 	// Max Health and Health
 	MaxHealth Stat
-	Health   Stat
-	Dead bool
+	Health    Stat
+	Dead      bool
 	// 3 item slots: Weapon, Armor, Trinket
 	Weap  Item
 	Armor Item
@@ -331,8 +331,8 @@ func MakeMonster(c *Agent) Agent {
 		Dex: Stat{"Dexterity", Roll(3, power)},
 		// Health and Wellness
 		MaxHealth: Stat{"Max Health", health},
-		Health:   Stat{"Current Health", health},
-		Dead: false,
+		Health:    Stat{"Current Health", health},
+		Dead:      false,
 		// Equiped items
 		Weap:  MakeWeapon(c),
 		Armor: Empty,
@@ -374,4 +374,11 @@ func MakeWeapon(c *Agent) Item {
 		Crit:   1,
 	}
 	return Tentacle
+}
+
+func (c Agent) CharacterSheet() string {
+	var textOut string
+	textOut = textOut + fmt.Sprintf("Character: %s", c.Name)
+	return textOut
+
 }

@@ -26,7 +26,7 @@ func Use(c *Agent, p Item) string {
 				h := Roll(2, c.MaxHealth.Val)
 
 				textOut = textOut + fmt.Sprintf(Cyan("\nYou drink the potion.\n"))
-				textOut = textOut + fmt.Sprintf(Yellow("\nYou heal %d health!\n\n"), h)
+				textOut = textOut + fmt.Sprintf(Yellow("You heal %d health!\n"), h)
 				c.AdjHealth(h)
 				c.Save()
 				return textOut

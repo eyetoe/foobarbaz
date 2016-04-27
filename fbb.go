@@ -4,7 +4,9 @@ import (
 	// dot preceding the import means, use this namespace for the import
 	// this means functions in the imported package don't need to have the
 	// directory prefixed, soo you can use Agent() rather than agents.Agent()
+
 	. "github.com/eyetoe/foobarbaz/agents"
+	. "github.com/eyetoe/foobarbaz/util"
 )
 
 // Global SaveFile available to all code
@@ -19,6 +21,9 @@ func main() {
 	PickChar()
 	Char := Agent{File: SaveFile}
 	Char.Load()
+
+	//fmt.Println(Char.CharacterSheet())
+	//Continue()
 
 	// for testing, Resurrect if character is dead
 	Resurrect(&Char)
