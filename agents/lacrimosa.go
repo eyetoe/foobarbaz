@@ -14,8 +14,8 @@ var Lacrimosa = Agent{
 	Int: Stat{"Intelligence", 40},
 	Dex: Stat{"Dexterity", 10},
 	// Health and Wellness
-	MxHp: Stat{"Max Health", 25},
-	Hp:   Stat{"Current Health", 25},
+	MaxHealth: Stat{"Max Health", 25},
+	Health:   Stat{"Current Health", 25},
 	Dead: false,
 	// Equiped items
 	Weap:  Malaise,

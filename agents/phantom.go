@@ -13,8 +13,8 @@ var Phantom = Agent{
 	Int: Stat{"Intelligence", 15},
 	Dex: Stat{"Dexterity", 25},
 	// Health and Wellness
-	MxHp: Stat{"Max Health", 1},
-	Hp:   Stat{"Current Health", 1},
+	MaxHealth: Stat{"Max Health", 1},
+	Health:   Stat{"Current Health", 1},
 	Dead: false,
 	// Equiped items
 	Weap:  Shriek,

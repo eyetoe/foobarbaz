@@ -51,7 +51,7 @@ func SimFight(c Agent, f Agent) bool {
 					hp = winner.Weap.Damage
 				}
 
-				loser.AdjHp(0 - hp)
+				loser.AdjHealth(0 - hp)
 				//else don't adjust
 			} else {
 				hp = 0
@@ -77,7 +77,7 @@ func SimFight(c Agent, f Agent) bool {
 					hp = winner.Weap.Damage
 				}
 
-				loser.AdjHp(0 - hp)
+				loser.AdjHealth(0 - hp)
 				//else don't adjust
 			} else {
 				hp = 0

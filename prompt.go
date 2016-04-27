@@ -56,8 +56,8 @@ func Prompt() {
 			continue
 		case "r", "R":
 			fmt.Printf(Blue("\nYou rest and recuperate.\n"))
-			if Char.Hp.Val < Char.MxHp.Val/2 {
-				Char.Hp.Val = Char.MxHp.Val / 2
+			if Char.Health.Val < Char.MaxHealth.Val/2 {
+				Char.Health.Val = Char.MaxHealth.Val / 2
 				fmt.Printf(Green("You heal.\n"))
 				Char.Save()
 			}

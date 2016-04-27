@@ -14,8 +14,8 @@ var Kobold = Agent{
 	Dex: Stat{"Dexterity", 10},
 
 	// Health and Wellness
-	MxHp: Stat{"Max Health", 5},
-	Hp:   Stat{"Current Health", 5},
+	MaxHealth: Stat{"Max Health", 5},
+	Health:   Stat{"Current Health", 5},
 	Dead: false,
 
 	// Equiped items

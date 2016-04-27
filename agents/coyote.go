@@ -15,8 +15,8 @@ var Coyote = Agent{
 	Int: Stat{"Intelligence", 4},
 	Dex: Stat{"Dexterity", 20},
 	// Health and Wellness
-	MxHp: Stat{"Max Health", 15},
-	Hp:   Stat{"Current Health", 15},
+	MaxHealth: Stat{"Max Health", 15},
+	Health:   Stat{"Current Health", 15},
 	Dead: false,
 	// Equiped items
 	Weap:  Maw,

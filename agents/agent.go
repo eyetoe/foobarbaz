@@ -31,8 +31,8 @@ type Agent struct {
 	Int Stat
 	Dex Stat
 	// Max Health and Health
-	MxHp Stat
-	Hp   Stat
+	MaxHealth Stat
+	Health   Stat
 	Dead bool
 	// 3 item slots: Weapon, Armor, Trinket
 	Weap  Item
@@ -71,7 +71,7 @@ func (c Agent) BaseDamage() int {
 // of damage reduction.  both up to 60 unlocks  second point and 3rd at 90.
 // - Subtract this number from damage done in combat.
 func (c Agent) BaseResist() int {
-	return ((c.Str.Val + c.MxHp.Val) / 2) / 30
+	return ((c.Str.Val + c.MaxHealth.Val) / 2) / 30
 }
 
 // BaseDodge() returns average of Int and Dex.
@@ -85,12 +85,12 @@ func (c Agent) BaseDodge() int {
 
 // Natural regeneration
 func (c Agent) BaseRegeneration() int {
-	return ((c.Str.Val + c.MxHp.Val) / 2) / 30
+	return ((c.Str.Val + c.MaxHealth.Val) / 2) / 30
 }
 
 func (c Agent) ExpDrop() int {
 	// add character stats
-	s := c.Str.Val + c.Int.Val + c.Dex.Val + c.MxHp.Val
+	s := c.Str.Val + c.Int.Val + c.Dex.Val + c.MaxHealth.Val
 	// and weapon stats
 	w := c.Weap.Attack + c.Weap.Damage + c.Weap.Resist + c.Weap.Dodge + c.Weap.Crit + c.Weap.DropChance
 	// and armor stats
@@ -110,13 +110,13 @@ func (c *Agent) Describe() {
 	Continue()
 }
 
-// Adjust Hp "hit points"
-func (c *Agent) AdjHp(a int) {
-	c.Hp.Val = c.Hp.Val + a
-	if c.Hp.Val > c.MxHp.Val {
-		c.Hp.Val = c.MxHp.Val
+// Adjust Health "hit points"
+func (c *Agent) AdjHealth(a int) {
+	c.Health.Val = c.Health.Val + a
+	if c.Health.Val > c.MaxHealth.Val {
+		c.Health.Val = c.MaxHealth.Val
 	}
-	if c.Hp.Val <= 0 {
+	if c.Health.Val <= 0 {
 		c.Dead = true
 		c.Exp = 0
 	}
@@ -170,13 +170,13 @@ func (c Agent) StatusBar() {
 	fmt.Printf("%s", Yellow(" D:"))
 	fmt.Printf("%s", Green(strconv.Itoa(c.Dex.Val)))
 	fmt.Printf("%s", Yellow(" HP:"))
-	fmt.Printf("%s", Green(strconv.Itoa(c.MxHp.Val)))
+	fmt.Printf("%s", Green(strconv.Itoa(c.MaxHealth.Val)))
 	fmt.Printf("%s", Yellow("|"))
 
-	if c.Hp.Val < c.MxHp.Val {
-		fmt.Printf("%s", Red(strconv.Itoa(c.Hp.Val)))
+	if c.Health.Val < c.MaxHealth.Val {
+		fmt.Printf("%s", Red(strconv.Itoa(c.Health.Val)))
 	} else {
-		fmt.Printf("%s", Green(strconv.Itoa(c.Hp.Val)))
+		fmt.Printf("%s", Green(strconv.Itoa(c.Health.Val)))
 	}
 
 	fmt.Printf("%s", Yellow(" XP:"))
@@ -193,7 +193,7 @@ func (c Agent) StatusBar() {
 	fmt.Printf("%s", Yellow(" T:"))
 	fmt.Printf("%s", ItemC(c.Trink.Name))
 	fmt.Println()
-	Meter(c.Hp.Val, c.MxHp.Val, c.FoeMaxHit, "Health", "█", "hero")
+	Meter(c.Health.Val, c.MaxHealth.Val, c.FoeMaxHit, "Health", "█", "hero")
 	// interesting palate of ascii for perusing
 	//░▒█░   ░ ████▓▒░░ ████▓▒░░▓█  ▀█▓ ▓█   ▓██▒░██▓ ▒██▒░▓█  ▀█▓ ▓█   ▓██▒███████▒
 }
@@ -203,7 +203,7 @@ func (c Agent) StatusBar() {
 // then the product of the postion and the multiplier var = Stat Cost
 func StatCost(c Agent) int {
 	m := 4 // multiplier
-	tStat := c.Str.Val + c.Int.Val + c.Dex.Val + c.MxHp.Val
+	tStat := c.Str.Val + c.Int.Val + c.Dex.Val + c.MaxHealth.Val
 	avStat := tStat / 4
 
 	switch {
@@ -306,7 +306,7 @@ func Resurrect(c *Agent) {
 		}
 		fmt.Println("\n")
 
-		c.Hp.Val = c.MxHp.Val
+		c.Health.Val = c.MaxHealth.Val
 		c.Dead = false
 		c.Save()
 		Continue()
@@ -318,7 +318,7 @@ func MakeMonster(c *Agent) Agent {
 
 	divisor := 2
 
-	power := (c.Str.Val + c.Int.Val + c.Dex.Val + c.MxHp.Val) / divisor
+	power := (c.Str.Val + c.Int.Val + c.Dex.Val + c.MaxHealth.Val) / divisor
 	health := Roll(2, power)
 
 	var Monster = Agent{
@@ -330,8 +330,8 @@ func MakeMonster(c *Agent) Agent {
 		Int: Stat{"Intelligence", Roll(3, power/2)},
 		Dex: Stat{"Dexterity", Roll(3, power)},
 		// Health and Wellness
-		MxHp: Stat{"Max Health", health},
-		Hp:   Stat{"Current Health", health},
+		MaxHealth: Stat{"Max Health", health},
+		Health:   Stat{"Current Health", health},
 		Dead: false,
 		// Equiped items
 		Weap:  MakeWeapon(c),
@@ -362,7 +362,7 @@ func MakeMonster(c *Agent) Agent {
 func MakeWeapon(c *Agent) Item {
 	// divisor: larger divisor makes easier weapon
 	divisor := 8
-	power := (c.Str.Val + c.Int.Val + c.Dex.Val + c.MxHp.Val) / divisor
+	power := (c.Str.Val + c.Int.Val + c.Dex.Val + c.MaxHealth.Val) / divisor
 
 	var Tentacle = Item{
 		Name:        "Tentacle",

@@ -47,7 +47,7 @@ func Fight(c *Agent, f *Agent) {
 			fmt.Printf(Red("%s\n"), f.Art)
 		}
 		FoeBar(*c, *f)
-		Meter(f.Hp.Val, f.MxHp.Val, c.Weap.Damage, "Health", "█", "foe")
+		Meter(f.Health.Val, f.MaxHealth.Val, c.Weap.Damage, "Health", "█", "foe")
 		fmt.Println()
 		//░▒█░   ░ ████▓▒░░ ████▓▒░░▓█  ▀█▓ ▓█   ▓██▒░██▓ ▒██▒░▓█  ▀█▓ ▓█   ▓██▒███████▒
 
@@ -256,19 +256,19 @@ func DoDamage(a *Agent, d *Agent, odds int) string {
 	if hp > d.Armor.Resist {
 		hp = hp - d.Armor.Resist
 		// if unlocked, hp = hp - BaseResist()
-		d.AdjHp(0 - hp)
+		d.AdjHealth(0 - hp)
 		textOut = textOut + fmt.Sprintf("for %s damage. ", Red(strconv.Itoa(hp)))
-		textOut = textOut + fmt.Sprintf("%s's health = %s.\n", d.Name, Red(strconv.Itoa(d.Hp.Val)))
+		textOut = textOut + fmt.Sprintf("%s's health = %s.\n", d.Name, Red(strconv.Itoa(d.Health.Val)))
 		//else don't adjust
 	} else {
 		hp = 0
 		textOut = textOut + fmt.Sprintf("%s! for %s damage. ", YellowU("Resist"), Red(strconv.Itoa(hp)))
-		textOut = textOut + fmt.Sprintf("%s's health = %s.\n", d.Name, Red(strconv.Itoa(d.Hp.Val)))
+		textOut = textOut + fmt.Sprintf("%s's health = %s.\n", d.Name, Red(strconv.Itoa(d.Health.Val)))
 	}
 
 	//if d.Dead == false {
 	//textOut = textOut + fmt.Sprintf("for %s damage. ", Red(strconv.Itoa(hp)))
-	//textOut = textOut + fmt.Sprintf("%s's health = %s.\n", d.Name, Red(strconv.Itoa(d.Hp.Val)))
+	//textOut = textOut + fmt.Sprintf("%s's health = %s.\n", d.Name, Red(strconv.Itoa(d.Health.Val)))
 	//}
 
 	// Monster agents don't have a save file set
@@ -299,10 +299,10 @@ func DoDamage(a *Agent, d *Agent, odds int) string {
 
 func WinHeal(c *Agent) string {
 	var textOut string
-	if c.MxHp.Val != c.Hp.Val {
-		h := Roll(1, (c.MxHp.Val - c.Hp.Val))
-		if c.MxHp.Val > c.Hp.Val && c.MxHp.Val+50 >= Roll(2, 100) {
-			c.AdjHp(h)
+	if c.MaxHealth.Val != c.Health.Val {
+		h := Roll(1, (c.MaxHealth.Val - c.Health.Val))
+		if c.MaxHealth.Val > c.Health.Val && c.MaxHealth.Val+50 >= Roll(2, 100) {
+			c.AdjHealth(h)
 			textOut = textOut + fmt.Sprintf(Green("\nIn victory heal %d hit points!\n\n"), h)
 			c.Save()
 		}
@@ -312,8 +312,8 @@ func WinHeal(c *Agent) string {
 
 func DropPotion(c *Agent) string {
 	var textOut string
-	//if c.MxHp.Val > c.Hp.Val && c.MxHp.Val+30 >= Roll(1, 100) {
-	if c.MxHp.Val > c.Hp.Val && c.MxHp.Val+100 >= Roll(2, 100) {
+	//if c.MaxHealth.Val > c.Health.Val && c.MaxHealth.Val+30 >= Roll(1, 100) {
+	if c.MaxHealth.Val > c.Health.Val && c.MaxHealth.Val+100 >= Roll(2, 100) {
 		c.Inv = append(c.Inv, Potion)
 		textOut = textOut + fmt.Sprintf("%s %s!\n\n", Green("You find a"), YellowU("potion"))
 		c.Save()

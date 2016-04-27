@@ -151,7 +151,7 @@ func ExpMgr(c *Agent) {
 		fmt.Printf(":>	%strength	 (%s xp), %s +%s %s\n", Green("S"), Yellow(strconv.Itoa(cost)), Cyan("current"), Yellow(strconv.Itoa(c.Str.Val)), Cyan("bonus to attack roll."))
 		fmt.Printf("	%sntelligence	 (%s xp), %s +%s%% %s\n", Green("I"), Yellow(strconv.Itoa(cost)), Cyan("current"), Yellow(strconv.Itoa(c.Int.Val/2)), Cyan("crital strice chance."))
 		fmt.Printf("	%sexterity	 (%s xp), %s +%s %s\n", Green("D"), Yellow(strconv.Itoa(cost)), Cyan("current"), Yellow(strconv.Itoa(c.Dex.Val)), Cyan("bonus to dodge roll."))
-		fmt.Printf("	%sP		 (%s xp), %s  %s %s\n", Green("H"), Yellow(strconv.Itoa(cost)), Cyan("current"), Yellow(strconv.Itoa(c.MxHp.Val)), Cyan("max health."))
+		fmt.Printf("	%sP		 (%s xp), %s  %s %s\n", Green("H"), Yellow(strconv.Itoa(cost)), Cyan("current"), Yellow(strconv.Itoa(c.MaxHealth.Val)), Cyan("max health."))
 		fmt.Printf("	%sack\n", Green("B"))
 		fmt.Printf("<:")
 
@@ -206,9 +206,9 @@ func ExpMgr(c *Agent) {
 		case "h", "H":
 			if c.Exp >= cost {
 				c.Exp = c.Exp - cost
-				c.MxHp.Val = c.MxHp.Val + 1
+				c.MaxHealth.Val = c.MaxHealth.Val + 1
 				fmt.Println(Blue("\nAttention to physical health improves your metabolism."))
-				fmt.Printf(Yellow("\n Max Hp is now %s.\n"), Green(strconv.Itoa(c.MxHp.Val)))
+				fmt.Printf(Yellow("\n Max Health is now %s.\n"), Green(strconv.Itoa(c.MaxHealth.Val)))
 				c.Save()
 				Continue()
 			} else {

@@ -15,8 +15,8 @@ var New = Agent{
 	Int: Stat{"Intelligence", 10},
 	Dex: Stat{"Dexterity", 10},
 	// Health and Wellness
-	MxHp: Stat{"Max Health", 10},
-	Hp:   Stat{"Current Health", 10},
+	MaxHealth: Stat{"Max Health", 10},
+	Health:   Stat{"Current Health", 10},
 	Dead: false,
 	// Equiped items
 	Weap:  Fist,

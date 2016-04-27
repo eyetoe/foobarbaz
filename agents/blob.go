@@ -22,10 +22,10 @@ var Blob = Agent{
 	//Dex: Stat{"Dexterity", Roll(1, randBase)},
 	Dex: Stat{"Dexterity", randBase},
 	// Health and Wellness
-	//MxHp: Stat{"Max Health", randHP},
-	MxHp: Stat{"Max Health", randBase},
-	//Hp:   Stat{"Current Health", randHP},
-	Hp:   Stat{"Current Health", randBase},
+	//MaxHealth: Stat{"Max Health", randHP},
+	MaxHealth: Stat{"Max Health", randBase},
+	//Health:   Stat{"Current Health", randHP},
+	Health:   Stat{"Current Health", randBase},
 	Dead: false,
 	// Equiped items
 	Weap:  Blobarm,

@@ -14,8 +14,8 @@ var Griffon = Agent{
 	Int: Stat{"Intelligence", 5},
 	Dex: Stat{"Dexterity", 5},
 	// Health and Wellness
-	MxHp: Stat{"Max Health", 30},
-	Hp:   Stat{"Current Health", 30},
+	MaxHealth: Stat{"Max Health", 30},
+	Health:   Stat{"Current Health", 30},
 	Dead: false,
 	// Equiped items
 	Weap:  Beak,

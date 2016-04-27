@@ -14,8 +14,8 @@ var Drake = Agent{
 	Int: Stat{"Intelligence", 22},
 	Dex: Stat{"Dexterity", 45},
 	// Health and Wellness
-	MxHp: Stat{"Max Health", 45},
-	Hp:   Stat{"Current Health", 45},
+	MaxHealth: Stat{"Max Health", 45},
+	Health:   Stat{"Current Health", 45},
 	Dead: false,
 	// Equiped items
 	Weap:  Drakestooth,

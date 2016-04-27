@@ -14,8 +14,8 @@ var FlyingPig = Agent{
 	Int: Stat{"Intelligence", 40},
 	Dex: Stat{"Dexterity", 30},
 	// Health and Wellness
-	MxHp: Stat{"Max Health", 40},
-	Hp:   Stat{"Current Health", 40},
+	MaxHealth: Stat{"Max Health", 40},
+	Health:   Stat{"Current Health", 40},
 	Dead: false,
 	// Equiped items
 	Weap:  Snort,

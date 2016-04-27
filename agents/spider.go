@@ -12,8 +12,8 @@ var Spider = Agent{
 	Int: Stat{"Intelligence", 10},
 	Dex: Stat{"Dexterity", 40},
 	// Health and Wellness
-	MxHp: Stat{"Max Health", 2},
-	Hp:   Stat{"Current Health", 2},
+	MaxHealth: Stat{"Max Health", 2},
+	Health:   Stat{"Current Health", 2},
 	Dead: false,
 	// Equiped items
 	Weap:  Fang,

@@ -14,8 +14,8 @@ var Goat = Agent{
 	Int: Stat{"Intelligence", 2},
 	Dex: Stat{"Dexterity", 55},
 	// Health and Wellness
-	MxHp: Stat{"Max Health", 55},
-	Hp:   Stat{"Current Health", 55},
+	MaxHealth: Stat{"Max Health", 55},
+	Health:   Stat{"Current Health", 55},
 	Dead: false,
 	// Equiped items
 	Weap:  GoatKick,

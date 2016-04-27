@@ -14,8 +14,8 @@ var Minotaur = Agent{
 	Int: Stat{"Intelligence", 5},
 	Dex: Stat{"Dexterity", 5},
 	// Health and Wellness
-	MxHp: Stat{"Max Health", 40},
-	Hp:   Stat{"Current Health", 40},
+	MaxHealth: Stat{"Max Health", 40},
+	Health:   Stat{"Current Health", 40},
 	Dead: false,
 	// Equiped items
 	Weap:  Battleaxe,
