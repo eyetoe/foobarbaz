@@ -423,7 +423,7 @@ func SpawnChooser(c *Agent) *Agent {
 		FlyingPig,
 		Goat,
 		FreshZombie,
-		//MakeMonster(&c),
+		MakeMonster(c),
 	}
 	fmt.Println()
 	for {
