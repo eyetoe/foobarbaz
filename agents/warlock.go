@@ -17,7 +17,7 @@ var Warlock = Agent{
 	MaxHealth: Stat{"Max Health", 25},
 	Health:   Stat{"Current Health", 25},
 	Dead: false,
-	// Equiped items
+	// Equipped items
 	Weap:  Staff,
 	Armor: Empty,
 	Trink: Empty,

@@ -18,7 +18,7 @@ var New = Agent{
 	MaxHealth: Stat{"Max Health", 10},
 	Health:   Stat{"Current Health", 10},
 	Dead: false,
-	// Equiped items
+	// Equipped items
 	Weap:  Fist,
 	Armor: Pancho,
 	Trink: Empty,

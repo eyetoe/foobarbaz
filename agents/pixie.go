@@ -16,7 +16,7 @@ var Pixie = Agent{
 	MaxHealth: Stat{"Max Health", 5},
 	Health:   Stat{"Current Health", 5},
 	Dead: false,
-	// Equiped items
+	// Equipped items
 	Weap:  Tack,
 	Armor: Vest,
 	Trink: Empty,

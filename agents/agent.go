@@ -48,13 +48,18 @@ type Agent struct {
 	Inv  []Item
 	Loc  Loc
 	File string
-	Art  string
+	Art  string // dimensions 16-21 rows high 80 col wide
 	// set this during combat, and clear after.  Used to decide when to show
 	// red in health meter to indicate when you are within range of a killing blow.
 	FoeMaxHit int
 }
 
-// BaseAttack() returns an the average of 1 part Int and 1/2 part Dex and Str
+// Equipped returns an array of Items which are currently equipped by the character.
+func (c Agent) Equipped() []Item {
+	return []Item{c.Weap, c.Armor, c.Trink}
+}
+
+// BaseAttack() returns the average of 1 part Int and 1/2 part Dex and Str
 // - Add this number to the attack roll
 func (c Agent) BaseAttack() int {
 	return ((c.Dex.Val + c.Str.Val/2 + c.Int.Val/2) / 2) + c.Weap.Attack
@@ -63,7 +68,13 @@ func (c Agent) BaseAttack() int {
 // BaseDamage() returns 1/15th of the Strength value.
 // - Add this number to damage done in combat
 func (c Agent) BaseDamage() int {
-	return c.Str.Val / 15
+	return (c.Str.Val / 15) + c.Weap.Damage
+}
+
+// BaseDamage() returns 1/15th of the Strength value.
+// - Add this number to damage done in combat
+func (c Agent) BaseCritical() int {
+	return (c.Int.Val / 2) + c.Weap.Crit
 }
 
 // BaseResist() returns the average of Strength and Intelligence divided by 30.
@@ -71,7 +82,7 @@ func (c Agent) BaseDamage() int {
 // of damage reduction.  both up to 60 unlocks  second point and 3rd at 90.
 // - Subtract this number from damage done in combat.
 func (c Agent) BaseResist() int {
-	return ((c.Str.Val + c.MaxHealth.Val) / 2) / 30
+	return c.Armor.Resist + (((c.Str.Val + c.MaxHealth.Val) / 2) / 30)
 }
 
 // BaseDodge() returns average of Int and Dex.
@@ -80,7 +91,6 @@ func (c Agent) BaseDodge() int {
 	dodge := ((c.Int.Val + c.Dex.Val) / 2)
 	armorDodgePercentage := float64(c.Armor.Dodge) * .01
 	return int(float64(dodge) - float64(dodge)*armorDodgePercentage)
-	//return ((c.Int.Val + c.Dex.Val) / 2)
 }
 
 // Natural regeneration
@@ -333,7 +343,7 @@ func MakeMonster(c *Agent) Agent {
 		MaxHealth: Stat{"Max Health", health},
 		Health:    Stat{"Current Health", health},
 		Dead:      false,
-		// Equiped items
+		// Equipped items
 		Weap:  MakeWeapon(c),
 		Armor: Empty,
 		Trink: Empty,

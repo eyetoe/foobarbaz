@@ -17,7 +17,7 @@ var Minotaur = Agent{
 	MaxHealth: Stat{"Max Health", 40},
 	Health:   Stat{"Current Health", 40},
 	Dead: false,
-	// Equiped items
+	// Equipped items
 	Weap:  Battleaxe,
 	Armor: Leathers,
 	Trink: Empty,

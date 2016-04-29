@@ -15,7 +15,7 @@ var Spider = Agent{
 	MaxHealth: Stat{"Max Health", 2},
 	Health:   Stat{"Current Health", 2},
 	Dead: false,
-	// Equiped items
+	// Equipped items
 	Weap:  Fang,
 	Armor: Empty,
 	Trink: Empty,

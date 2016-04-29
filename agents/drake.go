@@ -17,7 +17,7 @@ var Drake = Agent{
 	MaxHealth: Stat{"Max Health", 45},
 	Health:   Stat{"Current Health", 45},
 	Dead: false,
-	// Equiped items
+	// Equipped items
 	Weap:  Drakestooth,
 	Armor: Empty,
 	Trink: Empty,

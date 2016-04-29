@@ -18,7 +18,7 @@ var Kobold = Agent{
 	Health:   Stat{"Current Health", 5},
 	Dead: false,
 
-	// Equiped items
+	// Equipped items
 	Weap:  Hatchet,
 	Armor: Waistcoat,
 	Trink: Empty,

@@ -27,9 +27,9 @@ func Odds(c *Agent, f *Agent) int {
 // this metric where fights with long odds give greater experience.
 func SimFight(c Agent, f Agent) bool {
 
-	critDivisor := 2
 	// operate on a copy of structs for the simulation
 	var x, y Agent
+	var hp int
 	x = c
 	y = f
 
@@ -40,17 +40,18 @@ func SimFight(c Agent, f Agent) bool {
 		winner, loser := SimAttack(&x, &y)
 		if winner.Name == x.Name {
 
-			hp := Roll(2, winner.Weap.Damage)
+			hp = 0 // reset
 
-			// Damage Resistance
-			if hp > loser.Armor.Resist {
-				hp = hp - loser.Armor.Resist
-
-				// Critical Strike
-				if winner.Weap.Crit+(winner.Int.Val/critDivisor) >= Roll(1, 100) {
-					hp = winner.Weap.Damage
-				}
-
+			// Damage and max damage if it's a critical
+			if Roll(1, 100) > winner.BaseCritical() {
+				hp = Roll(2, winner.BaseDamage())
+			} else {
+				hp = winner.BaseDamage()
+			}
+			// If hp is greater than the damage resist then subtract
+			if hp > loser.BaseResist() {
+				hp = hp - loser.BaseResist()
+				//if unlocked, hp = hp - BaseResist()
 				loser.AdjHealth(0 - hp)
 				//else don't adjust
 			} else {
@@ -66,29 +67,29 @@ func SimFight(c Agent, f Agent) bool {
 		winner, loser = SimAttack(&y, &x)
 		if winner.Name == y.Name {
 
-			hp := Roll(2, winner.Weap.Damage)
+			hp = 0 // reset
 
-			// Damage Resistance
-			if hp > loser.Armor.Resist {
-				hp = hp - loser.Armor.Resist
-
-				// Critical Strike
-				if winner.Weap.Crit+(winner.Int.Val/critDivisor) >= Roll(1, 100) {
-					hp = winner.Weap.Damage
-				}
-
+			// Damage and max damage if it's a critical
+			if Roll(1, 100) > winner.BaseCritical() {
+				hp = Roll(2, winner.BaseDamage())
+			} else {
+				hp = winner.BaseDamage()
+			}
+			// If hp is greater than the damage resist then subtract
+			if hp > loser.BaseResist() {
+				hp = hp - loser.BaseResist()
+				//if unlocked, hp = hp - BaseResist()
 				loser.AdjHealth(0 - hp)
 				//else don't adjust
 			} else {
 				hp = 0
 			}
+
 			if loser.Dead == true {
 				return false
 			}
 		}
 	}
-
-	//	return
 }
 
 func SimAttack(a *Agent, d *Agent) (*Agent, *Agent) {

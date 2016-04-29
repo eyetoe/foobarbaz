@@ -161,7 +161,6 @@ func Fight(c *Agent, f *Agent) {
 			if c.Name == "Potion" {
 				numPotions++
 			}
-
 		}
 
 		// Combat Prompt
@@ -270,21 +269,21 @@ func Attack(a *Agent, d *Agent) (*Agent, *Agent, string) {
 // Calculate and apply damage to Agent
 func DoDamage(a *Agent, d *Agent, odds int) string {
 
-	critDivisor := 2
+	var hp int
 	var textOut string
 
-	hp := Roll(2, a.Weap.Damage)
-
-	// Critical strike
-	if a.Weap.Crit+(a.Int.Val/critDivisor) >= Roll(1, 100) {
-		hp = a.Weap.Damage
+	// Damage and max damage if it's a critical
+	if Roll(1, 100) > a.BaseCritical() {
+		hp = Roll(2, a.BaseDamage())
+	} else {
+		hp = a.BaseDamage()
 		textOut = fmt.Sprintf(CyanU("Critical") + " ")
 	}
 
-	// if hp is greater than the damage resist then subtract
-	if hp > d.Armor.Resist {
-		hp = hp - d.Armor.Resist
-		// if unlocked, hp = hp - BaseResist()
+	// If hp is greater than the damage resist then subtract
+	if hp > d.BaseResist() {
+		hp = hp - d.BaseResist()
+		//if unlocked, hp = hp - BaseResist()
 		d.AdjHealth(0 - hp)
 		textOut = textOut + fmt.Sprintf("for %s damage. ", Red(strconv.Itoa(hp)))
 		textOut = textOut + fmt.Sprintf("%s's health = %s.\n", d.Name, Red(strconv.Itoa(d.Health.Val)))
@@ -295,6 +294,8 @@ func DoDamage(a *Agent, d *Agent, odds int) string {
 		textOut = textOut + fmt.Sprintf("%s's health = %s.\n", d.Name, Red(strconv.Itoa(d.Health.Val)))
 	}
 
+	// Experience Reward
+	// if this is a dead monster
 	// Monster agents don't have a save file set
 	if d.File == "" && d.Dead == true {
 

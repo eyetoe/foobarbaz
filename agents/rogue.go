@@ -17,7 +17,7 @@ var Rogue = Agent{
 	MaxHealth: Stat{"Max Health", 18},
 	Health:   Stat{"Current Health", 18},
 	Dead: false,
-	// Equiped items
+	// Equipped items
 	Weap:  Dagger,
 	Armor: Jacket,
 	Trink: Empty,

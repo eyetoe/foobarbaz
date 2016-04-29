@@ -17,7 +17,7 @@ var Griffon = Agent{
 	MaxHealth: Stat{"Max Health", 30},
 	Health:   Stat{"Current Health", 30},
 	Dead: false,
-	// Equiped items
+	// Equipped items
 	Weap:  Beak,
 	Armor: Empty,
 	Trink: Empty,

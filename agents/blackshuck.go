@@ -17,7 +17,7 @@ var Blackshuck = Agent{
 	MaxHealth: Stat{"Max Health", 25},
 	Health:   Stat{"Current Health", 25},
 	Dead: false,
-	// Equiped items
+	// Equipped items
 	Weap:  Bite,
 	Armor: Empty,
 	Trink: Empty,

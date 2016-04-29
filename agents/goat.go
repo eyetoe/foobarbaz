@@ -17,7 +17,7 @@ var Goat = Agent{
 	MaxHealth: Stat{"Max Health", 55},
 	Health:   Stat{"Current Health", 55},
 	Dead: false,
-	// Equiped items
+	// Equipped items
 	Weap:  GoatKick,
 	Armor: Platemail,
 	Trink: Empty,

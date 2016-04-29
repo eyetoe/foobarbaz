@@ -18,7 +18,7 @@ var Coyote = Agent{
 	MaxHealth: Stat{"Max Health", 15},
 	Health:   Stat{"Current Health", 15},
 	Dead: false,
-	// Equiped items
+	// Equipped items
 	Weap:  Maw,
 	Armor: Empty,
 	Trink: Empty,

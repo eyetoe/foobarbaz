@@ -70,7 +70,7 @@ func Inventory(c *Agent) {
 		}
 
 	}
-	fmt.Println(YellowU("Equiped:\n"))
+	fmt.Println(YellowU("Equipped:\n"))
 	fmt.Printf(":	%s %s Attack: +%s Damage: 1d%s\n", WhiteU(c.Weap.Name), Blue(c.Weap.Slot), Red(strconv.Itoa(c.Weap.Attack)), Red(strconv.Itoa(c.Weap.Damage)))
 	fmt.Println("	", Blue(c.Weap.Description))
 	fmt.Printf(":	%s %s Attack: +%s Damage: 1d%s\n", WhiteU(c.Armor.Name), Blue(c.Armor.Slot), Red(strconv.Itoa(c.Armor.Attack)), Red(strconv.Itoa(c.Armor.Damage)))

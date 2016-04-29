@@ -27,7 +27,7 @@ var Blob = Agent{
 	//Health:   Stat{"Current Health", randHP},
 	Health:   Stat{"Current Health", randBase},
 	Dead: false,
-	// Equiped items
+	// Equipped items
 	Weap:  Blobarm,
 	Armor: Empty,
 	Trink: Empty,

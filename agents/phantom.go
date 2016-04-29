@@ -16,7 +16,7 @@ var Phantom = Agent{
 	MaxHealth: Stat{"Max Health", 1},
 	Health:   Stat{"Current Health", 1},
 	Dead: false,
-	// Equiped items
+	// Equipped items
 	Weap:  Shriek,
 	Armor: Empty,
 	Trink: Empty,

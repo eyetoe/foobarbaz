@@ -21,7 +21,6 @@ func (b *Screenbuffer) Flush() {
 }
 
 func examples() {
-
 	var test = Screenbuffer{[]string{}}
 
 	test.Add(fmt.Sprintf("[H[J"))
@@ -41,5 +40,4 @@ func examples() {
 	test.Add("dingo")
 	test.Add(fmt.Sprintf("%s:%d", "Liquid Pickle", 666))
 	test.Render() // print each line
-
 }
