@@ -1,9 +1,12 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"math/rand"
+	"os"
 	"strconv"
+	"strings"
 	"time"
 
 	. "github.com/eyetoe/foobarbaz/agents"
@@ -399,6 +402,55 @@ func OfferItem(c, f *Agent, i Item) {
 		}
 	}
 
+}
+
+func SpawnChooser(c *Agent) *Agent {
+	//func SpawnChooser(c *Agent) {
+	monsters := []Agent{
+		//Add monsters here to be included in random spawn
+		Kobold,
+		Spider,
+		Phantom,
+		Coyote,
+		Pixie,
+		Warlock,
+		Rogue,
+		Blackshuck,
+		Minotaur,
+		Griffon,
+		Lacrimosa,
+		Drake,
+		FlyingPig,
+		Goat,
+		FreshZombie,
+		//MakeMonster(&c),
+	}
+	fmt.Println()
+	for {
+
+		for number, each := range monsters {
+			fmt.Println(number, each.Name)
+		}
+		reader := bufio.NewReader(os.Stdin)
+		// Prompt and read
+		fmt.Print("Choose number of monster to spawn: ")
+		choice, _ := reader.ReadString('\n')
+
+		choice = strings.Trim(choice, "\n")
+
+		if intchoice, err := strconv.Atoi(choice); err == nil {
+			if intchoice <= len(monsters) {
+
+				return &monsters[intchoice]
+				break
+			}
+		} else {
+			continue
+		}
+
+	}
+
+	return c
 }
 
 func Spawn(c Agent) Agent {

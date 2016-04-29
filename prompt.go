@@ -83,16 +83,24 @@ func Prompt() {
 }
 
 func Go(c *Agent) {
-	ClearScreen()
-	c.StatusBar()
-	fmt.Println()
-	fmt.Printf(":> %sxit, %sack <:", Green("E"), Green("B"))
-	choice, _, _ := GetChar()
+	for {
+		ClearScreen()
+		c.StatusBar()
+		fmt.Println()
+		fmt.Printf(":> %sxit, %sack %sick Monster <:", Green("E"), Green("B"), Green("P"))
+		choice, _, _ := GetChar()
 
-	switch choice {
-	case "e", "E":
-		os.Exit(0)
-	case "b", "B":
-		return
+		switch choice {
+		case "e", "E":
+			os.Exit(0)
+		case "b", "B":
+			return
+		case "p", "P":
+			var Foe Agent
+			Foe = *SpawnChooser(c)
+
+			Fight(c, &Foe)
+			continue
+		}
 	}
 }
