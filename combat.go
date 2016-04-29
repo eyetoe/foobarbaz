@@ -195,6 +195,11 @@ func Fight(c *Agent, f *Agent) {
 			continue
 		// Evade
 		case "e", "E":
+			Sandbox()
+			for _, each := range c.Equipped() {
+				fmt.Println(each)
+			}
+			Continue()
 			fmt.Println("Evade!\n You stall for time, looking for an opening!")
 			fmt.Println("Note: should have a separate menu here where you can use items.  So you have to take a break from the fight, to be able to pull out an item or potion.  including switching weapons, drinking potions, using magic items.")
 			continue
@@ -241,10 +246,10 @@ func Attack(a *Agent, d *Agent) (*Agent, *Agent, string) {
 	dr := Roll(2, 100)
 	// bonuses
 	//arB := a.Str.Val + a.Weap.Attack
-	arB := a.BaseAttack()
+	arB := a.TotalAttack()
 	// subtract the dodge percentage hit from armor
 	//drB := int(float64(d.Dex.Val) - float64(d.Dex.Val)*(float64(d.Armor.Dodge)*.01))
-	drB := d.BaseDodge()
+	drB := d.TotalDodge()
 
 	// totals
 	aT := ar + arB
@@ -273,17 +278,17 @@ func DoDamage(a *Agent, d *Agent, odds int) string {
 	var textOut string
 
 	// Damage and max damage if it's a critical
-	if Roll(1, 100) > a.BaseCritical() {
-		hp = Roll(2, a.BaseDamage())
+	if Roll(1, 100) > a.TotalCritical() {
+		hp = Roll(2, a.TotalDamage())
 	} else {
-		hp = a.BaseDamage()
+		hp = a.TotalDamage()
 		textOut = fmt.Sprintf(CyanU("Critical") + " ")
 	}
 
 	// If hp is greater than the damage resist then subtract
-	if hp > d.BaseResist() {
-		hp = hp - d.BaseResist()
-		//if unlocked, hp = hp - BaseResist()
+	if hp > d.TotalResist() {
+		hp = hp - d.TotalResist()
+		//if unlocked, hp = hp - TotalResist()
 		d.AdjHealth(0 - hp)
 		textOut = textOut + fmt.Sprintf("for %s damage. ", Red(strconv.Itoa(hp)))
 		textOut = textOut + fmt.Sprintf("%s's health = %s.\n", d.Name, Red(strconv.Itoa(d.Health.Val)))
@@ -414,6 +419,7 @@ func Spawn(c Agent) Agent {
 		Drake,
 		FlyingPig,
 		Goat,
+		FreshZombie,
 		//Blob, // blob dosn't work, dynamic stats are persistent until game is reloaded
 		//  so the MakeMonster generator is much better.
 		MakeMonster(&c),

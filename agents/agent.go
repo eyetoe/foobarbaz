@@ -59,42 +59,42 @@ func (c Agent) Equipped() []Item {
 	return []Item{c.Weap, c.Armor, c.Trink}
 }
 
-// BaseAttack() returns the average of 1 part Int and 1/2 part Dex and Str
+// TotalAttack() returns the average of 1 part Int and 1/2 part Dex and Str
 // - Add this number to the attack roll
-func (c Agent) BaseAttack() int {
+func (c Agent) TotalAttack() int {
 	return ((c.Dex.Val + c.Str.Val/2 + c.Int.Val/2) / 2) + c.Weap.Attack
 }
 
-// BaseDamage() returns 1/15th of the Strength value.
+// TotalDamage() returns 1/15th of the Strength value.
 // - Add this number to damage done in combat
-func (c Agent) BaseDamage() int {
+func (c Agent) TotalDamage() int {
 	return (c.Str.Val / 15) + c.Weap.Damage
 }
 
-// BaseDamage() returns 1/15th of the Strength value.
+// TotalDamage() returns 1/15th of the Strength value.
 // - Add this number to damage done in combat
-func (c Agent) BaseCritical() int {
+func (c Agent) TotalCritical() int {
 	return (c.Int.Val / 2) + c.Weap.Crit
 }
 
-// BaseResist() returns the average of Strength and Intelligence divided by 30.
+// TotalResist() returns the average of Strength and Intelligence divided by 30.
 // unlock this skill by getting str and hp up to 30, and you get first point
 // of damage reduction.  both up to 60 unlocks  second point and 3rd at 90.
 // - Subtract this number from damage done in combat.
-func (c Agent) BaseResist() int {
+func (c Agent) TotalResist() int {
 	return c.Armor.Resist + (((c.Str.Val + c.MaxHealth.Val) / 2) / 30)
 }
 
-// BaseDodge() returns average of Int and Dex.
+// TotalDodge() returns average of Int and Dex.
 // - Compare against attack role
-func (c Agent) BaseDodge() int {
+func (c Agent) TotalDodge() int {
 	dodge := ((c.Int.Val + c.Dex.Val) / 2)
 	armorDodgePercentage := float64(c.Armor.Dodge) * .01
 	return int(float64(dodge) - float64(dodge)*armorDodgePercentage)
 }
 
 // Natural regeneration
-func (c Agent) BaseRegeneration() int {
+func (c Agent) TotalRegeneration() int {
 	return ((c.Str.Val + c.MaxHealth.Val) / 2) / 30
 }
 

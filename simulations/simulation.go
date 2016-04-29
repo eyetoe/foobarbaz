@@ -43,15 +43,15 @@ func SimFight(c Agent, f Agent) bool {
 			hp = 0 // reset
 
 			// Damage and max damage if it's a critical
-			if Roll(1, 100) > winner.BaseCritical() {
-				hp = Roll(2, winner.BaseDamage())
+			if Roll(1, 100) > winner.TotalCritical() {
+				hp = Roll(2, winner.TotalDamage())
 			} else {
-				hp = winner.BaseDamage()
+				hp = winner.TotalDamage()
 			}
 			// If hp is greater than the damage resist then subtract
-			if hp > loser.BaseResist() {
-				hp = hp - loser.BaseResist()
-				//if unlocked, hp = hp - BaseResist()
+			if hp > loser.TotalResist() {
+				hp = hp - loser.TotalResist()
+				//if unlocked, hp = hp - TotalResist()
 				loser.AdjHealth(0 - hp)
 				//else don't adjust
 			} else {
@@ -70,15 +70,15 @@ func SimFight(c Agent, f Agent) bool {
 			hp = 0 // reset
 
 			// Damage and max damage if it's a critical
-			if Roll(1, 100) > winner.BaseCritical() {
-				hp = Roll(2, winner.BaseDamage())
+			if Roll(1, 100) > winner.TotalCritical() {
+				hp = Roll(2, winner.TotalDamage())
 			} else {
-				hp = winner.BaseDamage()
+				hp = winner.TotalDamage()
 			}
 			// If hp is greater than the damage resist then subtract
-			if hp > loser.BaseResist() {
-				hp = hp - loser.BaseResist()
-				//if unlocked, hp = hp - BaseResist()
+			if hp > loser.TotalResist() {
+				hp = hp - loser.TotalResist()
+				//if unlocked, hp = hp - TotalResist()
 				loser.AdjHealth(0 - hp)
 				//else don't adjust
 			} else {
@@ -101,8 +101,8 @@ func SimAttack(a *Agent, d *Agent) (*Agent, *Agent) {
 	//arB := a.Str.Val + a.Weap.Attack
 	//drB := int(float64(d.Dex.Val) - float64(d.Dex.Val)*(float64(d.Armor.Dodge)*.01))
 
-	arB := a.BaseAttack()
-	drB := d.BaseDodge()
+	arB := a.TotalAttack()
+	drB := d.TotalDodge()
 	// totals
 	aT := ar + arB
 	dT := dr + drB
