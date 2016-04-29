@@ -11,10 +11,7 @@ func Banner() {
 
 	ClearScreen()
 
-	//Teletype("\nWelcome to ...\n")
 	fmt.Printf("\nWelcome to ...\n")
-
-	//time.Sleep(500 * time.Millisecond)
 
 	foobarbaz :=
 		`  █████▒▒█████   ▒█████   ▄▄▄▄    ▄▄▄       ██▀███   ▄▄▄▄    ▄▄▄     ▒███████▒` + "\n" +
@@ -28,28 +25,19 @@ func Banner() {
 			`           ░ ░      ░ ░   ░            ░  ░   ░      ░            ░  ░ ░ ░    ` + "\n" +
 			`                               ░                          ░          ░        `
 
-		//for i := 0; i <= 4; i++ {
 	ClearScreen()
 	fmt.Printf(White("\nWelcome to ...\n"))
 	fmt.Println(ColorBanner(foobarbaz))
-	//	time.Sleep(100 * time.Millisecond)
-	//}
-
 }
 
 func StartBanner() {
 
 	ClearScreen()
-	//fmt.Printf(White("\nWelcome to ...\n"))
 
 	Teletype("\nWelcome to ...\n")
-	//for _, c := range "\nWelcome to ...\n" {
-	//fmt.Printf(White(string(c)))
-	//time.Sleep(100 * time.Millisecond)
-
-	//}
 
 	time.Sleep(500 * time.Millisecond)
+
 	//	fmt.Println(Red(
 	//		`   ______         ______           ______              ` + "\n" +
 	//			`   |  ___|        | ___ \          | ___ \             ` + "\n" +
@@ -59,7 +47,6 @@ func StartBanner() {
 	//			`   \_| \___/ \___/\____/ \__,_|_|  \____/ \__,_/___|   ` + "\n" +
 	//			`                                                       `))
 
-	//fmt.Println(Red(
 	foobarbaz :=
 		`  █████▒▒█████   ▒█████   ▄▄▄▄    ▄▄▄       ██▀███   ▄▄▄▄    ▄▄▄     ▒███████▒` + "\n" +
 			`▓██   ▒▒██▒  ██▒▒██▒  ██▒▓█████▄ ▒████▄    ▓██ ▒ ██▒▓█████▄ ▒████▄   ▒ ▒ ▒ ▄▀░` + "\n" +
