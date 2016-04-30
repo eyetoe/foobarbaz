@@ -198,7 +198,6 @@ func Fight(c *Agent, f *Agent) {
 			continue
 		// Evade
 		case "e", "E":
-			Sandbox()
 			for _, each := range c.Equipped() {
 				fmt.Println(each)
 			}
@@ -423,6 +422,7 @@ func SpawnChooser(c *Agent) *Agent {
 		FlyingPig,
 		Goat,
 		FreshZombie,
+		Swordsman,
 		MakeMonster(c),
 	}
 	fmt.Println()
@@ -472,6 +472,7 @@ func Spawn(c Agent) Agent {
 		FlyingPig,
 		Goat,
 		FreshZombie,
+		Swordsman,
 		//Blob, // blob dosn't work, dynamic stats are persistent until game is reloaded
 		//  so the MakeMonster generator is much better.
 		MakeMonster(&c),

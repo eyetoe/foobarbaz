@@ -10,8 +10,8 @@ var FreshZombie = Agent{
 	Description: "... Oh no!  Oh dear God no! The smell! Oh God the smell.",
 	// Stats
 	Str: Stat{"Strength", 70},
-	Int: Stat{"Intelligence", 4},
-	Dex: Stat{"Dexterity", 4},
+	Int: Stat{"Intelligence", 16},
+	Dex: Stat{"Dexterity", 14},
 	// Health and Wellness
 	MaxHealth: Stat{"Max Health", 100},
 	Health:    Stat{"Current Health", 100},

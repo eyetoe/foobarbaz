@@ -82,7 +82,7 @@ func (c Agent) TotalCritical() int {
 // of damage reduction.  both up to 60 unlocks  second point and 3rd at 90.
 // - Subtract this number from damage done in combat.
 func (c Agent) TotalResist() int {
-	return c.Armor.Resist + (((c.Str.Val + c.MaxHealth.Val) / 2) / 30)
+	return c.Armor.Resist + c.Trink.Resist + (((c.Str.Val + c.MaxHealth.Val) / 2) / 30)
 }
 
 // TotalDodge() returns average of Int and Dex.
@@ -90,10 +90,12 @@ func (c Agent) TotalResist() int {
 func (c Agent) TotalDodge() int {
 	dodge := ((c.Int.Val + c.Dex.Val) / 2)
 	armorDodgePercentage := float64(c.Armor.Dodge) * .01
-	return int(float64(dodge) - float64(dodge)*armorDodgePercentage)
+	trinketDodgePercentage := float64(c.Trink.Dodge) * .01
+	return int(float64(dodge) - float64(dodge)*(armorDodgePercentage+trinketDodgePercentage))
 }
 
-// Natural regeneration
+// TotalRegeneration() returns average Str and Health divided by 30
+// - Regenerate this much health every round of combat
 func (c Agent) TotalRegeneration() int {
 	return ((c.Str.Val + c.MaxHealth.Val) / 2) / 30
 }

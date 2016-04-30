@@ -31,8 +31,6 @@ func FoeBar(c Agent, f Agent) {
 	}
 
 	// For sanity layout the StatusBar vertically here although printing horizonal
-	fmt.Printf("%s", Yellow(" "))
-	//fmt.Printf("%s", RedU(f.Name))
 	fmt.Printf("%s", RedU(conName))
 	fmt.Printf("%s", Yellow(" S:"))
 	fmt.Printf("%s", Green(strconv.Itoa(f.Str.Val)))

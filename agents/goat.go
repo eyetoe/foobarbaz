@@ -11,15 +11,15 @@ var Goat = Agent{
 	Description: "screaming and furious the goat is enraged!",
 	// Stats
 	Str: Stat{"Strength", 55},
-	Int: Stat{"Intelligence", 2},
-	Dex: Stat{"Dexterity", 55},
+	Int: Stat{"Intelligence", 25},
+	Dex: Stat{"Dexterity", 65},
 	// Health and Wellness
 	MaxHealth: Stat{"Max Health", 55},
-	Health:   Stat{"Current Health", 55},
-	Dead: false,
+	Health:    Stat{"Current Health", 55},
+	Dead:      false,
 	// Equipped items
 	Weap:  GoatKick,
-	Armor: Platemail,
+	Armor: Empty,
 	Trink: Empty,
 	// Special Abilities
 	Abl1: "Horns-o-doom",
