@@ -276,28 +276,28 @@ func Attack(a *Agent, d *Agent) (*Agent, *Agent, string) {
 // Calculate and apply damage to Agent
 func DoDamage(a *Agent, d *Agent, odds int) string {
 
-	var hp int
+	var damage int
 	var textOut string
 
 	// Damage and max damage if it's a critical
 	if Roll(1, 100) > a.TotalCritical() {
-		hp = Roll(2, a.TotalDamage())
+		damage = Roll(2, a.TotalDamage())
 	} else {
-		hp = a.TotalDamage()
+		damage = a.TotalDamage()
 		textOut = fmt.Sprintf(CyanU("Critical") + " ")
 	}
 
-	// If hp is greater than the damage resist then subtract
-	if hp > d.TotalResist() {
-		hp = hp - d.TotalResist()
-		//if unlocked, hp = hp - TotalResist()
-		d.AdjHealth(0 - hp)
-		textOut = textOut + fmt.Sprintf("for %s damage. ", Red(strconv.Itoa(hp)))
+	// If damage is greater than the damage resist then subtract
+	if damage > d.TotalResist() {
+		damage = damage - d.TotalResist()
+		//if unlocked, damage = damage - TotalResist()
+		d.AdjHealth(0 - damage)
+		textOut = textOut + fmt.Sprintf("for %s damage. ", Red(strconv.Itoa(damage)))
 		textOut = textOut + fmt.Sprintf("%s's health = %s.\n", d.Name, Red(strconv.Itoa(d.Health.Val)))
 		//else don't adjust
 	} else {
-		hp = 0
-		textOut = textOut + fmt.Sprintf("%s! for %s damage. ", YellowU("Resist"), Red(strconv.Itoa(hp)))
+		damage = 0
+		textOut = textOut + fmt.Sprintf("%s! for %s damage. ", YellowU("Resist"), Red(strconv.Itoa(damage)))
 		textOut = textOut + fmt.Sprintf("%s's health = %s.\n", d.Name, Red(strconv.Itoa(d.Health.Val)))
 	}
 
@@ -359,11 +359,20 @@ func OfferItem(c, f *Agent, i Item) {
 	fmt.Println(Blue("!! ITEM DROP !!\n"))
 	fmt.Printf("%s has dropped it's %s.\n\n", Yellow(f.Name), Yellow(i.Name))
 
+	var oldodds, newodds int
+	var x Agent
+	x = *c
+
 	switch i.Slot {
 	case "Weapon":
+		x.Weap = i
+		oldodds = Odds(c, &x)
+		newodds = Odds(&x, c)
 		fmt.Printf("Replace?\n")
+		fmt.Printf("%d%% vs.", oldodds)
 		c.Weap.Display()
 		fmt.Printf("with..\n")
+		fmt.Printf("%d%% vs.", newodds)
 		f.Weap.Display()
 		if Confirm("\nWould you like to make this swap?") == true {
 			c.Inv = append(c.Inv, c.Weap)
@@ -374,9 +383,14 @@ func OfferItem(c, f *Agent, i Item) {
 			c.Save()
 		}
 	case "Armor":
+		x.Armor = i
+		oldodds = Odds(c, &x)
+		newodds = Odds(&x, c)
 		fmt.Printf("Replace?\n")
+		fmt.Printf("%d%% vs.", oldodds)
 		c.Armor.Display()
 		fmt.Printf("with..\n")
+		fmt.Printf("%d%% vs.", newodds)
 		f.Armor.Display()
 		if Confirm("\nWould you like to make this swap?") == true {
 			c.Inv = append(c.Inv, c.Armor)
@@ -387,9 +401,14 @@ func OfferItem(c, f *Agent, i Item) {
 			c.Save()
 		}
 	case "Trinket":
+		x.Trink = i
+		oldodds = Odds(c, &x)
+		newodds = Odds(&x, c)
 		fmt.Printf("Replace?\n")
+		fmt.Printf("%d%% vs.", oldodds)
 		c.Trink.Display()
 		fmt.Printf("with..\n")
+		fmt.Printf("%d%% vs.", newodds)
 		f.Trink.Display()
 		if Confirm("\nWould you like to make this swap?") == true {
 			c.Inv = append(c.Inv, c.Trink)
