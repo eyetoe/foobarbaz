@@ -43,6 +43,7 @@ func Prompt() {
 		fmt.Printf("%srain ", GreenU("T"))
 		fmt.Printf("%so, ", GreenU("G"))
 		fmt.Printf("%soad, ", GreenU("L"))
+		fmt.Printf("%spawn, ", GreenU("S"))
 		fmt.Printf("%snventory <: ", GreenU("I"))
 
 		choice, _, _ := GetChar()
@@ -66,15 +67,20 @@ func Prompt() {
 		case "t", "T":
 			ExpMgr(&Char)
 			continue
+		case "g", "G":
+			Go(&Char)
+			break
 		case "l", "L":
 			Banner()
 			PickChar()
 			Char.Load()
 			Resurrect(&Char)
 			continue
-		case "g", "G":
-			Go(&Char)
-			break
+		case "s", "S":
+			var Foe Agent
+			Foe = *SpawnChooser(&Char)
+			Fight(&Char, &Foe)
+			continue
 		case "i", "I":
 			Inventory(&Char)
 			break
@@ -95,12 +101,6 @@ func Go(c *Agent) {
 			os.Exit(0)
 		case "b", "B":
 			return
-		case "p", "P":
-			var Foe Agent
-			Foe = *SpawnChooser(c)
-
-			Fight(c, &Foe)
-			continue
 		}
 	}
 }
