@@ -93,7 +93,7 @@ func Go(c *Agent) {
 		ClearScreen()
 		c.StatusBar()
 		fmt.Println()
-		fmt.Printf(":> %sxit, %sack %sick Monster <:", Green("E"), Green("B"), Green("P"))
+		fmt.Printf(":> %sxit, %sack <:", Green("E"), Green("B"))
 		choice, _, _ := GetChar()
 
 		switch choice {

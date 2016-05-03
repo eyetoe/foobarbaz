@@ -31,7 +31,9 @@ func SimFight(c Agent, f Agent) bool {
 	var x, y Agent
 	var hp int
 	x = c
+	x.Health.Val = x.MaxHealth.Val
 	y = f
+	y.Health.Val = y.MaxHealth.Val
 
 	//fmt.Println(x.Name, y.Name)
 	for {

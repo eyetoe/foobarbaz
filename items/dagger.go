@@ -9,8 +9,8 @@ var Dagger = Item{
 	Description: "a well balanced ancient piercer!",
 	Slot:        "Weapon",
 	Affects:     []Affect{Charged},
-	Attack:      5,
-	Damage:      4,
+	Attack:      11,
+	Damage:      5,
 	Crit:        5,
 	DropChance:  20,
 }

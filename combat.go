@@ -494,8 +494,8 @@ func Spawn(c Agent) Agent {
 		Swordsman,
 		//Blob, // blob dosn't work, dynamic stats are persistent until game is reloaded
 		//  so the MakeMonster generator is much better.
-		MakeMonster(&c),
-		MakeMonster(&c),
+		//		MakeMonster(&c),
+		//		MakeMonster(&c),
 		MakeMonster(&c),
 		MakeMonster(&c),
 	}
