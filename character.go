@@ -123,7 +123,7 @@ func NewCharacter() {
 		}
 	}
 
-	Char := New
+	Char = New
 	Char.Name = SaveFile
 	Char.File = SaveFile
 	Char.Save()
