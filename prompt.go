@@ -14,8 +14,8 @@ func Prompt() {
 	for {
 		// setting File var in Agent struct, this allows Char.Load to pick up
 		// the save file without prompting.
-		Char := Agent{File: SaveFile}
-		Char.Load()
+		//Char := Agent{File: SaveFile}
+		//Char.Load()
 		ClearScreen()
 		if Char.Dead == true {
 			fmt.Printf(Red("\n%s collapsed in a sobbing frightned lump and expired.\n\n"), Char.Name)

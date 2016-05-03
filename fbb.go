@@ -11,6 +11,10 @@ import (
 // Global SaveFile available to all code
 var SaveFile string
 
+// Global Character struct available to all code
+var Char Agent
+var Foe Agent
+
 func main() {
 	// uncomment Sandbox() to run testing function before starting game
 	// see sandbox.go
@@ -18,7 +22,7 @@ func main() {
 
 	EnvSetup()
 	PickChar()
-	Char := Agent{File: SaveFile}
+	Char = Agent{File: SaveFile}
 	Char.Load()
 
 	//fmt.Println(Char.CharacterSheet())
