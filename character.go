@@ -39,6 +39,8 @@ func PickChar() {
 			if choice == strconv.Itoa(cnum) {
 				fmt.Printf("Loading --> %s\n", Blue(f.Name()))
 				SaveFile = strings.Replace(f.Name(), ".json", "", -1)
+				Char = Agent{File: SaveFile}
+				Char.Load()
 				return
 			} else {
 				cnum++

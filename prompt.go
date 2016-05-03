@@ -51,7 +51,7 @@ func Prompt() {
 		// choices here
 		switch choice {
 		case "e", "E":
-			var Foe Agent
+			//var Foe Agent
 			Foe = Spawn(Char)
 			Fight(&Char, &Foe)
 			continue
