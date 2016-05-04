@@ -16,8 +16,8 @@ import (
 func PickChar() {
 	var files []os.FileInfo
 	if SaveFile == "" {
-		//StartBanner()
-		Banner()
+		StartBanner()
+		//Banner()
 	}
 	for {
 		Banner()
