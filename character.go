@@ -156,9 +156,9 @@ func ExpMgr(c *Agent) {
 		fmt.Printf("	%sexterity	 (%s xp), %s +%s %s\n", Green("D"), Yellow(strconv.Itoa(cost)), Cyan("current"), Yellow(strconv.Itoa(c.Dex.Val)), Cyan("bonus to dodge roll."))
 		fmt.Printf("	%sP		 (%s xp), %s  %s %s\n", Green("H"), Yellow(strconv.Itoa(cost)), Cyan("current"), Yellow(strconv.Itoa(c.MaxHealth.Val)), Cyan("max health."))
 
-		fmt.Printf("	%soughness	(%s xp), %s%s%s%s%s%s%s\n", Green("T"), Yellow("1000"), Cyan("unlocks when Strength and Health average "), Yellow("30"), Cyan(", "), Yellow("60 "), Cyan("and "), Yellow("90"), Cyan("."))
+		fmt.Printf("\n	%soughness	(%s xp), %s%s%s%s%s%s%s\n", Green("T"), Yellow("1000"), Cyan("unlocks when Strength and Health average "), Yellow("30"), Cyan(", "), Yellow("60 "), Cyan("and "), Yellow("90"), Cyan("."))
 
-		fmt.Printf("	%sack\n", Green("B"))
+		fmt.Printf("\n	%sack\n", Green("B"))
 		fmt.Printf("<:")
 
 		consolation := func() {
