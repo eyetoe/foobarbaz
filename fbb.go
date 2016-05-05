@@ -6,6 +6,7 @@ import (
 	// directory prefixed, soo you can use Agent() rather than agents.Agent()
 
 	. "github.com/eyetoe/foobarbaz/agents"
+	. "github.com/eyetoe/foobarbaz/util"
 )
 
 // Global SaveFile available to all code
@@ -21,6 +22,7 @@ func main() {
 	//Sandbox()
 
 	EnvSetup()
+	StartBanner()
 	PickChar()
 	Char = Agent{File: SaveFile}
 	Char.Load()

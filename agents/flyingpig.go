@@ -15,8 +15,8 @@ var FlyingPig = Agent{
 	Dex: Stat{"Dexterity", 30},
 	// Health and Wellness
 	MaxHealth: Stat{"Max Health", 40},
-	Health:   Stat{"Current Health", 40},
-	Dead: false,
+	Health:    Stat{"Current Health", 40},
+	Dead:      false,
 	// Equipped items
 	Weap:  Snort,
 	Armor: Empty,
@@ -27,13 +27,13 @@ var FlyingPig = Agent{
 	Abl3: "Trash Gobble",
 	// Inventory
 	Inv: []Item{},
-	Art: `           ____ _____    ` + "\n" +
-		`          (    /,----'   ` + "\n" +
-		`           \  //==--'    ` + "\n" +
-		`            \//==--'     ` + "\n" +
-		`         _//|Y.-~~~~-,   ` + "\n" +
-		`       _/66  \        \_@` + "\n" +
-		`      (")_   /   /    |  ` + "\n" +
-		`        '--'|| |-\   /   ` + "\n" +
-		`   jgs      //_/  /_/    ` + "\n",
+	Art: `                           ____ _____    ` + "\n" +
+		`                          (    /,----'   ` + "\n" +
+		`                           \  //==--'    ` + "\n" +
+		`                            \//==--'     ` + "\n" +
+		`                         _//|Y.-~~~~-,   ` + "\n" +
+		`                       _/66  \        \_@` + "\n" +
+		`                      (")_   /   /    |  ` + "\n" +
+		`                        '--'|| |-\   /   ` + "\n" +
+		`                   jgs      //_/  /_/    ` + "\n",
 }

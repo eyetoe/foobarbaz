@@ -14,8 +14,8 @@ var Phantom = Agent{
 	Dex: Stat{"Dexterity", 25},
 	// Health and Wellness
 	MaxHealth: Stat{"Max Health", 1},
-	Health:   Stat{"Current Health", 1},
-	Dead: false,
+	Health:    Stat{"Current Health", 1},
+	Dead:      false,
 	// Equipped items
 	Weap:  Shriek,
 	Armor: Empty,
@@ -26,15 +26,15 @@ var Phantom = Agent{
 	Abl3: "howl",
 	// Inventory
 	Inv: []Item{},
-	Art: `                                ` + "\n" +
-		`      .''''.      ...           ` + "\n" +
-		`     :o  o '....''  ;           ` + "\n" +
-		`     '. O         :'            ` + "\n" +
-		`       '':          '.          ` + "\n" +
-		`         ':.          '.        ` + "\n" +
-		`          : '.         '.       ` + "\n" +
-		`         '..''...       '.      ` + "\n" +
-		`                 '...     '.    ` + "\n" +
-		`                     ''...  '.  ` + "\n" +
-		`                          '''''.` + "\n",
+	Art: `                                        ` + "\n" +
+		`              .''''.      ...           ` + "\n" +
+		`             :o  o '....''  ;           ` + "\n" +
+		`             '. O         :'            ` + "\n" +
+		`               '':          '.          ` + "\n" +
+		`                 ':.          '.        ` + "\n" +
+		`                  : '.         '.       ` + "\n" +
+		`                 '..''...       '.      ` + "\n" +
+		`                         '...     '.    ` + "\n" +
+		`                             ''...  '.  ` + "\n" +
+		`                                  '''''.` + "\n",
 }
