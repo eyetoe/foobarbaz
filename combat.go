@@ -443,6 +443,8 @@ func SpawnChooser(c *Agent) *Agent {
 		FreshZombie,
 		Swordsman,
 		Umadon,
+		Wizard,
+		Thornbird,
 		MakeMonster(c),
 	}
 	fmt.Println()
@@ -494,6 +496,8 @@ func Spawn(c Agent) Agent {
 		FreshZombie,
 		Swordsman,
 		Umadon,
+		Wizard,
+		Thornbird,
 		//Blob, // blob dosn't work, dynamic stats are persistent until game is reloaded
 		//  so the MakeMonster generator is much better.
 		//		MakeMonster(&c),
